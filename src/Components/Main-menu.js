@@ -1,10 +1,10 @@
 import React from 'react';
 import MainMenuCard from './MainMenuCard'; // Import the MainMenuCard component
 import './MainMenuCard.css'; // Import the CSS file
-import imgg from '../plan.jpg';
-import imgg2 from '../Diet_plan.jpg';
-import imgg3 from '../Mental.jpg';
-import imgg4 from '../cardimg1.jpg';
+import imgg from '../Images/plan.jpg';
+import imgg2 from '../Images/Diet_plan.jpg';
+import imgg3 from '../Images/Mental.jpg';
+import imgg4 from '../Images/cardimg1.jpg';
 
 
 export default function ActionAreaCard() {

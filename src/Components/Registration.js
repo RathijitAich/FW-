@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Button, MenuItem, Box, Typography, Grid, Paper } from '@mui/material';
-import regimg from '../register.jpg';
+import regimg from '../Images/register.jpg';
 import { useNavigate } from 'react-router-dom';
 import { Snackbar } from '@mui/material';
 

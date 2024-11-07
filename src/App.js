@@ -4,7 +4,6 @@ import Navbar from "./Components/Navbar";
 import TextForm from "./Components/TextForm";
 import Login_Page from "./Components/Login_Page";
 import { useState } from "react";
-import Spring from "./Components/Spring";
 import News from "./Components/News";
 import MainMenu from "./Components/Main-menu";
 import Registration from "./Components/Registration";
