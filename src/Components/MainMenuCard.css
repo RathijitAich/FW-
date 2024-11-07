@@ -1,0 +1,19 @@
+.main-menu-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .main-menu-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(245, 8, 8, 0.2);
+  }
+  
+  .main-menu-card img {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  .center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh; /* Full viewport height */
+  }

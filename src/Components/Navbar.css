@@ -1,0 +1,26 @@
+.modern-brand {
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.modern-brand:hover {
+  color: #000000; /* Change to your desired hover color */
+  transform: scale(1.2); /* Slightly enlarge the text */
+}
+
+.navbar-logo {
+  width: 90px; /* Adjust the size as needed */
+  height: auto;
+  margin-right: 1px; /* Space between the logo and the text */
+}
+
+.modern-link {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.modern-link:hover {
+  color: #0271f8; /* Change to your desired hover color */
+  transform: scale(1.2); /* Slightly enlarge the text */
+}

@@ -36,3 +36,40 @@
     transform: rotate(360deg);
   }
 }
+
+
+.login-wrapper {
+  display: flex;
+  height: 100vh;
+  justify-content: left;
+  align-items: center;
+  
+  
+
+  
+}
+
+
+.loginframe {
+  width: 450px;
+  margin:auto;
+  padding: 20px;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 20px; /* Reduced from 100px to make it visible */
+  font-family: 'Roboto', sans-serif;
+  /* bold */
+
+  font-weight: 530;
+  font-size: 20px;
+  
+  
+  background-color: hwb(337 88% 7% / 0.733);
+}
+
+
+
+
+
+
+
+
