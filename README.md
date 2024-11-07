@@ -1,1 +1,1 @@
-package to json is react app
+public to package json is react app
