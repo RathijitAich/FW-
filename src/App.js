@@ -12,6 +12,8 @@ import { Close as CloseIcon } from '@mui/icons-material';
 
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import Calculators from "./Components/Calculators";
+import BMI from "./Components/BMI";
+import BMR from "./Components/BMR";
 
 function App() {
  
@@ -103,6 +105,8 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/WorkoutPlan" element={<TextForm />} />
         <Route path="/Registration" element={<Registration />} />
         <Route path="/Calculators" element={<Calculators />} />
+        <Route path="/BMI" element={<BMI />} />
+        <Route path="/BMR" element={<BMR />} />
       </Routes>
       <Snackbar
         open={openSnackbar}
