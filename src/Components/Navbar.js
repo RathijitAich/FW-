@@ -2,17 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import './Navbar.css'; // Import the CSS file
-import Navbar_logo from '../Images/gpt_icon.svg'; 
+import Navbar_logo from '../Images/gpt_icon.svg';
 import PropTypes from 'prop-types';
 
-export default function Navbar({ isloggedin, logoutclicked, fontFamily = 'Roboto, sans-serif', fontSizeBrand = '1.1rem', fontSizeLink = '1rem' }) {
+export default function Navbar({ isloggedin, logoutclicked, fontFamily = 'Roboto, sans-serif', fontSizeBrand = '0.5rem', fontSizeLink = '0.875rem' }) {
   return (
     <>
-      <nav className="navbar navbar-expand-lg" style={{ backgroundColor: 'rgb(168 176 188 / 0.5%)', padding: '0.003rem' }}>
+      <nav className="navbar navbar-expand-lg" style={{ background: 'linear-gradient(to right, rgb(20 165 166 / 92%), rgb(235 241 249 / 83%))', padding: '0.2rem 0.5rem' }}>
         <div className="container-fluid">
           <a className="navbar-brand modern-brand" href="#" style={{ fontFamily, fontSize: fontSizeBrand }}>
-            <img src={Navbar_logo} alt="Logo" className="navbar-logo" /> 
-            
+            <img src={Navbar_logo} alt="Logo" className="navbar-logo" style={{ height: '70px' }} />
           </a>
           <button
             className="navbar-toggler"
@@ -28,29 +27,25 @@ export default function Navbar({ isloggedin, logoutclicked, fontFamily = 'Roboto
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active modern-link" aria-current="page" to="/" style={{ fontFamily, fontSize: fontSizeLink, border: '1px solid #ccc', borderRadius: '15px', backgroundColor: '#bfeb9da6', fontWeight:'bold', marginRight: '15px' }}>Home</Link>
+                <Link className="nav-link active modern-link" aria-current="page" to="/" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px' }}>Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active modern-link" aria-current="page" to="/Calculators" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '15px',border: '1px solid #ccc', borderRadius: '15px', backgroundColor: '#bfeb9da6', fontWeight:'bold', marginRight: '15px' }}>Calculators</Link>
+                <Link className="nav-link active modern-link" aria-current="page" to="/Calculators" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px' }}>Calculators</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active modern-link" aria-current="page" to="/Articles" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '15px',
-                  borderRadius: '15px', backgroundColor: '#bfeb9da6', fontWeight:'bold', marginRight: '15px'
-                 }}>Fitness Articles</Link>
+                <Link className="nav-link active modern-link" aria-current="page" to="/Articles" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px' }}>Fitness Articles</Link>
               </li>
               <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle modern-link" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '15px',
-                  borderRadius: '15px', backgroundColor: '#bfeb9da6', fontWeight:'bold', marginRight: '15px'
-                 }}>
+                <Link className="nav-link dropdown-toggle modern-link" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px' }}>
                   Profile
                 </Link>
                 <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="#" style={{ fontFamily }}>My Profile</Link></li>
+                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink }}>My Profile</Link></li>
                   <li><hr className="dropdown-divider" /></li>
-                  <li><Link className="dropdown-item" to="#" style={{ fontFamily }}>Current Workout Plan</Link></li>
-                  <li><Link className="dropdown-item" to="#" style={{ fontFamily }}>Current Diet Plan</Link></li>
-                  <li><Link className="dropdown-item" to="#" style={{ fontFamily }}>Mental Health Today</Link></li>
-                  <li><Link className="dropdown-item" to="#" style={{ fontFamily }}>Progress</Link></li>
+                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink }}>Current Workout Plan</Link></li>
+                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink }}>Current Diet Plan</Link></li>
+                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink }}>Mental Health Today</Link></li>
+                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink }}>Progress</Link></li>
                 </ul>
               </li>
             </ul>

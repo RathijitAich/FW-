@@ -11,6 +11,7 @@ import { Snackbar, IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import Calculators from "./Components/Calculators";
 
 function App() {
  
@@ -101,6 +102,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/Articles" element={<News />} />
         <Route path="/WorkoutPlan" element={<TextForm />} />
         <Route path="/Registration" element={<Registration />} />
+        <Route path="/Calculators" element={<Calculators />} />
       </Routes>
       <Snackbar
         open={openSnackbar}

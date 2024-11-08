@@ -15,5 +15,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 70vh; /* Full viewport height */
+    min-height: 85vh; /* Full viewport height */
   }
