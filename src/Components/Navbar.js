@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 export default function Navbar({ isloggedin, logoutclicked, fontFamily = 'Roboto, sans-serif', fontSizeBrand = '0.5rem', fontSizeLink = '0.875rem' }) {
   return (
     <>
-      <nav className="navbar navbar-expand-lg" style={{ background: 'linear-gradient(to right, rgb(20 165 166 / 92%), rgb(235 241 249 / 83%))', padding: '0.2rem 0.5rem' }}>
+      <nav className="navbar navbar-expand-lg" style={{ background: 'linear-gradient(to right, rgb(158 212 119 / 70%), rgb(249 249 249 / 69%))', padding: '0.2rem 0.5rem' }}>
         <div className="container-fluid">
           <a className="navbar-brand modern-brand" href="#" style={{ fontFamily, fontSize: fontSizeBrand }}>
             <img src={Navbar_logo} alt="Logo" className="navbar-logo" style={{ height: '70px' }} />

@@ -1,7 +1,11 @@
 
 body {
-  background-image: url('./Images/back2.jpg'); /* Replace with your image URL */
-  background-size: 100% 120%; 
+  /* background-image: url('./Images/back2.jpg'); */
+ 
+  
+  /* background-image:url('./Images/Real3.jpg'); */
+  background-image:url('./Images/AI1.jpg');
+  background-size: 100% 140%; 
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;

@@ -5,6 +5,9 @@ import imgg from '../Images/plan.jpg';
 import imgg2 from '../Images/Diet_plan.jpg';
 import imgg3 from '../Images/Mental.jpg';
 import imgg4 from '../Images/cardimg1.jpg';
+import imgg5 from '../Images/Real2.jpg';
+import imgg6 from '../Images/Real4.jpg';
+import imgg7 from '../Images/Real5.jpg';
 
 
 export default function ActionAreaCard() {
@@ -12,19 +15,19 @@ export default function ActionAreaCard() {
         {
             title: 'Set Your Workout Plan',
             description: 'Create a workout plan that suits your needs and goals.',
-            image: imgg,
+            image: imgg5,
             link:'/WorkoutPlan'
         },
         {
             title: 'Diet Plan',
             description: 'Create a diet plan that suits your needs and goals.',
-            image: imgg2,
+            image: imgg6,
             link:'/DietPlan'
         },
         {
             title: 'Mental Health',
             description: 'Mental health is just as important as physical health.',
-            image: imgg3,
+            image: imgg7,
             link:'/MentalHealth'
         },
     ];

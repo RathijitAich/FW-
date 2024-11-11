@@ -14,6 +14,7 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-route
 import Calculators from "./Components/Calculators";
 import BMI from "./Components/BMI";
 import BMR from "./Components/BMR";
+import CalorieIntake from "./Components/CalorieIntake";
 
 function App() {
  
@@ -107,6 +108,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/Calculators" element={<Calculators />} />
         <Route path="/BMI" element={<BMI />} />
         <Route path="/BMR" element={<BMR />} />
+        <Route path="/CalorieIntake" element ={<CalorieIntake />} />
       </Routes>
       <Snackbar
         open={openSnackbar}
