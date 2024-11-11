@@ -113,7 +113,7 @@ export default function BMI() {
             <Box sx={{ position: 'relative', display: 'inline-flex', mt: 2 }}>
               <CircularProgress
                 variant="determinate"
-                value={(bmi / 40) * 100}
+                value={(bmi / 50) * 100}
                 size={100}
                 thickness={4}
                 sx={{ color: getBmiColor(bmi) }}
