@@ -1,5 +1,6 @@
 import "./App.css";
-import About from "./Components/About";
+
+
 import Navbar from "./Components/Navbar";
 import TextForm from "./Components/TextForm";
 import Login_Page from "./Components/Login_Page";
@@ -7,14 +8,16 @@ import { useState } from "react";
 import News from "./Components/News";
 import MainMenu from "./Components/Main-menu";
 import Registration from "./Components/Registration";
-import { Snackbar, IconButton } from '@mui/material';
-import { Close as CloseIcon } from '@mui/icons-material';
-
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import Calculators from "./Components/Calculators";
 import BMI from "./Components/BMI";
 import BMR from "./Components/BMR";
 import CalorieIntake from "./Components/CalorieIntake";
+import Footer from "./Components/Footer";
+import { Snackbar, IconButton } from '@mui/material';
+import { Close as CloseIcon } from '@mui/icons-material';
+
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+
 
 function App() {
  
@@ -121,6 +124,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
           </IconButton>
         }
       />
+      <Footer />
     </>
   );
 }

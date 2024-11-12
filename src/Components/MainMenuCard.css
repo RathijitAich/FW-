@@ -1,19 +1,119 @@
 .main-menu-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.main-menu-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(245, 8, 8, 0.2);
+}
+
+.main-menu-card img {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+
+
+
+
+
+.carousel-box {
+  width: 100%;
+  padding: 20px 0;
+  background-image: url('../Images/Real1.jpg');
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 95vh; /* Full viewport height */
+}
+
+.carousel-container {
+  max-width: 800px; /* Set a fixed width for the carousel */
+  margin: 0 auto; /* Center the carousel horizontally */
+  border-radius: 15px; /* Add rounded corners */
+  overflow: hidden; /* Ensure content stays within the rounded corners */
+  box-shadow: 0 4px 8px rgba(215, 183, 96, 0.456); /* Add a subtle shadow */
+}
+
+.carousel .carousel-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Ensure the image covers the area without stretching */
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+  border-radius: 10px; /* Add rounded corners to the caption */
+  padding: 10px; /* Add some padding */
+}
+
+.carousel-caption h3 {
+  color: #ffffff; /* Set text color to white */
+  font-weight: bold; /* Make the text bold */
+}
+
+.carousel-caption p {
+  color: #92e3c4; /* Set text color to a lighter shade */
+}
+
+
+
+.avatar-box {
+  max-width: 800px; /* Set a fixed width for the avatar box */
+  margin: 0 auto; /* Center the avatar box horizontally */
+  padding: 20px;
+  border-radius: 15px; /* Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  background: linear-gradient(2deg, #a3a3a3, #80fab59e);
+  margin-top: 200px; /* Add distance from the previous component */
+ 
+}
+
+.avatar-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.avatar-link {
+  text-align:initial;
+  margin: 10px;
+  text-decoration: none;
+  color: inherit;
+  flex: 1 1 30%; /* Adjust the flex basis to control the number of items per row */
+  max-width: 170px; /* Set a max width for the avatars */
+}
+
+.avatar-link p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.media-cards-container {
+  max-width: 1200px; /* Set a fixed width for the media cards container */
+  margin: 0 auto; /* Center the media cards container horizontally */
+}
+
+.media-card {
+  margin: 20px 0; /* Add some margin between the cards */
+}
+
+.media-box{
+
+  max-width: 1400px; /* Set a fixed width for the avatar box */
+  margin: 0 auto; /* Center the avatar box horizontally */
+  padding: 20px;
+  border-radius: 15px; /* Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  background: linear-gradient(2deg, #000000a8, #2a362f9e);
+  margin-top: 200px; /* Add distance from the previous component */
   
-  .main-menu-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(245, 8, 8, 0.2);
-  }
-  
-  .main-menu-card img {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-  }
-  .center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 85vh; /* Full viewport height */
-  }
+}
+
+
+

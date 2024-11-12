@@ -9,6 +9,8 @@ import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import './MainMenuCard.css'; // Import the CSS file
 
+
+
 const MainMenuCard = ({ title, description, image, link }) => {
     return (
         <Box className="main-menu-card">
@@ -20,7 +22,7 @@ const MainMenuCard = ({ title, description, image, link }) => {
                         image={image}
                         alt={title}
                     />
-                    <CardContent sx={{ backgroundColor: '#ffffff4f'}}>
+                    <CardContent sx={{ backgroundColor: '#e3bd294f'}}>
                         <Typography gutterBottom variant="h5" component="div" sx={{ fontWeight: 'bold',fontFamily: 'Roboto,sans-serif'  }}>
                             {title}
                         </Typography>
