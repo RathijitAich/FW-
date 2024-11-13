@@ -1,6 +1,7 @@
 import React from 'react';
 import CalculatorCard from './CalculatorCard'; // Import the CalculatorCard component
 import './MainMenuCard.css'; // Import the CSS file
+import './Calculator.css'; // Import the CSS file
 
 import imgg5 from '../Images/BMI.jpg';
 import imgg6 from '../Images/BMR.jpg';
@@ -35,6 +36,7 @@ export default function ActionAreaCard() {
   ];
 
   return (
+    
       <div className="container my-3 center-container">
           <div className="row">
               {cardsData.map((card, index) => (

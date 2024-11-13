@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import NewsItem from './NewsItem';
+import './Calculator.css';
 
 
 
@@ -34,7 +35,7 @@ export default class News extends Component {
     
     return (
       <div>
-      <div className="container ">
+      <div className="container my-3 ">
          
          <div className="row">
          {this.state.articles && this.state.articles.length > 0 ? (

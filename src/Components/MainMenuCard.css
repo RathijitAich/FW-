@@ -12,6 +12,13 @@
   border-top-right-radius: 15px;
 }
 
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 95vh;
+  margin-top: 100px;
+}
 
 
 

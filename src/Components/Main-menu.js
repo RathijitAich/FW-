@@ -57,7 +57,7 @@ export default function ActionAreaCard() {
 
     return (
         <>
-            <div className="container my-3 center-container">
+            <div className="container  center-container">
                 <div className="row">
                     {cardsData.map((card, index) => (
                         <div className="col-md-4" key={index}>

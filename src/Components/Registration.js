@@ -77,7 +77,7 @@ export default function Registration(props) {
   };
 
   return (
-    <Grid container component="main" sx={{ height: '74vh', justifyContent: 'center', alignItems: 'center', mt: 3 }}>
+    <Grid container component="main" sx={{ height: '74vh', justifyContent: 'center', alignItems: 'center', mt: 16 }}>
       <Grid
         item
         xs={false}

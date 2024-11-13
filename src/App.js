@@ -13,6 +13,9 @@ import BMI from "./Components/BMI";
 import BMR from "./Components/BMR";
 import CalorieIntake from "./Components/CalorieIntake";
 import Footer from "./Components/Footer";
+import Userprofile from "./Components/Userprofile";
+
+
 import { Snackbar, IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 
@@ -75,7 +78,8 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         // Delay navigation for a short period to allow the Snackbar to show
         setTimeout(() => {
           navigate('/');
-        }, 2000); // Navigate after 2 seconds
+        }, 1000); // Navigate after 1 seconds
+        
       } else {
         const error = await response.text();
         console.log('Login Failed', error);
@@ -112,10 +116,11 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/BMI" element={<BMI />} />
         <Route path="/BMR" element={<BMR />} />
         <Route path="/CalorieIntake" element ={<CalorieIntake />} />
+        <Route path="/Userprofile" element= {<Userprofile isloggedin={isloggedin} username={username} password={password} />} />
       </Routes>
       <Snackbar
         open={openSnackbar}
-        autoHideDuration={5000}
+        autoHideDuration={2000}
         onClose={handleSnackbarClose}
         message={alertMessage}
         action={

@@ -30,7 +30,7 @@ export default function Login_Page({ handleloginbutton, setUsername, setPassword
 
     return (
         <div className='login-wrapper'>
-            <div className="loginframe container mt-5 p-4 rounded shadow">
+            <div className="loginframe container mt-9 p-4 rounded shadow">
                 <form>
                     <h2 className="text-center mb-4" style={{ color: 'blue', fontSize: '1.5rem' }}>Login</h2>
 
