@@ -14,12 +14,14 @@ import BMR from "./Components/BMR";
 import CalorieIntake from "./Components/CalorieIntake";
 import Footer from "./Components/Footer";
 import Userprofile from "./Components/Userprofile";
-
+import MentalHealth from "./Components/MentalHealth";
 
 import { Snackbar, IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import Stress from "./Components/Stress";
+import Relax_stress from "./Components/Relax_stress";
 
 
 function App() {
@@ -117,6 +119,9 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/BMR" element={<BMR />} />
         <Route path="/CalorieIntake" element ={<CalorieIntake />} />
         <Route path="/Userprofile" element= {<Userprofile isloggedin={isloggedin} username={username} password={password} />} />
+        <Route path="/MentalHealth" element={<MentalHealth />} />
+        <Route path="/Stress" element={<Stress/>} />
+        <Route path="/Relax_stress" element={<Relax_stress />} />
       </Routes>
       <Snackbar
         open={openSnackbar}

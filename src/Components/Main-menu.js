@@ -127,7 +127,6 @@ export default function ActionAreaCard() {
                         </div>
                     ))}
                 </div>
-          
             </div>
 
             <div className="avatar-box">

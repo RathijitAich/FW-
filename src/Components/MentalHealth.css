@@ -1,0 +1,49 @@
+
+
+.myy-3 {
+    margin-top: 12rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.carousel-boxing {
+    width:100%;
+    padding: 20px 0;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  .center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 95vh; /* Full viewport height */
+  }
+  
+  .carousel-containering {
+    max-width: 600px; /* Set a fixed width for the carousel */
+    margin: 0 auto; /* Center the carousel horizontally */
+    border-radius: 15px; /* Add rounded corners */
+    overflow: hidden; /* Ensure content stays within the rounded corners */
+    box-shadow: 0 4px 8px rgba(215, 183, 96, 0.456); /* Add a subtle shadow */
+  }
+  
+  .carousel .carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensure the image covers the area without stretching */
+  }
+  
+  .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+    border-radius: 10px; /* Add rounded corners to the caption */
+    padding: 10px; /* Add some padding */
+  }
+  
+  .carousel-caption h3 {
+    color: #ffffff; /* Set text color to white */
+    font-weight: bold; /* Make the text bold */
+  }
+  
+  .carousel-caption p {
+    color: #92e3c4; /* Set text color to a lighter shade */
+  }

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { TextField, Button, Box, Typography, Paper, Switch, FormControlLabel, CircularProgress, Grid } from '@mui/material';
+import './Calculator.css'; // Import the CSS file
 
 export default function BMI() {
   const [heightFeet, setHeightFeet] = useState('');
@@ -59,6 +60,8 @@ export default function BMI() {
   };
 
   return (
+
+    <div className="my-3">
     <Box
       sx={{
         display: 'flex',
@@ -69,7 +72,7 @@ export default function BMI() {
         mt: 9,
       }}
     >
-      <Paper elevation={3} sx={{ padding: 4, maxWidth: 600, width: '100%', mb: 4 }}>
+      <Paper elevation={3} sx={{ padding: 4, maxWidth: 600, width: '100%', mb: 4,  background: 'linear-gradient(to right, rgb(20 165 166 / 92%), rgb(235 241 249 / 83%))' }}>
         <Typography variant="h5" component="p" gutterBottom sx={{ textAlign: 'center' }}>
           Body Mass Index (BMI) is a simple calculation using a person's height and weight. The formula is BMI = kg/m² where kg is a person's weight in kilograms and m² is their height in meters squared. A BMI of 25.0 or more is overweight, while the healthy range is 18.5 to 24.9. BMI applies to most adults 18-65 years.
         </Typography>
@@ -197,5 +200,6 @@ export default function BMI() {
         </Paper>
       )}
     </Box>
+  </div>
   );
 }

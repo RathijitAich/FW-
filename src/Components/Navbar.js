@@ -44,8 +44,7 @@ export default function Navbar({ isloggedin, logoutclicked, fontFamily = 'Roboto
                   <li><hr className="dropdown-divider" /></li>
                   <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink }}>Current Workout Plan</Link></li>
                   <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink }}>Current Diet Plan</Link></li>
-                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink }}>Mental Health Today</Link></li>
-                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink }}>Progress</Link></li>
+                  
                 </ul>
               </li>
             </ul>

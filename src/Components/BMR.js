@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { TextField, Button, Box, Typography, Paper, Switch, FormControlLabel, MenuItem, Grid } from '@mui/material';
+import './Calculator.css'; // Import the CSS file
 
 export default function BMR() {
   const [heightFeet, setHeightFeet] = useState('');
@@ -52,6 +53,8 @@ export default function BMR() {
   };
 
   return (
+
+    <div className="my-3">
     <Box
       sx={{
         display: 'flex',
@@ -202,5 +205,6 @@ export default function BMR() {
         </Paper>
       )}
     </Box>
+    </div>
   );
 }

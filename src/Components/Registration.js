@@ -122,7 +122,7 @@ export default function Registration(props) {
               onChange={handleChange}
               variant="outlined"
               fullWidth
-              required
+              
               margin="dense"
             />
             <TextField
@@ -133,7 +133,7 @@ export default function Registration(props) {
               onChange={handleChange}
               variant="outlined"
               fullWidth
-              required
+              
               margin="dense"
             />
             <TextField
@@ -143,7 +143,7 @@ export default function Registration(props) {
               onChange={handleChange}
               variant="outlined"
               fullWidth
-              required
+             
               margin="dense"
             />
             <TextField
@@ -153,7 +153,7 @@ export default function Registration(props) {
               onChange={handleChange}
               variant="outlined"
               fullWidth
-              required
+              
               margin="dense"
             />
             <TextField
@@ -163,7 +163,7 @@ export default function Registration(props) {
               onChange={handleChange}
               variant="outlined"
               fullWidth
-              required
+            
               margin="dense"
             />
             <TextField
@@ -173,7 +173,7 @@ export default function Registration(props) {
               onChange={handleChange}
               variant="outlined"
               fullWidth
-              required
+              
               select
               margin="dense"
             >
