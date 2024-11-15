@@ -10,7 +10,7 @@ import MainMenu from "./Components/Main-menu";
 import Registration from "./Components/Registration";
 import Calculators from "./Components/Calculators";
 import BMI from "./Components/BMI";
-import BMR from "./Components/BMR";
+import CalorieThatDay from "./Components/CalorieThatDay";
 import CalorieIntake from "./Components/CalorieIntake";
 import Footer from "./Components/Footer";
 import Userprofile from "./Components/Userprofile";
@@ -116,7 +116,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/Registration" element={<Registration />} />
         <Route path="/Calculators" element={<Calculators />} />
         <Route path="/BMI" element={<BMI />} />
-        <Route path="/BMR" element={<BMR />} />
+        <Route path="/CalorieThatDay" element={<CalorieThatDay />} />
         <Route path="/CalorieIntake" element ={<CalorieIntake />} />
         <Route path="/Userprofile" element= {<Userprofile isloggedin={isloggedin} username={username} password={password} />} />
         <Route path="/MentalHealth" element={<MentalHealth />} />

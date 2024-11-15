@@ -20,10 +20,10 @@ export default function ActionAreaCard() {
           bc_color: '#ffffff4f'
       },
       {
-          title: 'BMR Calculator',
-          description: 'Calculate BMR',
+          title: 'Calore Per Food',
+          description: 'Calculate calorie taken',
           image: imgg6,
-          link:'/BMR',
+          link:'/CalorieThatDay',
           bc_color: '#ffffff4f'
       },
       {

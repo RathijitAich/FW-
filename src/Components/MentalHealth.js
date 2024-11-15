@@ -7,8 +7,7 @@ import './MentalHealth.css';
 
 
 import { Carousel } from 'react-bootstrap';
-import imgg8 from '../Images/slide4.jpg';
-import imgg9 from '../Images/slide3.jpg';
+import imgg8 from '../Images/stress.jpg';
 
 export default function MentalHealth() {
 
@@ -26,7 +25,7 @@ export default function MentalHealth() {
                                     alt="First slide"
                                 />
                                 <Carousel.Caption>
-                                    <h3>Stess Mangament</h3>
+                                    <h3>Stess Managament</h3>
                                     <p>Relaxing is neccessary</p>
                                   
                                 </Carousel.Caption>
