@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Typography, Box, Slider, Button, Paper, Card, CardContent } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import './Calculator.css'; // Import the CSS file
+
 
 function Stress(props) {
   const [stressLevel, setStressLevel] = useState(3);

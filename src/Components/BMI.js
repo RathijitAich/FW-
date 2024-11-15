@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { TextField, Button, Box, Typography, Paper, Switch, FormControlLabel, CircularProgress, Grid } from '@mui/material';
-import './Calculator.css'; // Import the CSS file
+
 
 export default function BMI() {
   const [heightFeet, setHeightFeet] = useState('');

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Container, TextField, Button, Typography, Box, Paper } from '@mui/material';
-import './Calculator.css'; // Import the CSS file
 
 export default function Userprofile({ isloggedin, username, password }) {
     const [userData, setUserData] = useState({

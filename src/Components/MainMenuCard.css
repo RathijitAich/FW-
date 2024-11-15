@@ -17,10 +17,8 @@
   justify-content: center;
   align-items: center;
   min-height: 95vh;
-  margin-top: 100px;
+  
 }
-
-
 
 
 
@@ -28,16 +26,10 @@
   width: 100%;
   padding: 20px 0;
   background-image: url('../Images/Real1.jpg');
-
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
 }
 
-.center-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 95vh; /* Full viewport height */
-}
+
 
 .carousel-container {
   max-width: 800px; /* Set a fixed width for the carousel */
@@ -47,24 +39,24 @@
   box-shadow: 0 4px 8px rgba(215, 183, 96, 0.456); /* Add a subtle shadow */
 }
 
-.carousel .carousel-item img {
+.carousel .carousel-item imgrathi {
   width: 100%;
   height: auto;
   object-fit: cover; /* Ensure the image covers the area without stretching */
 }
 
-.carousel-caption {
+.carousel-captionrathi {
   background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
   border-radius: 10px; /* Add rounded corners to the caption */
   padding: 10px; /* Add some padding */
 }
 
-.carousel-caption h3 {
+.carousel-captionrathi h3 {
   color: #ffffff; /* Set text color to white */
   font-weight: bold; /* Make the text bold */
 }
 
-.carousel-caption p {
+.carousel-captionrathi p {
   color: #92e3c4; /* Set text color to a lighter shade */
 }
 

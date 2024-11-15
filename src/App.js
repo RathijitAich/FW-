@@ -15,6 +15,8 @@ import CalorieIntake from "./Components/CalorieIntake";
 import Footer from "./Components/Footer";
 import Userprofile from "./Components/Userprofile";
 import MentalHealth from "./Components/MentalHealth";
+import Workout_plan from "./Components/workout_plan";
+import GeneratedPlan from "./Components/generated_plan";
 
 import { Snackbar, IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
@@ -112,7 +114,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/" element={<MainMenu />} />
         <Route path="/Login" element={<Login_Page handleloginbutton={handleloginbutton} setUsername={setUsername} setPassword={setPassword} />} />
         <Route path="/Articles" element={<News />} />
-        <Route path="/WorkoutPlan" element={<TextForm />} />
+        <Route path="/WorkoutPlan" element={<Workout_plan/>} />
         <Route path="/Registration" element={<Registration />} />
         <Route path="/Calculators" element={<Calculators />} />
         <Route path="/BMI" element={<BMI />} />
@@ -122,6 +124,8 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/MentalHealth" element={<MentalHealth />} />
         <Route path="/Stress" element={<Stress/>} />
         <Route path="/Relax_stress" element={<Relax_stress />} />
+        <Route path="/generated_plan" element={<GeneratedPlan />} />
+
       </Routes>
       <Snackbar
         open={openSnackbar}

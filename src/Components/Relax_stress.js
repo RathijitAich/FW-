@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Box, Grid, Card, CardContent, Typography, CardMedia } from '@mui/material';
 import { Link } from 'react-router-dom';
-import './Calculator.css'; // Import the CSS file
+
 
 const games = [
   { title: 'Journey', description: 'Journey is a visually stunning, meditative game where players traverse a vast desert and explore beautiful environments. It’s peaceful and offers a simple experience focused on exploration and reflection.', image: 'https://i0.wp.com/hypercritical.co/2012/11/27/images/journey.jpg?resize=681%2C383', link: 'https://thatgamecompany.com/journey/' },

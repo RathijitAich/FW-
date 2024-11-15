@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { TextField, Button, Box, Typography, Paper, Switch, FormControlLabel, MenuItem, Grid } from '@mui/material';
-import './Calculator.css'; // Import the CSS file
+
 
 export default function CalorieIntake() {
   const [heightFeet, setHeightFeet] = useState('');

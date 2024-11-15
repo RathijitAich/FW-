@@ -1,0 +1,46 @@
+.carousel-item imgshuva {  /*added shuva karon same css file amio use korsi ejonno overlap korte pare */
+    width: 100%;
+    height: auto;
+    opacity: 0.0; /* Adjust opacity level for transparency */
+  }
+  
+  .carousel-captionshuva {  /*added shuva karon same css file amio use korsi ejonno overlap korte pare */
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: #fff;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+  }
+/* @font-face to load custom font */
+@font-face {
+  font-family: Battambang;
+  src :url('/public/fonts/Battambang-Regular.ttf') format('truetype');
+  
+}
+
+.Battambang {
+  font-family: Battambang, sans-serif; /* Use Battambang font */
+}
+
+/* Styling for h1 */
+
+@font-face {
+  font-family: 'sourgummy';
+  src: url('/public/fonts/SourGummy-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
+.sourgummy {
+  font-family: 'sourgummy', sans-serif;
+}
+@font-face {
+  font-family: HostGrotesk;
+  src: url('/public/fonts/HostGrotesk-VariableFont_wght.ttf') format('truetype');
+}
+.HostGrotesk {
+  font-family: HostGrotesk, sans-serif;
+}
+.white-background {
+  background-color: white;
+}

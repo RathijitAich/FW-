@@ -3,7 +3,6 @@ import { Container, Table, TableBody, TableCell, TableContainer, TableHead, Tabl
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { styled } from '@mui/system';
 import { Search } from '@mui/icons-material';
-import './Calculator.css'; // Import the CSS file
 
 const foodEntries = [
   // Bangladeshi Staple Foods
