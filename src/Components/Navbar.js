@@ -1,18 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import './Navbar.css'; // Import the CSS file
 import Navbar_logo from '../Images/gpt_icon.svg';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-export default function Navbar({ isloggedin, logoutclicked, fontFamily = 'Roboto, sans-serif', fontSizeBrand = '0.5rem', fontSizeLink = '0.875rem' }) {
+export default function Navbar({ isloggedin, logoutclicked, fontFamily = 'Roboto, sans-serif', fontSizeBrand = '0.5rem', fontSizeLink = '0.875rem', fontColor = 'white' }) {
   return (
     <>
-      <nav className="navbar navbar-expand-lg" style={{ background: 'linear-gradient(to right, rgb(158 212 119 / 70%), rgb(249 249 249 / 69%))', padding: '0.2rem 0.5rem' }}>
+      <nav className="navbar navbar-expand-lg" style={{background:'linear-gradient(to right, rgb(228 236 223 / 66%), rgb(0 0 0 / 99%))', padding: '0.2rem 0.5rem' }}>
         <div className="container-fluid">
-          <a className="navbar-brand modern-brand" href="#" style={{ fontFamily, fontSize: fontSizeBrand }}>
-            <img src={Navbar_logo} alt="Logo" className="navbar-logo" style={{ height: '70px' }} />
-          </a>
+          <Link className="navbar-brand modern-brand" aria-current="page" to="/" style={{ fontFamily, fontSize: fontSizeBrand, color: fontColor }}>
+            <img src={Navbar_logo} alt="Logo" className="navbar-logo" style={{ height: '50px' }} />
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -27,24 +26,23 @@ export default function Navbar({ isloggedin, logoutclicked, fontFamily = 'Roboto
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active modern-link" aria-current="page" to="/" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px' }}>Home</Link>
+                <Link className="nav-link active modern-link" aria-current="page" to="/Home" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px', color: fontColor }}>Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active modern-link" aria-current="page" to="/Calculators" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px' }}>Calculators</Link>
+                <Link className="nav-link active modern-link" aria-current="page" to="/Calculators" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px', color: fontColor }}>Calculators</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active modern-link" aria-current="page" to="/Articles" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px' }}>Fitness Articles</Link>
+                <Link className="nav-link active modern-link" aria-current="page" to="/Articles" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px', color: fontColor }}>Fitness Articles</Link>
               </li>
               <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle modern-link" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px' }}>
+                <Link className="nav-link dropdown-toggle modern-link" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px', color: fontColor }}>
                   Profile
                 </Link>
                 <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="/Userprofile" style={{ fontFamily, fontSize: fontSizeLink }}>My Profile</Link></li>
+                  <li><Link className="dropdown-item" to="/Userprofile" style={{ fontFamily, fontSize: fontSizeLink, color: 'black' }}>My Profile</Link></li>
                   <li><hr className="dropdown-divider" /></li>
-                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink }}>Current Workout Plan</Link></li>
-                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink }}>Current Diet Plan</Link></li>
-                  
+                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink, color: 'black' }}>Current Workout Plan</Link></li>
+                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink, color: 'black' }}>Current Diet Plan</Link></li>
                 </ul>
               </li>
             </ul>
@@ -70,4 +68,5 @@ Navbar.propTypes = {
   fontFamily: PropTypes.string,
   fontSizeBrand: PropTypes.string,
   fontSizeLink: PropTypes.string,
+  fontColor: PropTypes.string,
 };

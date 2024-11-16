@@ -2,7 +2,6 @@ import "./App.css";
 
 
 import Navbar from "./Components/Navbar";
-import TextForm from "./Components/TextForm";
 import Login_Page from "./Components/Login_Page";
 import { useState } from "react";
 import News from "./Components/News";
@@ -17,13 +16,16 @@ import Userprofile from "./Components/Userprofile";
 import MentalHealth from "./Components/MentalHealth";
 import Workout_plan from "./Components/workout_plan";
 import GeneratedPlan from "./Components/generated_plan";
+import Stress from "./Components/Stress";
+import Relax_stress from "./Components/Relax_stress";
+import LandingPage from "./Components/LandingPage";
+
+
 
 import { Snackbar, IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
-import Stress from "./Components/Stress";
-import Relax_stress from "./Components/Relax_stress";
 
 
 function App() {
@@ -111,7 +113,8 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
     <>
       <Navbar isloggedin={isloggedin} logoutclicked={logoutclicked} />
       <Routes>
-        <Route path="/" element={<MainMenu />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/Home" element={<MainMenu />} />
         <Route path="/Login" element={<Login_Page handleloginbutton={handleloginbutton} setUsername={setUsername} setPassword={setPassword} />} />
         <Route path="/Articles" element={<News />} />
         <Route path="/WorkoutPlan" element={<Workout_plan/>} />
@@ -138,7 +141,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
           </IconButton>
         }
       />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

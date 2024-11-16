@@ -22,7 +22,7 @@ const MainMenuCard = ({ title, description, image, link }) => {
                         image={image}
                         alt={title}
                     />
-                    <CardContent sx={{ backgroundColor: '#e3bd294f'}}>
+                    <CardContent sx={{ backgroundColor: '#56534a66'}}>
                         <Typography gutterBottom variant="h5" component="div" sx={{ fontWeight: 'bold',fontFamily: 'Roboto,sans-serif'  }}>
                             {title}
                         </Typography>
