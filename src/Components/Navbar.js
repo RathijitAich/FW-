@@ -4,10 +4,10 @@ import Navbar_logo from '../Images/gpt_icon.svg';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default function Navbar({ isloggedin, logoutclicked, fontFamily = 'Roboto, sans-serif', fontSizeBrand = '0.5rem', fontSizeLink = '0.875rem', fontColor = 'white' }) {
+export default function Navbar({ isloggedin, logoutclicked, fontFamily = 'Roboto, sans-serif', fontSizeBrand = '0.5rem', fontSizeLink = '0.875rem', fontColor = 'black' }) {
   return (
     <>
-      <nav className="navbar navbar-expand-lg" style={{background:'linear-gradient(to right, rgb(228 236 223 / 66%), rgb(0 0 0 / 99%))', padding: '0.2rem 0.5rem' }}>
+      <nav className="navbar navbar-expand-lg" style={{ background: 'linear-gradient(to right, rgb(158 212 119 / 70%), rgb(249 249 249 / 69%))', padding: '0.2rem 0.5rem' }}>
         <div className="container-fluid">
           <Link className="navbar-brand modern-brand" aria-current="page" to="/" style={{ fontFamily, fontSize: fontSizeBrand, color: fontColor }}>
             <img src={Navbar_logo} alt="Logo" className="navbar-logo" style={{ height: '50px' }} />
