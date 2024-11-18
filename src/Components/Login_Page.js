@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { IconButton, Button, TextField } from '@mui/material';
-import { Visibility, VisibilityOff, Login as LoginIcon } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Visibility, VisibilityOff, Login as LoginIcon, PersonAdd as PersonAddIcon } from '@mui/icons-material';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
-export default function Login_Page({ handleloginbutton, setUsername, setPassword }) {
-    useEffect(() => {
-        // Add the no-scroll class to the body element when the component mounts
-        document.body.classList.add('no-scroll');
-
-        // Remove the no-scroll class from the body element when the component unmounts
-        return () => {
-            document.body.classList.remove('no-scroll');
-        };
-    }, []);
+export default function Login_Page({ handleloginbutton, setPassword, setUser_id }) {
+  
 
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = (event) => event.preventDefault();
 
     const Changed = (event) => {
-        if (event.target.id === 'username') {
-            setUsername(event.target.value);
+        if (event.target.id === 'user_id') {
+            setUser_id(event.target.value);
         } else {
             setPassword(event.target.value);
         }
+    }
+
+    const handleRegisterButton = () => {
+        navigate('/Registration');
     }
 
     return (
@@ -36,8 +33,8 @@ export default function Login_Page({ handleloginbutton, setUsername, setPassword
 
                     <div className="mb-3">
                         <TextField
-                            id="username"
-                            label="Username"
+                            id="user_id"
+                            label="User ID"
                             variant="standard"
                             fullWidth
                             onChange={Changed}
@@ -49,52 +46,45 @@ export default function Login_Page({ handleloginbutton, setUsername, setPassword
                         <TextField
                             id="password"
                             label="Password"
-                            variant="standard"
                             type={showPassword ? 'text' : 'password'}
+                            variant="standard"
                             fullWidth
                             onChange={Changed}
-                            slotProps={{
-                                input: {
-                                    style: { fontSize: '1.25rem' },
-                                    endAdornment: (
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                        >
-                                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    ),
-                                },
-                                inputLabel: { style: { fontSize: '1.25rem' } }
+                            slotProps={{ input: { style: { fontSize: '1.25rem' } }, inputLabel: { style: { fontSize: '1.25rem' } } }}
+                            InputProps={{
+                                endAdornment: (
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                ),
                             }}
                         />
                     </div>
 
-                    <div className="text-center">
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleloginbutton}
-                            startIcon={<LoginIcon />}
-                            className="w-100 rounded-pill"
-                            style={{ fontSize: '1.1rem' }}
-                        >
-                            Login
-                        </Button>
-                    </div>
-                    <div className="text-center my-2">
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            className="w-100 rounded-pill"
-                            style={{ fontSize: '1.1rem' }}
-                            component={Link}
-                            to="/Registration"
-                        >
-                            New User?Click here to Register
-                        </Button>
-                    </div>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        onClick={handleloginbutton}
+                        startIcon={<LoginIcon />}
+                        sx={{ mb: 2 }}
+                    >
+                        Login
+                    </Button>
+
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                        fullWidth
+                        onClick={handleRegisterButton}
+                        startIcon={<PersonAddIcon />}
+                    >
+                        Register
+                    </Button>
                 </form>
             </div>
         </div>
@@ -103,6 +93,6 @@ export default function Login_Page({ handleloginbutton, setUsername, setPassword
 
 Login_Page.propTypes = {
     handleloginbutton: PropTypes.func.isRequired,
-    setUsername: PropTypes.func.isRequired,
     setPassword: PropTypes.func.isRequired,
+    setUser_id: PropTypes.func.isRequired,
 };

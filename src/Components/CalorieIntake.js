@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { TextField, Button, Box, Typography, Paper, Switch, FormControlLabel, MenuItem, Grid } from '@mui/material';
-
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function CalorieIntake() {
   const [heightFeet, setHeightFeet] = useState('');
@@ -55,7 +55,7 @@ export default function CalorieIntake() {
           tdee = bmr;
       }
 
-      setCalories(tdee.toFixed(2));
+      setCalories(tdee);
 
       setTimeout(() => {
         if (resultRef.current) {
@@ -65,35 +65,37 @@ export default function CalorieIntake() {
     }
   };
 
-  const clearFields = () => {
-    setHeightFeet('');
-    setHeightInches('');
-    setHeightCm('');
-    setWeight('');
-    setAge('');
-    setGender('');
-    setActivityLevel('');
-    setCalories(null);
+  const calculateMacros = (calories) => {
+    const protein = (calories * 0.3) / 4; // 30% of calories from protein, 4 calories per gram
+    const carbs = (calories * 0.5) / 4; // 50% of calories from carbs, 4 calories per gram
+    const fat = (calories * 0.2) / 9; // 20% of calories from fat, 9 calories per gram
+    return [
+      { type: 'Protein', grams: protein },
+      { type: 'Carbs', grams: carbs },
+      { type: 'Fat', grams: fat }
+    ];
   };
 
   return (
-    <div className="my-3">
+    <div className="my-2">
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          mt: 9,
+          mt: 5,
           padding: 2,
+          borderRadius: 3,
+          // Add background color
         }}
       >
-        <Paper elevation={3} sx={{ padding: 4, maxWidth: 600, width: '100%', mb: 4, background: 'linear-gradient(to right, rgb(20 165 166 / 92%), rgb(235 241 249 / 83%))' }}>
+        <Paper elevation={3} sx={{ padding: 4, maxWidth: 600, width: '100%', mb: 4, borderRadius: 3, backgroundColor: '#f6f7f6f2' }}>
           <Typography variant="h5" component="p" gutterBottom sx={{ textAlign: 'center' }}>
-            Calorie Needed Calculator. It is similar to BMR calculator but it also takes into account your activity level.
+            Calorie Intake Calculator
           </Typography>
         </Paper>
-        <Paper elevation={3} sx={{ padding: 4, maxWidth: 600, width: '100%', mb: 4 }}>
+        <Paper elevation={3} sx={{ padding: 4, maxWidth: 600, width: '100%', mb: 4, borderRadius: 3, backgroundColor: '#f6f7f6f2' }}>
           <Typography variant="h6" component="h2" gutterBottom>
             Select Unit System
           </Typography>
@@ -105,7 +107,7 @@ export default function CalorieIntake() {
         </Paper>
         <Grid container spacing={2} sx={{ maxWidth: 600, width: '100%' }}>
           <Grid item xs={12} sm={6}>
-            <Paper elevation={3} sx={{ padding: 4 }}>
+            <Paper elevation={3} sx={{ padding: 4, borderRadius: 3, backgroundColor: '#f6f7f6f2' }}>
               <Typography variant="h6" component="h2" gutterBottom>
                 Enter Your Age
               </Typography>
@@ -122,7 +124,7 @@ export default function CalorieIntake() {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Paper elevation={3} sx={{ padding: 4 }}>
+            <Paper elevation={3} sx={{ padding: 4, borderRadius: 3, backgroundColor: '#f6f7f6f2' }}>
               <Typography variant="h6" component="h2" gutterBottom>
                 Enter Your Height
               </Typography>
@@ -164,7 +166,7 @@ export default function CalorieIntake() {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Paper elevation={3} sx={{ padding: 4 }}>
+            <Paper elevation={3} sx={{ padding: 4, borderRadius: 3, backgroundColor: '#f6f7f6f2' }}>
               <Typography variant="h6" component="h2" gutterBottom>
                 Enter Your Weight
               </Typography>
@@ -181,7 +183,7 @@ export default function CalorieIntake() {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Paper elevation={3} sx={{ padding: 4 }}>
+            <Paper elevation={3} sx={{ padding: 4, borderRadius: 3, backgroundColor: '#f6f7f6f2' }}>
               <Typography variant="h6" component="h2" gutterBottom>
                 Select Your Gender
               </Typography>
@@ -202,7 +204,7 @@ export default function CalorieIntake() {
             </Paper>
           </Grid>
           <Grid item xs={12}>
-            <Paper elevation={3} sx={{ padding: 4 }}>
+            <Paper elevation={3} sx={{ padding: 4, borderRadius: 3, backgroundColor: '#f6f7f6f2' }}>
               <Typography variant="h6" component="h2" gutterBottom>
                 Select Your Activity Level
               </Typography>
@@ -240,16 +242,42 @@ export default function CalorieIntake() {
           color="error"
           fullWidth
           sx={{ mt: 2, maxWidth: 600 }}
-          onClick={clearFields}
+          onClick={() => {
+            setHeightFeet('');
+            setHeightInches('');
+            setHeightCm('');
+            setWeight('');
+            setAge('');
+            setGender('');
+            setActivityLevel('');
+            setCalories(null);
+          }}
         >
           Clear
         </Button>
         {calories && (
-          <Paper elevation={3} sx={{ padding: 4, maxWidth: 600, width: '100%', mt: 4 }} ref={resultRef}>
+          <Paper elevation={3} sx={{ padding: 4, maxWidth: 600, width: '100%', mt: 4, borderRadius: 3, backgroundColor: '#f6f7f6f2' }} ref={resultRef}>
             <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="h6">Your Daily Calorie Needs: {calories} calories/day</Typography>
+              <Typography variant="h6">Your Total Daily Energy Expenditure (TDEE): {calories.toFixed(2)} calories/day</Typography>
             </Box>
           </Paper>
+        )}
+        {calories && (
+          <Box sx={{ mt: 5, width: '100%', maxWidth: 600, backgroundColor: '#f6f7f6f2', borderRadius: 3 }}>
+            <Typography variant="h6" sx={{ mb: 2, textAlign: 'center' }}>
+              Macronutrients Needed (Balanced diet)
+            </Typography>
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart data={calculateMacros(calories)}>
+                <CartesianGrid strokeDasharray="5 4" />
+                <XAxis dataKey="type" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="grams" fill="black" />
+              </BarChart>
+            </ResponsiveContainer>
+          </Box>
         )}
       </Box>
     </div>

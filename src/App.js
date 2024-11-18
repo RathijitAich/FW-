@@ -26,7 +26,7 @@ import { Snackbar, IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
-
+import { useLocation} from 'react-router-dom';
 
 function App() {
  
@@ -38,6 +38,10 @@ function App() {
   const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar visibility
   const [username, setUsername] = useState(''); // State for username
   const [password, setPassword] = useState(''); // State for password
+  const [user_id, setUser_id] = useState(''); // State for user_id
+
+
+ 
 
   return (
     <Router>
@@ -52,23 +56,27 @@ function App() {
         setUsername={setUsername}
         password={password}
         setPassword={setPassword}
+        user_id={user_id}
+        setUser_id={setUser_id}
       />
     </Router>
   );
 }
 
-function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, openSnackbar, setOpenSnackbar, username, setUsername, password, setPassword }) {
+function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, openSnackbar, setOpenSnackbar, username, setUsername, password, setPassword, user_id, setUser_id }) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleloginbutton = async (event) => {
     event.preventDefault();
+    console.log("Login request data:", {  user_id, password });
     try {
       const response = await fetch('http://localhost:8080/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ user_id, password })
       });
 
       if (response.ok) {
@@ -83,14 +91,14 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
 
         // Delay navigation for a short period to allow the Snackbar to show
         setTimeout(() => {
-          navigate('/');
+          navigate('/Home');
         }, 1000); // Navigate after 1 seconds
         
       } else {
         const error = await response.text();
         console.log('Login Failed', error);
         // Show error message
-        setAlertMessage('Login Failed: Invalid username or password');
+        setAlertMessage('Login Failed: Invalid user_id or password');
         setOpenSnackbar(true); // Open Snackbar
       }
     } catch (error) {
@@ -102,7 +110,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
 
   const logoutclicked = () => {
     setisloggedin(false);
-    navigate('/');
+    navigate('/Home');
   }
 
   const handleSnackbarClose = () => {
@@ -111,11 +119,17 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
 
   return (
     <>
-      <Navbar isloggedin={isloggedin} logoutclicked={logoutclicked} />
+
+      
+     {location.pathname !== '/' && <Navbar isloggedin={isloggedin} logoutclicked={logoutclicked} />}
+     
+
+     
       <Routes>
+       
         <Route path="/" element={<LandingPage />} />
         <Route path="/Home" element={<MainMenu />} />
-        <Route path="/Login" element={<Login_Page handleloginbutton={handleloginbutton} setUsername={setUsername} setPassword={setPassword} />} />
+        <Route path="/Login" element={<Login_Page handleloginbutton={handleloginbutton} setPassword={setPassword} setUser_id={setUser_id}/>} />
         <Route path="/Articles" element={<News />} />
         <Route path="/WorkoutPlan" element={<Workout_plan/>} />
         <Route path="/Registration" element={<Registration />} />
@@ -123,10 +137,10 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/BMI" element={<BMI />} />
         <Route path="/CalorieThatDay" element={<CalorieThatDay />} />
         <Route path="/CalorieIntake" element ={<CalorieIntake />} />
-        <Route path="/Userprofile" element= {<Userprofile isloggedin={isloggedin} username={username} password={password} />} />
+        <Route path="/Userprofile" element= {<Userprofile isloggedin={isloggedin} user_id={user_id} username={username} password={password} />} />
         <Route path="/MentalHealth" element={<MentalHealth />} />
         <Route path="/Stress" element={<Stress/>} />
-        <Route path="/Relax_stress" element={<Relax_stress />} />
+        {/* <Route path="/Relax_stress" element={<Relax_stress />} /> */}
         <Route path="/generated_plan" element={<GeneratedPlan />} />
 
       </Routes>

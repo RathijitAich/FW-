@@ -12,7 +12,7 @@ import imgg8 from '../Images/stress.jpg';
 export default function MentalHealth() {
 
     return (
-        <div className="myy-3">
+        <div className="my-4">
             <div className="carousel-boxing">
                 <div className="carousel-containering">
 
@@ -25,8 +25,8 @@ export default function MentalHealth() {
                                     alt="First slide"
                                 />
                                 <Carousel.Caption>
-                                    <h3>Stess Managament</h3>
-                                    <p>Relaxing is neccessary</p>
+                                    <h3>Overall Assesment</h3>
+                                    <p>Answer some question to get Assesment</p>
                                   
                                 </Carousel.Caption>
                             </Link>
@@ -43,8 +43,8 @@ export default function MentalHealth() {
                                     <p>Learn how to sleep better.</p>
                                 </Carousel.Caption>
                             </Link>
-                        </Carousel.Item>
-                        <Carousel.Item>
+                        </Carousel.Item> */}
+                        {/* <Carousel.Item>
                             <Link to="/Mood">
                                 <img
                                     className="d-block carousel-image"

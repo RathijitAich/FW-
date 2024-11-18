@@ -1,163 +1,188 @@
 import React, { useState, useEffect } from 'react';
+import { Container, Paper, Box, Typography, TextField, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Container, TextField, Button, Typography, Box, Paper } from '@mui/material';
 
-export default function Userprofile({ isloggedin, username, password }) {
-    const [userData, setUserData] = useState({
-        username: '',
-        height: '',
-        weight: '',
-        age: '',
-        gender: '',
-        password: ''
-    });
+export default function Userprofile({ isloggedin, user_id, username, password }) {
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        if (isloggedin) {
-            // Fetch user data by username and password
-            fetchUserData(username, password);
-        }
-    }, [isloggedin, username, password]);
+  
 
-    const fetchUserData = async (username, password) => {
-        try {
-            // Replace with your API endpoint to fetch user data
-            const response = await fetch(`http://localhost:8080/api/users/${username}`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+
+    
+        const [userData, setUserData] = useState({
+            user_id: '',
+            username: '',
+            gender: '',
+            healthCondition: '',
+            height: '',
+            weight: '',
+            password: '',
+        });
+
+
+
+        useEffect(() => {
+
+            if (!isloggedin) {
+                navigate('/Login');
             }
-            const data = await response.json();
-            console.log('Fetched user data:', data); // Log the fetched data
-            setUserData({
-                username: data.username,
-                height: data.height,
-                weight: data.weight,
-                age: data.age,
-                gender: data.gender,
-                password: data.password
-            });
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-        }
-    };
 
-    const UpdateProfile = async () => {
-        try {
-            const updatedData = {
-                height: userData.height,
-                weight: userData.weight,
-                age: userData.age
-            };
-            const response = await fetch(`http://localhost:8080/api/users/update/${username}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedData),
-            });
+            else{
 
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Updated user data:', data);
-                alert('Profile Updated Successfully');
-            } else {
-                const errorData = await response.text();
-                console.error('Error updating profile:', errorData);
-                alert('Error updating profile');
+            // Fetch user data from the backend
+            try {
+                fetch(`http://localhost:8080/api/users/${user_id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setUserData({
+                            user_id: data.user_id,
+                            username: data.username,
+                            gender: data.gender,
+                            healthCondition: data.healthCondition,
+                            height: data.height,
+                            weight: data.weight,
+                            password: data.password,
+                        });
+                    })
+                    .catch((error) => {
+                        console.log("Error:", error);
+                    });
+            } catch (error) {
+                console.log("Error:", error);
             }
-        } catch (error) {
-            console.error('Error updating profile:', error);
         }
-    };
 
-    if (!isloggedin) {
+        }, [isloggedin, user_id, navigate]);
+    
+
+        const UpdateProfile = () => {
+            // Handle profile update logic here
+            try {
+                fetch(`http://localhost:8080/api/users/${user_id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userData),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log('Profile updated:', data);
+                        // Optionally, you can update the state with the new data
+                        setUserData(data);
+                    })
+                    .catch((error) => {
+                        console.log("Error:", error);
+                    });
+            } catch (error) {
+                console.log("Error:", error);
+            }
+        };
+
         return (
-            <Container className="container my-3">
-                <Typography variant="h6" className="text-center">
-                    Please login to view your profile
-                </Typography>
-            </Container>
+
+
+            <div className="my-3">
+                <Container maxWidth="sm" sx={{ mt: 5 }}>
+                    <Paper elevation={3} sx={{ padding: 3 }}>
+                        <Box component="form" noValidate autoComplete="off">
+                            <Typography variant="h4" gutterBottom>
+                                User Profile
+                            </Typography>
+                            <TextField
+                                fullWidth
+                                label="User ID"
+                                margin="normal"
+                                variant="outlined"
+                                value={userData.user_id}
+                                disabled
+                            />
+                            <TextField
+                                fullWidth
+                                label="Username"
+                                margin="normal"
+                                variant="outlined"
+                                value={userData.username}
+                                onChange={(e) => setUserData({ ...userData, username: e.target.value })}
+                            />
+                            <TextField
+                                fullWidth
+                                label="Gender"
+                                margin="normal"
+                                variant="outlined"
+                                value={userData.gender}
+                                disabled
+                            />
+                            <TextField
+                                fullWidth
+                                label="Health Condition"
+                                margin="normal"
+                                variant="outlined"
+                                value={userData.healthCondition}
+                                onChange={(e) => setUserData({ ...userData, healthCondition: e.target.value })}
+                                select
+                                SelectProps={{
+                                    native: true,
+                                }}
+                            >
+                                <option value="none">No Conditions</option>
+                                <option value="diabetes">Diabetes</option>
+                                <option value="heart disease">Heart Disease</option>
+                                <option value="high pressure">High Pressure</option>
+                            </TextField>
+                            <TextField
+                                fullWidth
+                                label="Height (cm)"
+                                margin="normal"
+                                variant="outlined"
+                                type="number"
+                                value={userData.height}
+                                onChange={(e) => setUserData({ ...userData, height: e.target.value })}
+                            />
+                            <TextField
+                                fullWidth
+                                label="Weight (kg)"
+                                margin="normal"
+                                variant="outlined"
+                                type="number"
+                                value={userData.weight}
+                                onChange={(e) => setUserData({ ...userData, weight: e.target.value })}
+                            />
+                            <TextField
+                                fullWidth
+                                label="Password"
+                                margin="normal"
+                                variant="outlined"
+                                type="password"
+                                value={userData.password}
+                                disabled
+                            />
+                            <Button
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                sx={{ mt: 3, mb: 2 }}
+                                onClick={UpdateProfile}
+                            >
+                                Save Changes
+                            </Button>
+                        </Box>
+                    </Paper>
+                </Container>
+            </div>
         );
     }
 
-    return (
-        <div className="my-3">
-            <Container maxWidth="sm" sx={{ mt: 5 }}>
-                <Paper elevation={3} sx={{ padding: 3 }}>
-                    <Box component="form" noValidate autoComplete="off">
-                        <Typography variant="h4" gutterBottom>
-                            User Profile
-                        </Typography>
-                        <TextField
-                            fullWidth
-                            label="Username"
-                            margin="normal"
-                            variant="outlined"
-                            value={userData.username}
-                            disabled
-                        />
-                        <TextField
-                            fullWidth
-                            label="Age"
-                            margin="normal"
-                            variant="outlined"
-                            type="number"
-                            value={userData.age}
-                            onChange={(e) => setUserData({ ...userData, age: e.target.value })}
-                        />
-                        <TextField
-                            fullWidth
-                            label="Gender"
-                            margin="normal"
-                            variant="outlined"
-                            value={userData.gender}
-                            disabled
-                        />
-                        <TextField
-                            fullWidth
-                            label="Height(cm)"
-                            margin="normal"
-                            variant="outlined"
-                            type="number"
-                            value={userData.height}
-                            onChange={(e) => setUserData({ ...userData, height: e.target.value })}
-                        />
-                        <TextField
-                            fullWidth
-                            label="Weight(kg)"
-                            margin="normal"
-                            variant="outlined"
-                            type="number"
-                            value={userData.weight}
-                            onChange={(e) => setUserData({ ...userData, weight: e.target.value })}
-                        />
-                        <TextField
-                            fullWidth
-                            label="Password"
-                            margin="normal"
-                            variant="outlined"
-                            type="password"
-                            value={userData.password}
-                            disabled
-                        />
-                        <Button
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            sx={{ mt: 3, mb: 2 }}
-                            onClick={UpdateProfile}
-                        >
-                            Save Changes
-                        </Button>
-                    </Box>
-                </Paper>
-            </Container>
-        </div>
-    );
-}
 
 Userprofile.propTypes = {
     isloggedin: PropTypes.bool,
+    user_id: PropTypes.string,
     username: PropTypes.string,
     password: PropTypes.string,
 };
