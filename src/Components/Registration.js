@@ -58,7 +58,7 @@ export default function Registration(props) {
           return;
         }
       }
-      
+
 
       // Proceed with registration
       console.log('Registration form data:', formData);
@@ -114,12 +114,12 @@ export default function Registration(props) {
             height: '100%',
           }}
         />
-        <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square sx={{ height: '80vh', width: '500px', display: 'flex', alignItems: 'center',background: '#fffffff5' }}>
+        <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square sx={{ height: '80vh', width: '500px', display: 'flex', alignItems: 'center', background: '#fffffff5' }}>
           <Box
             sx={{
               my: 3,
               mx: 1,
-              ml:12,
+              ml: 12,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -221,7 +221,7 @@ export default function Registration(props) {
                     <MenuItem value="diabetes">Diabetes</MenuItem>
                     <MenuItem value="heart disease">Heart Disease</MenuItem>
                     <MenuItem value="high pressure">High Pressure</MenuItem>
-                    <MenuItem value="no conditions">No Conditions</MenuItem>
+                    <MenuItem value="no conditions">None</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -260,7 +260,14 @@ export default function Registration(props) {
           <Button color="inherit" size="small" onClick={handleSnackbarClose}>
             Close
           </Button>
+
         }
+        sx={{
+          '& .MuiSnackbarContent-root': {
+            color: 'black', // Change this to your desired color
+            backgroundColor: 'white', // Change this to your desired color
+          },
+        }}
       />
     </div>
   );

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Paper, Box, Typography, TextField, Button } from '@mui/material';
+import { Container, Paper, Box, Typography, TextField, Button, Snackbar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function Userprofile({ isloggedin, user_id, username, password }) {
     const navigate = useNavigate();
+    const [showSnackbar, setShowSnackbar] = useState(false);
+    const [alertMessage, setAlertMessage] = useState(''); // State for alert message
 
   
 
@@ -40,6 +42,7 @@ export default function Userprofile({ isloggedin, user_id, username, password })
                 })
                     .then((response) => response.json())
                     .then((data) => {
+                        
                         setUserData({
                             user_id: data.user_id,
                             username: data.username,
@@ -76,13 +79,21 @@ export default function Userprofile({ isloggedin, user_id, username, password })
                         console.log('Profile updated:', data);
                         // Optionally, you can update the state with the new data
                         setUserData(data);
+                        setAlertMessage('Profile updated successfully.');
+                        setShowSnackbar(true);
+
                     })
                     .catch((error) => {
                         console.log("Error:", error);
+                        
                     });
             } catch (error) {
                 console.log("Error:", error);
             }
+        };
+
+        const handleSnackbarClose = () => {
+            setShowSnackbar(false);
         };
 
         return (
@@ -175,6 +186,17 @@ export default function Userprofile({ isloggedin, user_id, username, password })
                         </Box>
                     </Paper>
                 </Container>
+                <Snackbar
+                open={showSnackbar}
+                autoHideDuration={3000}
+                onClose={handleSnackbarClose}
+                message={alertMessage}
+                action={
+                    <Button color="inherit" size="small" onClick={handleSnackbarClose}>
+                        Close
+                    </Button>
+                }
+            />
             </div>
         );
     }

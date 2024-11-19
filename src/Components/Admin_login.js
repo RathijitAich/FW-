@@ -1,55 +1,65 @@
 import React, { useState, useEffect } from 'react';
-import { IconButton, Button, TextField } from '@mui/material';
+import { IconButton, Button, TextField, Snackbar } from '@mui/material';
 import { Visibility, VisibilityOff, Login as LoginIcon, PersonAdd as PersonAddIcon } from '@mui/icons-material';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login_Page({ handleloginbutton, setPassword, setUser_id }) {
-   
-
-    const [showPassword, setShowPassword] = useState(false);
+function Admin_login({ handleAdminloginbutton, isloggedin, isloggedin_admin, setisloggedin_admin, admin_id, setAdmin_id, admin_password, setAdmin_password }) {
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+    const [showSnackbar, setShowSnackbar] = useState(false);
+
+    useEffect(() => {
+        if (isloggedin) {
+            setShowSnackbar(true);
+            setTimeout(() => {
+                navigate('/Home');
+            }, 4000); // Delay navigation to allow Snackbar to show
+        }
+    }, [isloggedin, navigate]);
 
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = (event) => event.preventDefault();
 
     const Changed = (event) => {
-        if (event.target.id === 'user_id') {
-            setUser_id(event.target.value);
+        if (event.target.id === 'admin_id') {
+            setAdmin_id(event.target.value);
         } else {
-            setPassword(event.target.value);
+            setAdmin_password(event.target.value);
         }
     }
 
-    const handleRegisterButton = () => {
-        navigate('/Registration');
-    }
+    const handleSnackbarClose = () => {
+        setShowSnackbar(false);
+    };
 
     return (
         <div className='login-wrapper'>
             <div className="loginframe container mt-9 p-4 rounded shadow">
                 <form>
-                    <h2 className="text-center mb-4" style={{ color: 'blue', fontSize: '1.5rem' }}>Login</h2>
+                    <h2 className="text-center mb-4" style={{ color: 'blue', fontSize: '1.5rem' }}>Admin Login</h2>
 
                     <div className="mb-3">
                         <TextField
-                            id="user_id"
-                            label="User ID"
+                            id="admin_id"
+                            label="Admin ID"
                             variant="standard"
                             fullWidth
                             onChange={Changed}
+                            disabled={isloggedin} // Disable input if logged in
                             slotProps={{ input: { style: { fontSize: '1.25rem' } }, inputLabel: { style: { fontSize: '1.25rem' } } }}
                         />
                     </div>
 
                     <div className="mb-3">
                         <TextField
-                            id="password"
+                            id="admin_password"
                             label="Password"
                             type={showPassword ? 'text' : 'password'}
                             variant="standard"
                             fullWidth
                             onChange={Changed}
+                            disabled={isloggedin} // Disable input if logged in
                             slotProps={{
                                 input: {
                                     style: { fontSize: '1.25rem' },
@@ -58,6 +68,7 @@ export default function Login_Page({ handleloginbutton, setPassword, setUser_id 
                                             aria-label="toggle password visibility"
                                             onClick={handleClickShowPassword}
                                             onMouseDown={handleMouseDownPassword}
+                                            disabled={isloggedin} // Disable button if logged in
                                         >
                                             {showPassword ? <VisibilityOff /> : <Visibility />}
                                         </IconButton>
@@ -72,30 +83,45 @@ export default function Login_Page({ handleloginbutton, setPassword, setUser_id 
                         variant="contained"
                         color="primary"
                         fullWidth
-                        onClick={handleloginbutton}
+                        onClick={handleAdminloginbutton}
                         startIcon={<LoginIcon />}
                         sx={{ mb: 2 }}
+                        disabled={isloggedin} // Disable button if logged in
                     >
                         Login
                     </Button>
-
-                    <Button
-                        variant="outlined"
-                        color="secondary"
-                        fullWidth
-                        onClick={handleRegisterButton}
-                        startIcon={<PersonAddIcon />}
-                    >
-                        Register
-                    </Button>
                 </form>
             </div>
+            <Snackbar
+                open={showSnackbar}
+                autoHideDuration={5000}
+                onClose={handleSnackbarClose}
+                message="Please Logout First, You are already logged in as User"
+                action={
+                    <Button color="primary" size="small" onClick={handleSnackbarClose}>
+                        Close
+                    </Button>
+                }
+                sx={{
+                    '& .MuiSnackbarContent-root': {
+                        color: 'black', // Change this to your desired color
+                        backgroundColor: 'white', // Change this to your desired color
+                    },
+                }}
+            />
         </div>
     );
 }
 
-Login_Page.propTypes = {
-    handleloginbutton: PropTypes.func.isRequired,
-    setPassword: PropTypes.func.isRequired,
-    setUser_id: PropTypes.func.isRequired,
+Admin_login.propTypes = {
+    handleAdminloginbutton: PropTypes.func.isRequired,
+    isloggedin: PropTypes.bool.isRequired,
+    isloggedin_admin: PropTypes.bool.isRequired,
+    setisloggedin_admin: PropTypes.func.isRequired,
+    admin_id: PropTypes.string.isRequired,
+    setAdmin_id: PropTypes.func.isRequired,
+    admin_password: PropTypes.string.isRequired,
+    setAdmin_password: PropTypes.func.isRequired,
 };
+
+export default Admin_login;

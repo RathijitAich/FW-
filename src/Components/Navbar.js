@@ -45,16 +45,36 @@ export default function Navbar({ isloggedin, logoutclicked, fontFamily = 'Roboto
                   <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink, color: 'black' }}>Current Diet Plan</Link></li>
                 </ul>
               </li>
+
+              <li className="nav-item dropdown">
+                <Link className="nav-link dropdown-toggle modern-link" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px', color: fontColor }}>
+                 Admin/Trainer
+                </Link>
+                <ul className="dropdown-menu">
+                  <li><Link className="dropdown-item" to="/Admin_login" style={{ fontFamily, fontSize: fontSizeLink, color: 'black' }}>Admin Login</Link></li>
+                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink, color: 'black' }}>Trainer Login</Link></li>
+                </ul>
+              </li>
+           
+
             </ul>
-            {isloggedin ? (
+
+              {isloggedin ? (
               <Button variant="contained" color="secondary" onClick={logoutclicked} style={{ fontFamily, fontSize: fontSizeLink }}>
                 Logout
               </Button>
             ) : (
               <Button variant="contained" color="primary" component={Link} to="/Login" style={{ fontFamily, fontSize: fontSizeLink }}>
-                Login
+                Login As User
               </Button>
             )}
+
+            
+            
+
+       
+
+
           </div>
         </div>
       </nav>

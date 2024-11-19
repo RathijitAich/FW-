@@ -7,7 +7,7 @@
 
 .modern-brand:hover {
   color: #000000; /* Change to your desired hover color */
-  transform: scale(1.2); /* Slightly enlarge the text */
+  transform: scale(1.1); /* Slightly enlarge the text */
 }
 
 .navbar-logo {
@@ -22,5 +22,5 @@
 
 .modern-link:hover {
   color: #0271f8; /* Change to your desired hover color */
-  transform: scale(1.2); /* Slightly enlarge the text */
+  transform: scale(1.1); /* Slightly enlarge the text */
 }
