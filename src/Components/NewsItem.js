@@ -13,7 +13,7 @@ export default class NewsItem extends Component {
         let { title, description,imageurl ,newsurl} = this.props;
         return (
             <div className='my-3 '>
-                <div className="card" style={{ width: '27rem', height:'30rem', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '10px' }}>
+                <div className="card" style={{ width: '27rem', height:'30rem', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '10px',backgroundColor:'antiquewhite' }}>
                     <img src={imageurl} className="card-img-top" alt="..."/>
                         <div className="card-body">
                             <h5 className="card-title">{title}</h5>

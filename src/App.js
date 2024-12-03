@@ -1,9 +1,9 @@
 import "./App.css";
-
+import { useState } from "react";
 
 import Navbar from "./Components/Navbar";
 import Login_Page from "./Components/Login_Page";
-import { useState } from "react";
+
 import News from "./Components/News";
 import MainMenu from "./Components/Main-menu";
 import Registration from "./Components/Registration";
@@ -16,7 +16,7 @@ import Userprofile from "./Components/Userprofile";
 import MentalHealth from "./Components/MentalHealth";
 import Workout_plan from "./Components/workout_plan";
 import GeneratedPlan from "./Components/generated_plan";
-import Stress from "./Components/Stress";
+import MentalHealthQuestion from "./Components/MentalHealthQuestion";
 import Relax_stress from "./Components/Relax_stress";
 import LandingPage from "./Components/LandingPage";
 import Admin_login from "./Components/Admin_login";
@@ -219,8 +219,8 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/CalorieIntake" element={<CalorieIntake />} />
         <Route path="/Userprofile" element={<Userprofile isloggedin={isloggedin} user_id={user_id} username={username} password={password} />} />
         <Route path="/MentalHealth" element={<MentalHealth />} />
-        <Route path="/Stress" element={<Stress />} />
-        {/* <Route path="/Relax_stress" element={<Relax_stress />} /> */}
+        <Route path="/MentalHealthQuestion" element={<MentalHealthQuestion />} />
+        <Route path="/Relax_stress" element={<Relax_stress />} />
         <Route path="/generated_plan" element={<GeneratedPlan />} />
 
         <Route path="/Admin_login" element={<Admin_login isloggedin={isloggedin} isloggedin_admin={isloggedin_admin} setisloggedin_admin={setisloggedin_admin} admin_id={admin_id} setAdmin_id={setAdmin_id} admin_password={admin_password} setAdmin_password={setAdmin_password} handleAdminloginbutton={handleAdminloginbutton} />} />

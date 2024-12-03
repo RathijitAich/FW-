@@ -5,6 +5,10 @@ import { Carousel } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Avatar, Card, CardMedia, CardContent, Typography } from '@mui/material';
 import ReactPlayer from 'react-player';
+import { Container, Grid, Paper } from '@mui/material';
+import Box from '@mui/material/Box';
+
+
 
 
 import imgg5 from '../Images/Real2.jpg';
@@ -71,6 +75,9 @@ export default function ActionAreaCard() {
                     ))}
                 </div>
             </div>
+
+
+
             <div className="carousel-box">
                 <div className="carousel-container">
                     <Carousel>
@@ -103,12 +110,45 @@ export default function ActionAreaCard() {
                     </Carousel>
                 </div>
             </div>
+
+
+            <Container sx={{ mb: 15, mt :20 }}>
+                <Grid container spacing={3} direction="column" alignItems="center">
+                    <Grid item xs={12}>
+                        <Paper sx={{ p: 4, width: '100%',backgroundColor: 'antiquewhite' }}>
+                            <Typography variant="h4" gutterBottom>
+                                HealthyHorizons Game
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                                HealthyHorizons is a game developed by one of our admin. Check out the game below and have fun!
+                            </Typography>
+                            <iframe
+                                frameBorder="0"
+                                src="https://itch.io/embed/3120867?bg_color=c5aaaa&amp;fg_color=000000"
+                                // src="./Game/index.html"
+                                width="100%"
+                                height="167"
+                                title="HealthyHorizons Game"
+                                
+                            >
+                                <a href="https://snikdrek.itch.io/healthyhorizons">HealthyHorizons by SnikDrek</a>
+                            </iframe>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </Container>
             
 
             <div className="media-box">
+
+            <Box sx={{ p: 2, backgroundColor: '#e3f2fd', borderRadius: 2, mb: 5, width: '450px', mt: 5 }}>
+            <Typography variant="h6" gutterBottom sx={{ color: '#3f51b5' }}>
+              Check out these podcasts and get inspired!
+            </Typography>
+          </Box>
             
                 <div className="row">
-                <h2 className="text-center" style={{ color: '#92e3c4' }}>Some recommended videos to get you going</h2>
+                
                     {mediaCards.map((media, index) => (
                         <div className="col-md-4" key={index}>
                             <Card className="media-card">

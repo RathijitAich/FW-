@@ -109,7 +109,7 @@
   padding: 20px;
   border-radius: 15px; /* Add rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  background: linear-gradient(2deg, #000000a8, #2a362f9e);
+  background-color:#faebd78f;
   margin-top: 200px; /* Add distance from the previous component */
   
 }

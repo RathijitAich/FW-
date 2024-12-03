@@ -5,7 +5,7 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import MentalHealthIcon from '@mui/icons-material/HealthAndSafety';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import imgg1 from '../Images/frontpage7.jpg';
+import imgg1 from '../Images/2.jpg';
 import styled from 'styled-components';
 
 const StyledContainer = styled(Container)`
@@ -18,7 +18,7 @@ export default function LandingPage() {
     <Box
       sx={{
         minHeight: '100vh',
-        // backgroundImage: `url(${imgg1})`,
+        backgroundImage: `url(${imgg1})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         display: 'flex',
@@ -30,8 +30,8 @@ export default function LandingPage() {
       }}
     >
       <StyledContainer sx={{ maxWidth: 800 }}>
-        <Grid container spacing={3} sx={{ mx: 'auto', backgroundColor:'#2930306b' }}>
-          <Grid item xs={12} sx={{    backgroundColor: '#070707a1'}} >
+        <Grid container spacing={3} sx={{ mx: 'auto',color :'black' }}>
+          <Grid item xs={12}  >
             <Typography
               variant="h3"
               component="h1"

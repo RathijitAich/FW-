@@ -17,21 +17,21 @@ export default function ActionAreaCard() {
           description: 'Calculate BMI',
           image: imgg5,
           link:'/BMI',
-          bc_color: '#ffffff4f'
+          bc_color: '#faebd78f'
       },
       {
           title: 'Calore Per Food',
           description: 'Calculate calorie taken',
           image: imgg6,
           link:'/CalorieThatDay',
-          bc_color: '#ffffff4f'
+          bc_color: '#faebd78f'
       },
       {
           title: 'Calorie Intake',
           description: 'Calculate daily calorie intake',
           image: imgg7,
           link:'/CalorieIntake',
-          bc_color: '#ffffff4f'
+          bc_color: '#faebd78f'
       },
   ];
 
