@@ -6,91 +6,31 @@ import { Search } from '@mui/icons-material';
 
 const foodEntries = [
   // Bangladeshi Staple Foods
-  { name: 'Rice', type: 'Carb', unit: 'cup', caloriesPerUnit: 206 },
-  { name: 'Lentils (Dal)', type: 'Protein', unit: 'cup', caloriesPerUnit: 230 },
-  { name: 'Hilsa Fish (Ilish)', type: 'Protein', unit: 'piece', caloriesPerUnit: 280 },
-  { name: 'Rui Fish (Rohu)', type: 'Protein', unit: 'piece', caloriesPerUnit: 180 },
-  { name: 'Beef Curry', type: 'Protein', unit: 'cup', caloriesPerUnit: 350 },
-  { name: 'Chicken Curry', type: 'Protein', unit: 'cup', caloriesPerUnit: 300 },
-  { name: 'Mutton Curry', type: 'Protein', unit: 'cup', caloriesPerUnit: 420 },
-  { name: 'Vegetable Curry', type: 'Carb', unit: 'cup', caloriesPerUnit: 150 },
-  { name: 'Khichuri', type: 'Carb', unit: 'cup', caloriesPerUnit: 250 },
-  { name: 'Paratha', type: 'Carb', unit: 'piece', caloriesPerUnit: 250 },
-  { name: 'Chapati (Roti)', type: 'Carb', unit: 'piece', caloriesPerUnit: 120 },
-  { name: 'Luchi', type: 'Carb', unit: 'piece', caloriesPerUnit: 150 },
-  { name: 'Chingri Malai Curry (Prawn Curry)', type: 'Protein', unit: 'cup', caloriesPerUnit: 350 },
-  { name: 'Fish Curry', type: 'Protein', unit: 'cup', caloriesPerUnit: 200 },
-  { name: 'Shutki (Dried Fish)', type: 'Protein', unit: 'piece', caloriesPerUnit: 200 },
-  { name: 'Puffed Rice (Muri)', type: 'Carb', unit: 'cup', caloriesPerUnit: 60 },
-  { name: 'Payesh (Rice Pudding)', type: 'Carb', unit: 'cup', caloriesPerUnit: 250 },
-  { name: 'Mishti Doi (Sweet Yogurt)', type: 'Carb', unit: 'cup', caloriesPerUnit: 150 },
-  { name: 'Singara', type: 'Carb', unit: 'piece', caloriesPerUnit: 150 },
-  { name: 'Fuchka', type: 'Carb', unit: 'piece', caloriesPerUnit: 50 },
-  { name: 'Shemai (Vermicelli)', type: 'Carb', unit: 'cup', caloriesPerUnit: 200 },
-  { name: 'Chotpoti', type: 'Carb', unit: 'cup', caloriesPerUnit: 220 },
-  { name: 'Tehari', type: 'Carb', unit: 'cup', caloriesPerUnit: 450 },
-  { name: 'Kacchi Biryani', type: 'Carb', unit: 'cup', caloriesPerUnit: 550 },
-
-  // Gym-Type Foods (High Protein, Low Fat)
-  { name: 'Chicken Breast (Boiled)', type: 'Protein', unit: 'piece', caloriesPerUnit: 165 },
-  { name: 'Salmon (Grilled)', type: 'Protein', unit: 'piece', caloriesPerUnit: 200 },
-  { name: 'Egg Whites', type: 'Protein', unit: 'piece', caloriesPerUnit: 17 },
-  { name: 'Whole Eggs', type: 'Protein', unit: 'piece', caloriesPerUnit: 78 },
-  { name: 'Greek Yogurt (Plain)', type: 'Protein', unit: 'cup', caloriesPerUnit: 100 },
-  { name: 'Cottage Cheese (Low Fat)', type: 'Protein', unit: 'cup', caloriesPerUnit: 206 },
-  { name: 'Protein Shake (Whey)', type: 'Protein', unit: 'scoop', caloriesPerUnit: 120 },
-  { name: 'Quinoa', type: 'Carb', unit: 'cup', caloriesPerUnit: 222 },
-  { name: 'Brown Rice', type: 'Carb', unit: 'cup', caloriesPerUnit: 218 },
-  { name: 'Oatmeal', type: 'Carb', unit: 'cup', caloriesPerUnit: 150 },
-  { name: 'Sweet Potato', type: 'Carb', unit: 'piece', caloriesPerUnit: 112 },
-  { name: 'Avocado', type: 'Fat', unit: 'piece', caloriesPerUnit: 234 },
-  { name: 'Almonds', type: 'Fat', unit: 'ounce', caloriesPerUnit: 164 },
-  { name: 'Walnuts', type: 'Fat', unit: 'ounce', caloriesPerUnit: 185 },
-  { name: 'Peanut Butter', type: 'Fat', unit: 'tbsp', caloriesPerUnit: 94 },
-  { name: 'Broccoli', type: 'Carb', unit: 'cup', caloriesPerUnit: 55 },
-  { name: 'Spinach (Boiled)', type: 'Carb', unit: 'cup', caloriesPerUnit: 41 },
-  { name: 'Zucchini', type: 'Carb', unit: 'cup', caloriesPerUnit: 20 },
-  { name: 'Baked Potato (with Skin)', type: 'Carb', unit: 'piece', caloriesPerUnit: 161 },
-  { name: 'Steamed Asparagus', type: 'Carb', unit: 'cup', caloriesPerUnit: 27 },
-  { name: 'Chicken Soup (Low Fat)', type: 'Protein', unit: 'cup', caloriesPerUnit: 150 },
-  { name: 'Grilled Tilapia', type: 'Protein', unit: 'piece', caloriesPerUnit: 128 },
-  { name: 'Tofu (Firm)', type: 'Protein', unit: 'piece', caloriesPerUnit: 100 },
-
-  // Snacks for Gym Diets
-  { name: 'Granola Bar (Low Sugar)', type: 'Carb', unit: 'piece', caloriesPerUnit: 100 },
-  { name: 'Rice Cake', type: 'Carb', unit: 'piece', caloriesPerUnit: 35 },
-  { name: 'Beef Jerky', type: 'Protein', unit: 'piece', caloriesPerUnit: 80 },
-  { name: 'Hummus', type: 'Fat', unit: 'tbsp', caloriesPerUnit: 25 },
-  { name: 'Dark Chocolate (70%)', type: 'Fat', unit: 'piece', caloriesPerUnit: 50 },
-  { name: 'Chia Seeds', type: 'Fat', unit: 'tbsp', caloriesPerUnit: 58 },
-  { name: 'Flax Seeds', type: 'Fat', unit: 'tbsp', caloriesPerUnit: 37 },
-
-  // Drinks
-  { name: 'Green Tea', type: 'Carb', unit: 'cup', caloriesPerUnit: 2 },
-  { name: 'Black Coffee (No Sugar)', type: 'Carb', unit: 'cup', caloriesPerUnit: 5 },
-  { name: 'Milk (Low Fat)', type: 'Protein', unit: 'cup', caloriesPerUnit: 103 },
-  { name: 'Smoothie (Mixed Berries)', type: 'Carb', unit: 'cup', caloriesPerUnit: 120 },
-  { name: 'Coconut Water', type: 'Carb', unit: 'cup', caloriesPerUnit: 45 },
-  { name: 'Protein Shake (Plant-Based)', type: 'Protein', unit: 'scoop', caloriesPerUnit: 130 },
-
-  // Sweets for Occasional Treats
-  { name: 'Banana Bread', type: 'Carb', unit: 'slice', caloriesPerUnit: 196 },
-  { name: 'Apple Pie', type: 'Carb', unit: 'slice', caloriesPerUnit: 240 },
-  { name: 'Honey', type: 'Carb', unit: 'tbsp', caloriesPerUnit: 64 },
-
-  // Additional Bangladeshi Foods
-  { name: 'Dal Bharta', type: 'Protein', unit: 'cup', caloriesPerUnit: 160 },
-  { name: 'Aloo Bharta', type: 'Carb', unit: 'cup', caloriesPerUnit: 200 },
-  { name: 'Begun Bharta', type: 'Carb', unit: 'cup', caloriesPerUnit: 90 },
-  { name: 'Shorshe Ilish (Hilsa in Mustard)', type: 'Protein', unit: 'piece', caloriesPerUnit: 350 },
-  { name: 'Beef Bhuna', type: 'Protein', unit: 'cup', caloriesPerUnit: 400 },
-  { name: 'Chicken Rezala', type: 'Protein', unit: 'cup', caloriesPerUnit: 350 },
-  { name: 'Vegetable Roll', type: 'Carb', unit: 'piece', caloriesPerUnit: 250 }
+  { name: 'Rice', type: 'Carb', unit: 'cup', caloriesPerUnit: 206, protein: 4.3, fat: 0.4, carb: 45 },
+  { name: 'Lentils (Dal)', type: 'Protein', unit: 'cup', caloriesPerUnit: 230, protein: 18, fat: 0.8, carb: 40 },
+  { name: 'Hilsa Fish (Ilish)', type: 'Protein', unit: 'piece', caloriesPerUnit: 280, protein: 25, fat: 20, carb: 0 },
+  { name: 'Rui Fish (Rohu)', type: 'Protein', unit: 'piece', caloriesPerUnit: 180, protein: 20, fat: 8, carb: 0 },
+  { name: 'Beef Curry', type: 'Protein', unit: 'cup', caloriesPerUnit: 350, protein: 30, fat: 25, carb: 5 },
+  { name: 'Chicken Curry', type: 'Protein', unit: 'cup', caloriesPerUnit: 300, protein: 25, fat: 15, carb: 8 },
+  { name: 'Mutton Curry', type: 'Protein', unit: 'cup', caloriesPerUnit: 420, protein: 28, fat: 30, carb: 6 },
+  { name: 'Vegetable Curry', type: 'Carb', unit: 'cup', caloriesPerUnit: 150, protein: 3, fat: 7, carb: 18 },
+  { name: 'Khichuri', type: 'Carb', unit: 'cup', caloriesPerUnit: 250, protein: 7, fat: 8, carb: 35 },
+  { name: 'Paratha', type: 'Carb', unit: 'piece', caloriesPerUnit: 250, protein: 4, fat: 13, carb: 27 },
+  { name: 'Chapati (Roti)', type: 'Carb', unit: 'piece', caloriesPerUnit: 120, protein: 3, fat: 1, carb: 25 },
+  { name: 'Luchi', type: 'Carb', unit: 'piece', caloriesPerUnit: 150, protein: 2, fat: 7, carb: 18 },
+  { name: 'Chingri Malai Curry (Prawn Curry)', type: 'Protein', unit: 'cup', caloriesPerUnit: 350, protein: 22, fat: 25, carb: 5 },
+  { name: 'Fish Curry', type: 'Protein', unit: 'cup', caloriesPerUnit: 200, protein: 20, fat: 10, carb: 2 },
+  { name: 'Shutki (Dried Fish)', type: 'Protein', unit: 'piece', caloriesPerUnit: 200, protein: 30, fat: 5, carb: 0 },
+  { name: 'Puffed Rice (Muri)', type: 'Carb', unit: 'cup', caloriesPerUnit: 60, protein: 1, fat: 0.2, carb: 13 },
+  { name: 'Payesh (Rice Pudding)', type: 'Carb', unit: 'cup', caloriesPerUnit: 250, protein: 6, fat: 5, carb: 45 },
+  { name: 'Mishti Doi (Sweet Yogurt)', type: 'Carb', unit: 'cup', caloriesPerUnit: 150, protein: 4, fat: 3, carb: 25 },
+  { name: 'Singara', type: 'Carb', unit: 'piece', caloriesPerUnit: 150, protein: 3, fat: 8, carb: 15 },
+  { name: 'Fuchka', type: 'Carb', unit: 'piece', caloriesPerUnit: 50, protein: 1, fat: 2, carb: 8 },
 ];
 
 const StyledTableCell = styled(TableCell)({
-  backgroundColor: 'black',// Table cell color
-  color: 'white',// Text color
+  backgroundColor: 'black', // Table cell color
+  color: 'white', // Text color
   fontWeight: 'bold',
 });
 
@@ -119,16 +59,17 @@ export default function FoodTable() {
     food.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-
-  const calculateCaloriesByType = () => {
-    const caloriesByType = { Protein: 0, Carb: 0, Fat: 0 };
+  const calculateNutrientsByType = () => {
+    const nutrientsByType = { Protein: 0, Carb: 0, Fat: 0 };
     selectedFoods.forEach(food => {
-      caloriesByType[food.type] += food.caloriesPerUnit * food.amount;
+      nutrientsByType.Protein += food.protein * food.amount;
+      nutrientsByType.Carb += food.carb * food.amount;
+      nutrientsByType.Fat += food.fat * food.amount;
     });
     return [
-      { type: 'Protein', calories: caloriesByType.Protein },
-      { type: 'Carb', calories: caloriesByType.Carb },
-      { type: 'Fat', calories: caloriesByType.Fat }
+      { type: 'Protein', Protein: nutrientsByType.Protein, fill: 'rgb(122, 171, 139)' },
+      { type: 'Carb', Carb: nutrientsByType.Carb, fill: 'rgb(255, 165, 0)' },
+      { type: 'Fat', Fat: nutrientsByType.Fat, fill: 'rgb(255, 99, 71)' },
     ];
   };
 
@@ -170,7 +111,7 @@ export default function FoodTable() {
                   sx={{ backgroundColor: 'white' }}
                   InputProps={{
                     startAdornment: (
-                      <InputAdornment position="end">
+                      <InputAdornment position="start">
                         <Search />
                       </InputAdornment>
                     ),
@@ -202,13 +143,15 @@ export default function FoodTable() {
               }}
             >
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={calculateCaloriesByType()}>
+                <BarChart data={calculateNutrientsByType()} barCategoryGap="100%" barGap={0}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="type" />
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="calories" fill="black" />
+                  <Bar dataKey="Protein" fill="rgb(122, 171, 139)" barSize={40} />
+                  <Bar dataKey="Carb" fill="rgb(255, 165, 0)" barSize={40} />
+                  <Bar dataKey="Fat" fill="rgb(255, 99, 71)" barSize={40} />
                 </BarChart>
               </ResponsiveContainer>
             </Box>
@@ -226,6 +169,9 @@ export default function FoodTable() {
                 <StyledTableCell>Standard Unit</StyledTableCell>
                 <StyledTableCell>Calories per Unit</StyledTableCell>
                 <StyledTableCell>Total Calories</StyledTableCell>
+                <StyledTableCell>Protein (g)</StyledTableCell>
+                <StyledTableCell>Carb (g)</StyledTableCell>
+                <StyledTableCell>Fat (g)</StyledTableCell>
               </TableRow>
             </TableHead>
 
@@ -259,14 +205,27 @@ export default function FoodTable() {
                         ? selectedFood.caloriesPerUnit * selectedFood.amount
                         : food.caloriesPerUnit}
                     </TableCell>
+                    <TableCell>
+                      {selectedFood
+                        ? (food.protein * selectedFood.amount).toFixed(2)
+                        : food.protein}
+                    </TableCell>
+                    <TableCell>
+                      {selectedFood
+                        ? (food.carb * selectedFood.amount).toFixed(2)
+                        : food.carb}
+                    </TableCell>
+                    <TableCell>
+                      {selectedFood
+                        ? (food.fat * selectedFood.amount).toFixed(2)
+                        : food.fat}
+                    </TableCell>
                   </TableRow>
                 );
               })}
             </TableBody>
           </Table>
         </TableContainer>
-
-
       </Container>
     </div>
   );

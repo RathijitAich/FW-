@@ -20,15 +20,15 @@ export default function ActionAreaCard() {
           bc_color: '#faebd78f'
       },
       {
-          title: 'Calore Per Food',
-          description: 'Calculate calorie taken',
+          title: 'Calorie That Day',
+          description: 'Select foods and calculate calorie',
           image: imgg6,
           link:'/CalorieThatDay',
           bc_color: '#faebd78f'
       },
       {
           title: 'Calorie Intake',
-          description: 'Calculate daily calorie intake',
+          description: 'Calculate How much calorie you need everyday',
           image: imgg7,
           link:'/CalorieIntake',
           bc_color: '#faebd78f'

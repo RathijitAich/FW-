@@ -7,6 +7,7 @@ import { Avatar, Card, CardMedia, CardContent, Typography } from '@mui/material'
 import ReactPlayer from 'react-player';
 import { Container, Grid, Paper } from '@mui/material';
 import Box from '@mui/material/Box';
+import { useState } from 'react';
 
 
 
@@ -38,6 +39,7 @@ const mediaCards = [
 ];
 
 export default function ActionAreaCard() {
+
     const cardsData = [
         {
             title: 'Set Your Workout Plan',
@@ -58,6 +60,13 @@ export default function ActionAreaCard() {
             link: '/MentalHealth'
         },
     ];
+
+    const [selectedCard, setSelectedCard] = useState(null);
+
+    const handleCardClick = (index) => {
+        setSelectedCard(selectedCard === index ? null : index);
+    };
+
 
     return (
         <>
@@ -112,10 +121,10 @@ export default function ActionAreaCard() {
             </div>
 
 
-            <Container sx={{ mb: 15, mt :20 }}>
+            <Container sx={{ mb: 15, mt: 20 }}>
                 <Grid container spacing={3} direction="column" alignItems="center">
                     <Grid item xs={12}>
-                        <Paper sx={{ p: 4, width: '100%',backgroundColor: 'antiquewhite' }}>
+                        <Paper sx={{ p: 4, width: '100%', backgroundColor: 'antiquewhite' }}>
                             <Typography variant="h4" gutterBottom>
                                 HealthyHorizons Game
                             </Typography>
@@ -129,7 +138,7 @@ export default function ActionAreaCard() {
                                 width="100%"
                                 height="167"
                                 title="HealthyHorizons Game"
-                                
+
                             >
                                 <a href="https://snikdrek.itch.io/healthyhorizons">HealthyHorizons by SnikDrek</a>
                             </iframe>
@@ -137,18 +146,18 @@ export default function ActionAreaCard() {
                     </Grid>
                 </Grid>
             </Container>
-            
+
 
             <div className="media-box">
 
-            <Box sx={{ p: 2, backgroundColor: '#e3f2fd', borderRadius: 2, mb: 5, width: '450px', mt: 5 }}>
-            <Typography variant="h6" gutterBottom sx={{ color: '#3f51b5' }}>
-              Check out these podcasts and get inspired!
-            </Typography>
-          </Box>
-            
+                <Box sx={{ p: 2, backgroundColor: '#e3f2fd', borderRadius: 2, mb: 5, width: '450px', mt: 5 }}>
+                    <Typography variant="h6" gutterBottom sx={{ color: '#3f51b5' }}>
+                        Check out these podcasts and get inspired!
+                    </Typography>
+                </Box>
+
                 <div className="row">
-                
+
                     {mediaCards.map((media, index) => (
                         <div className="col-md-4" key={index}>
                             <Card className="media-card">
@@ -169,21 +178,91 @@ export default function ActionAreaCard() {
                 </div>
             </div>
 
-            <div className="avatar-box">
-                <h2 className="text-center">Fitness Influencers You Can Checkout</h2>
-                <div className="avatar-container">
-                    {influencers.map((influencer, index) => (
-                        <Link to={influencer.link} key={index} className="avatar-link">
-                            <Avatar
+            
+
+            
+
+            <Box display="flex" flexDirection="column" alignItems="center" >
+
+            <Box sx={{ p: 2, backgroundColor: '#f6f9fb', borderRadius: 2, mb: 5, width: '400px', mt: 20 }}>
+                    <Typography variant="h6" gutterBottom sx={{ color: '#3f51b5' }}>
+                        You might like these fitness influencers!
+                    </Typography>
+                </Box>
+                {influencers.map((influencer, index) => (
+                    <Link to={influencer.link} key={index} style={{ textDecoration: 'none' }}>
+                        <Card
+                            onClick={() => handleCardClick(index)}
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                maxWidth: selectedCard === index ? 1000 : 800,
+                                m: 2,
+                                p: 2,
+                                transition: 'max-width 0.3s ease-in-out',
+                                cursor: 'pointer',
+                                '&:hover': {
+                                    boxShadow: 6,
+                                    transform: 'scale(1.05) translateY(-10px)',
+                                    boxShadow: '0 10px 20px rgba(245, 8, 8, 0.2)',
+                                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                },
+                                backgroundColor: '#f0f9fcd6',
+                                color:'blue',
+                            }}
+                        >
+                            {/* Image Section */}
+                            <CardMedia
+                                component="img"
+                                sx={{
+                                    width: 200,
+                                    height: 200,
+                                    borderRadius: 1,
+                                    objectFit: 'cover',
+                                    mr: 3,
+                                }}
+                                image={influencer.image}
                                 alt={influencer.name}
-                                src={influencer.image}
-                                sx={{ width: 100, height: 100 }}
                             />
-                            <p>{influencer.name}</p>
-                        </Link>
-                    ))}
-                </div>
-            </div>
+
+                            {/* Description Section */}
+                            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center'  }}>
+                                <CardContent sx={{ textAlign: 'left' }}>
+                                    <Typography component="div" variant="h6" sx={{ mb: 1 }}>
+                                        {influencer.name}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {(() => {
+                                            switch (influencer.name) {
+                                                case 'Jeff Nippard':
+                                                    return 'Jeff Nippard specializes in evidence-based fitness and bodybuilding content.';
+                                                case 'Jesse James West':
+                                                    return 'Jesse James West shares energetic vlogs and workout routines.';
+                                                case 'Sean Nalewanyj':
+                                                    return 'Sean Nalewanyj focuses on simple, science-backed fitness advice.';
+                                                case 'David Goggins':
+                                                    return 'David Goggins inspires with his story of resilience and mental toughness.';
+                                                case 'David Laid':
+                                                    return 'David Laid showcases aesthetic bodybuilding and fitness journeys.';
+                                                case 'Jeff Seid':
+                                                    return 'Jeff Seid is a pioneer of aesthetic bodybuilding and fitness motivation.';
+                                                case 'Andrew Huberman':
+                                                    return 'Andrew Huberman shares neuroscience insights to optimize health and performance.';
+                                                case 'Sam Sulek':
+                                                    return 'Sam Sulek brings raw and unfiltered bodybuilding content.';
+                                                default:
+                                                    return 'Check out their content for amazing tips and motivation!';
+                                            }
+                                        })()}
+                                    </Typography>
+                                </CardContent>
+                            </Box>
+                        </Card>
+                    </Link>
+                ))}
+            </Box>
+
+
         </>
     );
 }

@@ -5,6 +5,7 @@ function Stress(props) {
 
 
   const [responses, setResponses] = useState({
+    12:3, // Initial value for question 12 (slider)
     13: 3, // Initial value for question 13 (slider)
     14: 3, // Initial value for question 14 (slider)
     15: 3, // Initial value for question 15 (slider)
@@ -12,7 +13,7 @@ function Stress(props) {
     17: 3, // Initial value for question 17 (slider)
     18: 3, // Initial value for question 18 (slider)
     19: 3, // Initial value for question 19 (slider)
-    20: 3, // Initial value for question 20 (slider)
+  
   });
   const [feedback, setFeedback] = useState('');
 
@@ -28,14 +29,14 @@ function Stress(props) {
     { id: 9, type: 'yesno', question: 'Do you feel fulfilled by your work, studies, or daily activities?', explanation: 'This question is about your fulfillment from work, studies, or daily activities.' },
     { id: 10, type: 'yesno', question: 'Do you believe your physical health impacts your mental well-being?', explanation: 'This question is about the impact of physical health on mental well-being.' },
     { id: 11, type: 'yesno', question: 'Do you often find yourself ruminating on past events or future worries?', explanation: 'This addresses tendencies that can trigger anxiety or stress' },
-    { id: 13, type: 'slider', question: 'How often do you feel happy or content in your daily life?', explanation: 'This question is about your overall happiness and contentment.' },
-    { id: 14, type: 'slider', question: 'How often do you feel stressed or anxious?', explanation: 'This question is about your levels of stress and anxiety.' },
-    { id: 15, type: 'slider', question: 'How often do you wake up feeling refreshed and rested?', explanation: 'This question is about how often you feel refreshed and rested after sleep.' },
-    { id: 16, type: 'slider', question: 'How often do you feel lonely or isolated?', explanation: 'This question is about your feelings of loneliness or isolation.' },
-    { id: 17, type: 'slider', question: 'How satisfied are you with your current social relationships?', explanation: 'This question is about your satisfaction with your social relationships.' },
-    { id: 18, type: 'slider', question: 'How often do you feel overburdened by your responsibilities?', explanation: 'This question is about how often you feel overburdened by responsibilities.' },
-    { id: 19, type: 'slider', question: 'How often do you engage in physical activities or exercise?', explanation: 'This question is about your engagement in physical activities or exercise.' },
-    { id: 20, type: 'slider', question: 'Do you feel hopeful and optimistic about your future?', explanation: 'This question is about your outlook on the future.' },
+    { id: 12, type: 'slider', question: 'How often do you feel happy or content in your daily life?', explanation: 'This question is about your overall happiness and contentment.' },
+    { id: 13, type: 'slider', question: 'How often do you feel stressed or anxious?', explanation: 'This question is about your levels of stress and anxiety.' },
+    { id: 14, type: 'slider', question: 'How often do you wake up feeling refreshed and rested?', explanation: 'This question is about how often you feel refreshed and rested after sleep.' },
+    { id: 15, type: 'slider', question: 'How often do you feel lonely or isolated?', explanation: 'This question is about your feelings of loneliness or isolation.' },
+    { id: 16, type: 'slider', question: 'How satisfied are you with your current social relationships?', explanation: 'This question is about your satisfaction with your social relationships.' },
+    { id: 17, type: 'slider', question: 'How often do you feel overburdened by your responsibilities?', explanation: 'This question is about how often you feel overburdened by responsibilities.' },
+    { id: 18, type: 'slider', question: 'How often do you engage in physical activities or exercise?', explanation: 'This question is about your engagement in physical activities or exercise.' },
+    { id: 19, type: 'slider', question: 'Do you feel hopeful and optimistic about your future?', explanation: 'This question is about your outlook on the future.' },
   ];
 
   const handleSliderChange = (id) => (event, value) => {
@@ -60,13 +61,16 @@ function Stress(props) {
 
     //check if every question has been answered
 
-    // for (let i = 1; i <= 20; i++) {
-    //   if (responses[i] === undefined) {
-    //     alert('Please answer all the questions');
-    //     return;
-    //   }
-    // }
+    console.log(responses);
+
+    for (let i = 1; i <= 19; i++) {
+      if (responses[i] === undefined) {
+        alert('Please answer all the questions');
+        return;
+      }
+    }
     alert('Thank you for completing the questionnaire!');
+    
 
     try {
       const questionAndAnswers = questions.map((question) => ({

@@ -274,7 +274,7 @@ export default function CalorieIntake() {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="grams" fill="black" />
+                <Bar dataKey="grams" fill="rgb(122, 171, 139)" />
               </BarChart>
             </ResponsiveContainer>
           </Box>
