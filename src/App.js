@@ -21,6 +21,7 @@ import Relax_stress from "./Components/Relax_stress";
 import LandingPage from "./Components/LandingPage";
 import Admin_login from "./Components/Admin_login";
 import Admin_Dashboard from "./Components/Admin_DashBoard";
+import Food_dictionary from "./Components/Food_dictionary";
 
 
 import { Snackbar, IconButton } from '@mui/material';
@@ -221,10 +222,12 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/MentalHealth" element={<MentalHealth />} />
         <Route path="/MentalHealthQuestion" element={<MentalHealthQuestion />} />
         <Route path="/Relax_stress" element={<Relax_stress />} />
+        <Route path="/Food_dictionary" element={<Food_dictionary />} />
+
+
         <Route path="/generated_plan" element={<GeneratedPlan />} />
 
         <Route path="/Admin_login" element={<Admin_login isloggedin={isloggedin} isloggedin_admin={isloggedin_admin} setisloggedin_admin={setisloggedin_admin} admin_id={admin_id} setAdmin_id={setAdmin_id} admin_password={admin_password} setAdmin_password={setAdmin_password} handleAdminloginbutton={handleAdminloginbutton} />} />
-
         <Route path="/Admin_Dashboard" element={<Admin_Dashboard isloggedin_admin={isloggedin_admin} setisloggedin_admin={setisloggedin_admin} admin_id={admin_id} setAdmin_id={setAdmin_id} admin_password={admin_password} setAdmin_password={setAdmin_password} />} />
 
       </Routes>

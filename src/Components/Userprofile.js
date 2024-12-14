@@ -1,210 +1,236 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Paper, Box, Typography, TextField, Button, Snackbar } from '@mui/material';
+import {
+  Container,
+  Paper,
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Snackbar,
+  Grid,
+  Avatar,
+  IconButton,
+} from '@mui/material';
+import { Edit } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import imgg1 from '../Images/user1.jpg';
 
-export default function Userprofile({ isloggedin, user_id, username, password }) {
-    const navigate = useNavigate();
-    const [showSnackbar, setShowSnackbar] = useState(false);
-    const [alertMessage, setAlertMessage] = useState(''); // State for alert message
+export default function UserProfile({ isloggedin, user_id }) {
+  const navigate = useNavigate();
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [userData, setUserData] = useState({
+    user_id: '',
+    username: '',
+    gender: '',
+    healthCondition: '',
+    height: '',
+    weight: '',
+    password: '',
+  });
 
-  
-
-
-    
-        const [userData, setUserData] = useState({
-            user_id: '',
-            username: '',
-            gender: '',
-            healthCondition: '',
-            height: '',
-            weight: '',
-            password: '',
-        });
-
-
-
-        useEffect(() => {
-
-            if (!isloggedin) {
-                navigate('/Login');
-            }
-
-            else{
-
-            // Fetch user data from the backend
-            try {
-                fetch(`http://localhost:8080/api/users/${user_id}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        
-                        setUserData({
-                            user_id: data.user_id,
-                            username: data.username,
-                            gender: data.gender,
-                            healthCondition: data.healthCondition,
-                            height: data.height,
-                            weight: data.weight,
-                            password: data.password,
-                        });
-                    })
-                    .catch((error) => {
-                        console.log("Error:", error);
-                    });
-            } catch (error) {
-                console.log("Error:", error);
-            }
-        }
-
-        }, [isloggedin, user_id, navigate]);
-    
-
-        const UpdateProfile = () => {
-            // Handle profile update logic here
-            try {
-                fetch(`http://localhost:8080/api/users/${user_id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(userData),
-                })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log('Profile updated:', data);
-                        // Optionally, you can update the state with the new data
-                        setUserData(data);
-                        setAlertMessage('Profile updated successfully.');
-                        setShowSnackbar(true);
-
-                    })
-                    .catch((error) => {
-                        console.log("Error:", error);
-                        
-                    });
-            } catch (error) {
-                console.log("Error:", error);
-            }
-        };
-
-        const handleSnackbarClose = () => {
-            setShowSnackbar(false);
-        };
-
-        return (
-
-
-            <div className="my-3">
-                <Container maxWidth="sm" sx={{ mt: 5 }}>
-                    <Paper elevation={3} sx={{ padding: 3 }}>
-                        <Box component="form" noValidate autoComplete="off">
-                            <Typography variant="h4" gutterBottom>
-                                User Profile
-                            </Typography>
-                            <TextField
-                                fullWidth
-                                label="User ID"
-                                margin="normal"
-                                variant="outlined"
-                                value={userData.user_id}
-                                disabled
-                            />
-                            <TextField
-                                fullWidth
-                                label="Username"
-                                margin="normal"
-                                variant="outlined"
-                                value={userData.username}
-                                onChange={(e) => setUserData({ ...userData, username: e.target.value })}
-                            />
-                            <TextField
-                                fullWidth
-                                label="Gender"
-                                margin="normal"
-                                variant="outlined"
-                                value={userData.gender}
-                                disabled
-                            />
-                            <TextField
-                                fullWidth
-                                label="Health Condition"
-                                margin="normal"
-                                variant="outlined"
-                                value={userData.healthCondition}
-                                onChange={(e) => setUserData({ ...userData, healthCondition: e.target.value })}
-                                select
-                                SelectProps={{
-                                    native: true,
-                                }}
-                            >
-                                <option value="none">No Conditions</option>
-                                <option value="diabetes">Diabetes</option>
-                                <option value="heart disease">Heart Disease</option>
-                                <option value="high pressure">High Pressure</option>
-                            </TextField>
-                            <TextField
-                                fullWidth
-                                label="Height (cm)"
-                                margin="normal"
-                                variant="outlined"
-                                type="number"
-                                value={userData.height}
-                                onChange={(e) => setUserData({ ...userData, height: e.target.value })}
-                            />
-                            <TextField
-                                fullWidth
-                                label="Weight (kg)"
-                                margin="normal"
-                                variant="outlined"
-                                type="number"
-                                value={userData.weight}
-                                onChange={(e) => setUserData({ ...userData, weight: e.target.value })}
-                            />
-                            <TextField
-                                fullWidth
-                                label="Password"
-                                margin="normal"
-                                variant="outlined"
-                                type="password"
-                                value={userData.password}
-                                disabled
-                            />
-                            <Button
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                sx={{ mt: 3, mb: 2 }}
-                                onClick={UpdateProfile}
-                            >
-                                Save Changes
-                            </Button>
-                        </Box>
-                    </Paper>
-                </Container>
-                <Snackbar
-                open={showSnackbar}
-                autoHideDuration={3000}
-                onClose={handleSnackbarClose}
-                message={alertMessage}
-                action={
-                    <Button color="inherit" size="small" onClick={handleSnackbarClose}>
-                        Close
-                    </Button>
-                }
-            />
-            </div>
-        );
+  useEffect(() => {
+    if (!isloggedin) {
+      navigate('/Login');
+    } else {
+      fetch(`http://localhost:8080/api/users/${user_id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setUserData({
+            user_id: data.user_id,
+            username: data.username,
+            gender: data.gender,
+            healthCondition: data.healthCondition,
+            height: data.height,
+            weight: data.weight,
+            password: data.password,
+          });
+        })
+        .catch((error) => console.error('Error fetching user data:', error));
     }
+  }, [isloggedin, user_id, navigate]);
 
+  const handleUpdateProfile = () => {
+    fetch(`http://localhost:8080/api/users/${user_id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setAlertMessage('Profile updated successfully.');
+        setShowSnackbar(true);
+      })
+      .catch((error) => console.error('Error updating profile:', error));
+  };
 
-Userprofile.propTypes = {
-    isloggedin: PropTypes.bool,
-    user_id: PropTypes.string,
-    username: PropTypes.string,
-    password: PropTypes.string,
+  const handleSnackbarClose = () => setShowSnackbar(false);
+
+  return (
+    <Container maxWidth="md" sx={{ mt: 6, mb: 6 }}>
+      <Paper elevation={3} sx={{ overflow: 'hidden', borderRadius: 4 }}>
+        {/* Background Image with Overlay */}
+        <Box
+          sx={{
+            position: 'relative',
+            backgroundImage: `url(${imgg1})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            height: 250,
+          }}
+        >
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Avatar
+              sx={{ width: 100, height: 100, border: '3px solid white' }}
+              src="https://via.placeholder.com/150"
+            />
+            <Typography
+              variant="h5"
+              sx={{ color: 'white', mt: 2, fontWeight: 'bold' }}
+            >
+              {userData.username || 'User Name'}
+            </Typography>
+          </Box>
+        </Box>
+
+        <Box sx={{ p: 4 }}>
+          {/* Profile Form */}
+          <Box mt={4}>
+            <Typography variant="h6" gutterBottom>
+              Account Details
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="User ID"
+                  variant="outlined"
+                  value={userData.user_id}
+                  disabled
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Username"
+                  variant="outlined"
+                  value={userData.username}
+                  onChange={(e) =>
+                    setUserData({ ...userData, username: e.target.value })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Gender"
+                  variant="outlined"
+                  value={userData.gender}
+                  disabled
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Health Condition"
+                  variant="outlined"
+                  value={userData.healthCondition}
+                  onChange={(e) =>
+                    setUserData({ ...userData, healthCondition: e.target.value })
+                  }
+                  select
+                  SelectProps={{ native: true }}
+                >
+                  <option value="">Select Condition</option>
+                  <option value="none">No Conditions</option>
+                  <option value="diabetes">Diabetes</option>
+                  <option value="heart disease">Heart Disease</option>
+                  <option value="high pressure">High Pressure</option>
+                </TextField>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Height (cm)"
+                  variant="outlined"
+                  type="number"
+                  value={userData.height}
+                  onChange={(e) =>
+                    setUserData({ ...userData, height: e.target.value })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Weight (kg)"
+                  variant="outlined"
+                  type="number"
+                  value={userData.weight}
+                  onChange={(e) =>
+                    setUserData({ ...userData, weight: e.target.value })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Password"
+                  variant="outlined"
+                  type="password"
+                  value={userData.password}
+                  disabled
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton disabled>
+                        <Edit />
+                      </IconButton>
+                    ),
+                  }}
+                />
+              </Grid>
+            </Grid>
+
+            <Box textAlign="center" mt={4}>
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                onClick={handleUpdateProfile}
+              >
+                Save Changes
+              </Button>
+            </Box>
+          </Box>
+        </Box>
+      </Paper>
+
+      <Snackbar
+        open={showSnackbar}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        message={alertMessage}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      />
+    </Container>
+  );
+}
+
+UserProfile.propTypes = {
+  isloggedin: PropTypes.bool.isRequired,
+  user_id: PropTypes.string.isRequired,
 };

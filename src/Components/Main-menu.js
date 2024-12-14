@@ -104,7 +104,7 @@ export default function ActionAreaCard() {
                             </Link>
                         </Carousel.Item>
                         <Carousel.Item>
-                            <Link to="/slide2">
+                            <Link to="/Food_dictionary">
                                 <img
                                     className="d-block carousel-image"
                                     src={imgg9}

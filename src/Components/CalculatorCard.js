@@ -12,7 +12,7 @@ import './MainMenuCard.css'; // Import the CSS file
 const CalculatorCard = ({ title, description, image, link ,bc_color }) => {
     return (
         <Box className="main-menu-card ">
-            <Card sx={{ width: 400, marginBottom: '1rem', borderRadius: '15px', overflow: 'hidden' }}>
+            <Card sx={{ width: 350, marginBottom: '1rem', borderRadius: '15px', overflow: 'hidden' }}>
                 <CardActionArea component={Link} to={link}>
                     <CardMedia
                         component="img"
