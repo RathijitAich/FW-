@@ -1,5 +1,8 @@
 import "./App.css";
 import { useState } from "react";
+import { useEffect } from "react";
+
+// import localStorage from 'local-storage';
 
 import Navbar from "./Components/Navbar";
 import Login_Page from "./Components/Login_Page";
@@ -34,24 +37,62 @@ function App() {
 
 
 
+  // everytime the app loads from here 
 
-  const [isloggedin, setisloggedin] = useState(false);
-  const [alertMessage, setAlertMessage] = useState(''); // State for alert message
-  const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar visibility
-  const [username, setUsername] = useState(''); // State for username
-  const [password, setPassword] = useState(''); // State for password
-  const [user_id, setUser_id] = useState(''); // State for user_id
+  const [alertMessage, setAlertMessage] = useState(''); // State for alert message 
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  //state for admin login
-  const [isloggedin_admin, setisloggedin_admin] = useState(false);
-  const [admin_id, setAdmin_id] = useState(''); // State for admin_id
-  const [admin_password, setAdmin_password] = useState(''); // State for admin_password
+  const [isloggedin, setisloggedin] = useState(localStorage.getItem('isloggedin') === 'true');
+  const [username, setUsername] = useState(localStorage.getItem('username') || '');
+  const [password, setPassword] = useState(localStorage.getItem('password') || '');
+  const [user_id, setUser_id] = useState(localStorage.getItem('user_id') || '');
+  const [isloggedin_admin, setisloggedin_admin] = useState(localStorage.getItem('isloggedin_admin') === 'true');
+  const [admin_id, setAdmin_id] = useState(localStorage.getItem('admin_id') || '');
+  const [admin_password, setAdmin_password] = useState(localStorage.getItem('admin_password') || '');
+  const [isloggedin_trainer, setisloggedin_trainer] = useState(localStorage.getItem('isloggedin_trainer') === 'true');
+  const [trainer_id, setTrainer_id] = useState(localStorage.getItem('trainer_id') || '');
+  const [trainer_password, setTrainer_password] = useState(localStorage.getItem('trainer_password') || '');
 
-  //state for trainer login
-  const [isloggedin_trainer, setisloggedin_trainer] = useState(false);
-  const [trainer_id, setTrainer_id] = useState(''); // State for trainer_id
-  const [trainer_password, setTrainer_password] = useState(''); // State for trainer_password
 
+  useEffect(() => {
+    localStorage.setItem('isloggedin', isloggedin);
+  }, [isloggedin]);
+
+  useEffect(() => {
+    localStorage.setItem('username', username);
+  }, [username]);
+
+  useEffect(() => {
+    localStorage.setItem('password', password);
+  }, [password]);
+
+  useEffect(() => {
+    localStorage.setItem('user_id', user_id);
+  }, [user_id]);
+
+  useEffect(() => {
+    localStorage.setItem('isloggedin_admin', isloggedin_admin);
+  }, [isloggedin_admin]);
+
+  useEffect(() => {
+    localStorage.setItem('admin_id', admin_id);
+  }, [admin_id]);
+
+  useEffect(() => {
+    localStorage.setItem('admin_password', admin_password);
+  }, [admin_password]);
+
+  useEffect(() => {
+    localStorage.setItem('isloggedin_trainer', isloggedin_trainer);
+  }, [isloggedin_trainer]);
+
+  useEffect(() => {
+    localStorage.setItem('trainer_id', trainer_id);
+  }, [trainer_id]);
+
+  useEffect(() => {
+    localStorage.setItem('trainer_password', trainer_password);
+  }, [trainer_password]);
 
 
 
@@ -140,6 +181,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
 
   const logoutclicked = () => {
     setisloggedin(false);
+
     setAlertMessage('You have been logged out');
     setOpenSnackbar(true);
     setTimeout(() => {
@@ -175,7 +217,8 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         setAlertMessage('Login Successful as Admin Now Redirecting...');
         setOpenSnackbar(true); // Open Snackbar
 
-        setisloggedin_admin(true); // Set the login status to true from app.js
+
+        
 
         // Delay navigation for a short period to allow the Snackbar to show
         setTimeout(() => {
@@ -191,7 +234,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
       }
     } catch (error) {
       console.error('Login Failed', error);
-      setAlertMessage('Login Failed: An error occurred');
+
       setOpenSnackbar(true); // Open Snackbar
     }
   }
@@ -200,7 +243,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
   return (
     <>
 
-      {/* don't show the navbar on the landing page and admin dashboard */}
+
 
       {location.pathname !== '/' && location.pathname !== '/Admin_Dashboard' && <Navbar isloggedin={isloggedin} logoutclicked={logoutclicked} />}
 
