@@ -1,0 +1,55 @@
+/* Overall Container */
+.diet-plan {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1000px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 80px;
+    margin-bottom: 20px;
+  }
+  
+  /* Chart Container */
+  .chart-container {
+    margin: 20px 0;
+  }
+  
+  /* Meal Table */
+  .meal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .meal-table th,
+  .meal-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .meal-table th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .meal-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .meal-table tr:hover {
+    background-color: #ddd;
+  }
+  
+  /* Meal Image Styling */
+  .meal-img {
+    max-width: 100px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  

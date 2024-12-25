@@ -52,7 +52,7 @@ export default function ActionAreaCard() {
             title: 'Diet Plan',
             description: 'Create a diet plan that suits your needs and goals.',
             image: imgg6,
-            link: '/DietPlan'
+            link: '/DietPlanGenerator'
         },
         {
             title: 'Mental Health',

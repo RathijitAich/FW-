@@ -10,6 +10,10 @@ import {
   Grid,
   Avatar,
   IconButton,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +28,7 @@ export default function UserProfile({ isloggedin, user_id }) {
     user_id: '',
     username: '',
     gender: '',
-    healthCondition: '',
+    healthIssue: '',
     height: '',
     weight: '',
     password: '',
@@ -37,14 +41,15 @@ export default function UserProfile({ isloggedin, user_id }) {
       fetch(`http://localhost:8080/api/users/${user_id}`)
         .then((response) => response.json())
         .then((data) => {
+          console.log('Fetched User Data:', data);
           setUserData({
-            user_id: data.user_id,
-            username: data.username,
-            gender: data.gender,
-            healthCondition: data.healthCondition,
-            height: data.height,
-            weight: data.weight,
-            password: data.password,
+            user_id: data.userId || '',
+            username: data.username || '',
+            gender: data.gender || '',
+            healthIssue: data.healthIssue || '',
+            height: data.height || '',
+            weight: data.weight || '',
+            password: data.password || '',
           });
         })
         .catch((error) => console.error('Error fetching user data:', error));
@@ -52,6 +57,7 @@ export default function UserProfile({ isloggedin, user_id }) {
   }, [isloggedin, user_id, navigate]);
 
   const handleUpdateProfile = () => {
+    console.log('Sending updated user data:', userData);
     fetch(`http://localhost:8080/api/users/${user_id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -144,23 +150,27 @@ export default function UserProfile({ isloggedin, user_id }) {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Health Condition"
-                  variant="outlined"
-                  value={userData.healthCondition}
-                  onChange={(e) =>
-                    setUserData({ ...userData, healthCondition: e.target.value })
-                  }
-                  select
-                  SelectProps={{ native: true }}
-                >
-                  <option value="">Select Condition</option>
-                  <option value="none">No Conditions</option>
-                  <option value="diabetes">Diabetes</option>
-                  <option value="heart disease">Heart Disease</option>
-                  <option value="high pressure">High Pressure</option>
-                </TextField>
+                <FormControl fullWidth>
+                  <InputLabel id="health-issue-label">
+                    Health Issue
+                  </InputLabel>
+                  <Select
+                    labelId="health-issue-label"
+                    value={userData.healthIssue}
+                    onChange={(e) =>
+                      setUserData({
+                        ...userData,
+                        healthIssue: e.target.value,
+                      })
+                    }
+                    label="Health Issue"
+                  >
+                    <MenuItem value="none">No Conditions</MenuItem>
+                    <MenuItem value="Diabetes">Diabetes</MenuItem>
+                    <MenuItem value="Heart Disease">Heart Disease</MenuItem>
+                    <MenuItem value="High Pressure">High Pressure</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField

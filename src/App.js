@@ -25,6 +25,8 @@ import LandingPage from "./Components/LandingPage";
 import Admin_login from "./Components/Admin_login";
 import Admin_Dashboard from "./Components/Admin_DashBoard";
 import Food_dictionary from "./Components/Food_dictionary";
+import DietPlanGenerator from "./Components/DietPlanGenerator";
+import DietPlan from "./Components/DietPlan";
 
 
 import { Snackbar, IconButton } from '@mui/material';
@@ -52,6 +54,8 @@ function App() {
   const [isloggedin_trainer, setisloggedin_trainer] = useState(localStorage.getItem('isloggedin_trainer') === 'true');
   const [trainer_id, setTrainer_id] = useState(localStorage.getItem('trainer_id') || '');
   const [trainer_password, setTrainer_password] = useState(localStorage.getItem('trainer_password') || '');
+  const [loginType, setLoginType] = useState("user");
+
 
 
   useEffect(() => {
@@ -94,6 +98,10 @@ function App() {
     localStorage.setItem('trainer_password', trainer_password);
   }, [trainer_password]);
 
+  useEffect(() => {
+    localStorage.setItem('loginType', loginType);
+  }, [loginType]);
+
 
 
   return (
@@ -126,50 +134,130 @@ function App() {
         isloggedin_trainer={isloggedin_trainer}
         setisloggedin_trainer={setisloggedin_trainer}
 
+        loginType={loginType}
+        setLoginType={setLoginType}
+
       />
     </Router>
   );
 }
 
-function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, openSnackbar, setOpenSnackbar, username, setUsername, password, setPassword, user_id, setUser_id, admin_id, setAdmin_id, admin_password, setAdmin_password, isloggedin_admin, setisloggedin_admin, trainer_id, setTrainer_id, trainer_password, setTrainer_password, isloggedin_trainer, setisloggedin_trainer }) {
+function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, openSnackbar, setOpenSnackbar, username, setUsername, password, setPassword, user_id, setUser_id, admin_id, setAdmin_id, admin_password, setAdmin_password, isloggedin_admin, setisloggedin_admin, trainer_id, setTrainer_id, trainer_password, setTrainer_password, isloggedin_trainer, setisloggedin_trainer, loginType, setLoginType }) {
   const navigate = useNavigate();
   const location = useLocation();
   const location2 = useLocation();
 
 
   // handle user login
+  // const handleloginbutton = async (event) => {
+  //   event.preventDefault();
+  //   console.log("Login request data:", { user_id, password, role: loginType});
+  //   try {
+  //     const response = await fetch('http://localhost:8080/api/login', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ user_id, password, role: loginType })
+  //     });
+
+  //     if (response.ok) {
+  //       const data = await response.text();
+  //       console.log(data);
+  //       // Login successful
+  //       // Show success message
+  //       setAlertMessage('Login Successful Now Redirecting...');
+  //       setOpenSnackbar(true); // Open Snackbar
+
+  //       setisloggedin(true); // Set the login status to true from app.js
+
+  //       // Delay navigation for a short period to allow the Snackbar to show
+  //       setTimeout(() => {
+  //         navigate('/Home');
+  //       }, 1000); // Navigate after 1 seconds
+
+  //     } else {
+  //       const error = await response.text();
+  //       console.log('Login Failed', error);
+  //       // Show error message
+  //       setAlertMessage('Login Failed: Invalid user_id or password');
+  //       setOpenSnackbar(true); // Open Snackbar
+  //     }
+  //   } catch (error) {
+  //     console.error('Login Failed', error);
+  //     setAlertMessage('Login Failed: An error occurred');
+  //     setOpenSnackbar(true); // Open Snackbar
+  //   }
+  // }
+
   const handleloginbutton = async (event) => {
     event.preventDefault();
-    console.log("Login request data:", { user_id, password });
+    console.log("Login request data:", { user_id, password, role: loginType });
+
     try {
-      const response = await fetch('http://localhost:8080/api/users/login', {
+      const response = await fetch('http://localhost:8080/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ user_id, password })
+        body: JSON.stringify({ user_id, password, role: loginType })
       });
 
       if (response.ok) {
-        const data = await response.text();
+        const data = await response.json(); // Parse response as JSON
         console.log(data);
-        // Login successful
-        // Show success message
-        setAlertMessage('Login Successful Now Redirecting...');
+
+        // Destructure the response to get role and message
+        const { role, message } = data;
+
+        // Show role-specific message
+        setAlertMessage(`${message} You are logged in as a ${role}. Now Redirecting...`);
         setOpenSnackbar(true); // Open Snackbar
 
-        setisloggedin(true); // Set the login status to true from app.js
+        
 
-        // Delay navigation for a short period to allow the Snackbar to show
+        // Set state based on the role
+        switch (role) {
+          case "admin":
+            setisloggedin_admin(true);
+            setAdmin_id(user_id);
+            setisloggedin_trainer(false);
+            setisloggedin(false);
+            break;
+          case "trainer":
+            setisloggedin_admin(false);
+            setTrainer_id(user_id);//this way we can have the trainer id in its state
+            setisloggedin_trainer(true);
+            setisloggedin(false);
+            break;
+          case "user":
+            setisloggedin_admin(false);
+            setisloggedin_trainer(false);
+            setisloggedin(true);
+            setUser_id(user_id);
+            break;
+          default:
+            // If role is undefined or invalid, handle it here
+            console.error("Invalid role received");
+        }
+
+        // Optionally, log the role for further handling
+        console.log("Logged in as:", role);
+
+        // Delay navigation for a short period to allow Snackbar to show
         setTimeout(() => {
-          navigate('/Home');
-        }, 1000); // Navigate after 1 seconds
+          if(role === 'admin'){
+            navigate('/Admin_Dashboard');
+          }else if(role === 'trainer'){
+            navigate('/Trainer_Dashboard');
+          }else{
+          navigate('/Home');}
+        }, 1500); // Adjust delay as needed
 
       } else {
-        const error = await response.text();
+        const error = await response.json(); // Parse error as JSON if available
         console.log('Login Failed', error);
-        // Show error message
-        setAlertMessage('Login Failed: Invalid user_id or password');
+        setAlertMessage(error.message || 'Login Failed: Invalid user_id or password');
         setOpenSnackbar(true); // Open Snackbar
       }
     } catch (error) {
@@ -179,9 +267,17 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
     }
   }
 
-  const logoutclicked = () => {
-    setisloggedin(false);
 
+  const logoutclicked = () => {
+    if(isloggedin){
+      setisloggedin(false);
+    }
+    if(isloggedin_admin){
+      setisloggedin_admin(false);
+    }
+    if(isloggedin_trainer){
+      setisloggedin_trainer(false);
+    }
     setAlertMessage('You have been logged out');
     setOpenSnackbar(true);
     setTimeout(() => {
@@ -210,6 +306,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
       });
 
       if (response.ok) {
+        
         const data = await response.text();
         console.log(data);
         // Login successful
@@ -218,7 +315,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         setOpenSnackbar(true); // Open Snackbar
 
 
-        
+
 
         // Delay navigation for a short period to allow the Snackbar to show
         setTimeout(() => {
@@ -253,9 +350,9 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
 
         <Route path="/" element={<LandingPage />} />
         <Route path="/Home" element={<MainMenu />} />
-        <Route path="/Login" element={<Login_Page handleloginbutton={handleloginbutton} setPassword={setPassword} setUser_id={setUser_id} />} />
+        <Route path="/Login" element={<Login_Page handleloginbutton={handleloginbutton} setPassword={setPassword} setUser_id={setUser_id} loginType={loginType} setLoginType={setLoginType}  setAdmin_id={setAdmin_id} setTrainer_id={setTrainer_id}  />} />
         <Route path="/Articles" element={<News />} />
-        <Route path="/WorkoutPlan" element={<Workout_plan />} />
+       
         <Route path="/Registration" element={<Registration />} />
         <Route path="/Calculators" element={<Calculators />} />
         <Route path="/BMI" element={<BMI />} />
@@ -265,13 +362,24 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/MentalHealth" element={<MentalHealth />} />
         <Route path="/MentalHealthQuestion" element={<MentalHealthQuestion />} />
         <Route path="/Relax_stress" element={<Relax_stress />} />
-        <Route path="/Food_dictionary" element={<Food_dictionary />} />
 
-
+        <Route path="/WorkoutPlan" element={<Workout_plan />} />
         <Route path="/generated_plan" element={<GeneratedPlan />} />
+        
+
+        {/* diet and food routing */}
+        <Route path="/DietPlanGenerator" element={<DietPlanGenerator />} />
+        <Route path="/Food_dictionary" element={<Food_dictionary />} />
+        <Route path="/diet-plan" element={<DietPlan />} />
+
+        
+
+
+        
+
 
         <Route path="/Admin_login" element={<Admin_login isloggedin={isloggedin} isloggedin_admin={isloggedin_admin} setisloggedin_admin={setisloggedin_admin} admin_id={admin_id} setAdmin_id={setAdmin_id} admin_password={admin_password} setAdmin_password={setAdmin_password} handleAdminloginbutton={handleAdminloginbutton} />} />
-        <Route path="/Admin_Dashboard" element={<Admin_Dashboard isloggedin_admin={isloggedin_admin} setisloggedin_admin={setisloggedin_admin} admin_id={admin_id} setAdmin_id={setAdmin_id} admin_password={admin_password} setAdmin_password={setAdmin_password} />} />
+        <Route path="/Admin_Dashboard" element={<Admin_Dashboard setisloggedin_admin={setisloggedin_admin} />} />
 
       </Routes>
       <Snackbar

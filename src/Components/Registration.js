@@ -15,8 +15,8 @@ export default function Registration(props) {
     height: '',
     weight: '',
     gender: '',
-    user_id: '',
-    healthCondition: '', // Use camelCase to match backend
+    userId: '',
+    healthIssue: '', // Replaced healthCondition with healthIssue
   });
   const [alertMessage, setAlertMessage] = useState(''); // State for alert message
   const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar visibility
@@ -42,8 +42,8 @@ export default function Registration(props) {
     }
 
     try {
-      // Check if user_id is unique
-      const checkResponse = await fetch(`http://localhost:8080/api/users/${formData.user_id}`, {
+      // Check if userId is unique
+      const checkResponse = await fetch(`http://localhost:8080/api/users/exists/${formData.userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,6 @@ export default function Registration(props) {
           return;
         }
       }
-
 
       // Proceed with registration
       console.log('Registration form data:', formData);
@@ -79,7 +78,7 @@ export default function Registration(props) {
         setOpenSnackbar(true);
         setTimeout(() => {
           navigate('/Login');
-        }, 1000); // Redirect to login page after 1 seconds
+        }, 1000); // Redirect to login page after 1 second
       } else {
         const error = await response.text();
         console.log('Registration Failed', error);
@@ -130,8 +129,8 @@ export default function Registration(props) {
 
               <div className="mb-3">
                 <TextField
-                  id="user_id"
-                  name="user_id"
+                  id="userId"
+                  name="userId"
                   label="User ID"
                   variant="standard"
                   fullWidth
@@ -209,19 +208,19 @@ export default function Registration(props) {
 
               <div className="mb-3">
                 <FormControl variant="standard" fullWidth>
-                  <InputLabel id="health-condition-label">Health Condition</InputLabel>
+                  <InputLabel id="health-issue-label">Health Issue</InputLabel>
                   <Select
-                    labelId="health-condition-label"
-                    id="health_condition"
-                    name="healthCondition" // Use camelCase to match backend
-                    value={formData.healthCondition}
+                    labelId="health-issue-label"
+                    id="health_issue"
+                    name="healthIssue" // Updated name to healthIssue
+                    value={formData.healthIssue}
                     onChange={handleChange}
                     slotProps={{ input: { style: { fontSize: '1.25rem' } }, inputLabel: { style: { fontSize: '1.25rem' } } }}
                   >
                     <MenuItem value="diabetes">Diabetes</MenuItem>
                     <MenuItem value="heart disease">Heart Disease</MenuItem>
                     <MenuItem value="high pressure">High Pressure</MenuItem>
-                    <MenuItem value="no conditions">None</MenuItem>
+                    <MenuItem value="no issues">No Issues</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -242,13 +241,13 @@ export default function Registration(props) {
 
       <Box sx={{ mt: 4, p: 2, backgroundColor: '#f0f0f0', borderRadius: 2 }}>
         <Typography variant="h6" gutterBottom>Field Explanations:</Typography>
-        <Typography variant="body1"><strong>User ID:</strong> A unique identifier for your account. It must be unique and will be used while loggin.</Typography>
+        <Typography variant="body1"><strong>User ID:</strong> A unique identifier for your account. It must be unique and will be used while logging in.</Typography>
         <Typography variant="body1"><strong>Username:</strong> Your display name.</Typography>
         <Typography variant="body1"><strong>Password:</strong> A secure password for your account.</Typography>
         <Typography variant="body1"><strong>Height:</strong> Your height in centimeters.</Typography>
         <Typography variant="body1"><strong>Weight:</strong> Your weight in kilograms.</Typography>
         <Typography variant="body1"><strong>Gender:</strong> Your gender.</Typography>
-        <Typography variant="body1"><strong>Health Condition:</strong> Select any existing health conditions you have.</Typography>
+        <Typography variant="body1"><strong>Health Issue:</strong> Select any existing health issues you have.</Typography>
       </Box>
 
       <Snackbar
