@@ -2,12 +2,15 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Admin_DashBoard({setisloggedin_admin}) {
+export default function Admin_DashBoard({setisloggedin_admin, setAdmin_id, setAdmin_password}) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     // Clear login session data (you can adjust this based on your login mechanism)
     setisloggedin_admin(false);
+    setAdmin_id('');
+    setAdmin_password('');
+    
     // Redirect to the homepage or login page after logout
     navigate("/Home");
   };
@@ -105,4 +108,6 @@ export default function Admin_DashBoard({setisloggedin_admin}) {
 
 Admin_DashBoard.propTypes = {
   setisloggedin_admin: PropTypes.func.isRequired,
+  setAdmin_id: PropTypes.func.isRequired,
+  setAdmin_password: PropTypes.func.isRequired,
 };

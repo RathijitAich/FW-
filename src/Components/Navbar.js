@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import localStorage from 'local-storage';
 
-export default function Navbar({ isloggedin, logoutclicked, fontFamily = 'Roboto, sans-serif', fontSizeBrand = '0.5rem', fontSizeLink = '0.875rem', fontColor = 'black' }) {
+export default function Navbar({ isloggedin, logoutclicked, isloggedin_admin,isloggedin_trainer, fontFamily = 'Roboto, sans-serif', fontSizeBrand = '0.5rem', fontSizeLink = '0.875rem', fontColor = 'black' }) {
   return (
     <>
       <nav className="navbar navbar-expand-lg" style={{ background: 'linear-gradient(to right, rgb(189 217 246 / 68%), rgba(249, 249, 249, 0.69))', padding: '0.2rem 0.5rem' }}>
@@ -63,11 +63,31 @@ export default function Navbar({ isloggedin, logoutclicked, fontFamily = 'Roboto
 
               {isloggedin ? (
               <Button variant="contained" color="secondary" onClick={logoutclicked} style={{ fontFamily, fontSize: fontSizeLink }}>
-                Logout
+                Logout //Currently logged in as user
               </Button>
             ) : (
               <Button variant="contained" color="primary" component={Link} to="/Login" style={{ fontFamily, fontSize: fontSizeLink }}>
                 Login As User
+              </Button>
+            )}
+
+            {isloggedin_admin ? (
+              <Button variant="contained" color="secondary" onClick={logoutclicked} style={{ fontFamily, fontSize: fontSizeLink }}>
+                Logout //Currently logged in as admin
+              </Button>
+            ) : (
+              <Button variant="contained" color="primary" component={Link} to="/Admin_login" style={{ fontFamily, fontSize: fontSizeLink }}>
+                Login As Admin
+              </Button>
+            )}
+
+            {isloggedin_trainer ? (
+              <Button variant="contained" color="secondary" onClick={logoutclicked} style={{ fontFamily, fontSize: fontSizeLink }}>
+                Logout //Currently logged in as trainer
+              </Button>
+            ) : (
+              <Button variant="contained" color="primary" component={Link} to="/Trainer_login" style={{ fontFamily, fontSize: fontSizeLink }}>
+                Login As Trainer
               </Button>
             )}
 

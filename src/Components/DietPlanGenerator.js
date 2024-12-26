@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Import Link for routing
-import "./DietPlanGenerator.css";
+import { Link } from "react-router-dom";
 import img1 from "../Images/diet1.jpg";
 import img2 from "../Images/diet2.jpg";
 import img3 from "../Images/diet3.jpg";
+
 const images = [
   {
     src: img1,
@@ -100,23 +99,74 @@ const DietPlanner = () => {
   };
 
   return (
-    <div >
-      <div className="image-slider">
+    <div>
+      <div
+        style={{
+          width: "80%",
+          height: "450px",
+          overflow: "hidden",
+          margin: "20px auto",
+          position: "relative",
+          borderRadius: "10px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        }}
+      >
         {images.map((image, index) => (
           <div
             key={index}
-            className={`slider-image-container ${
-              index === imageIndex ? "active" : ""
-            }`}
+            style={{
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              transition: "opacity 2s ease-in-out",
+              opacity: index === imageIndex ? 1 : 0,
+              zIndex: index === imageIndex ? 1 : -1,
+            }}
           >
-            <img src={image.src} alt="Diet-related" className="slider-image" />
-            <div className="image-text">{image.text}</div>
+            <img
+              src={image.src}
+              alt="Diet-related"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                bottom: "10%",
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: "rgba(0, 0, 0, 0.7)",
+                color: "white",
+                padding: "15px 30px",
+                fontSize: "28px",
+                fontFamily: "Arial Black, Gadget, sans-serif",
+                borderRadius: "12px",
+                textAlign: "center",
+                fontWeight: "900",
+                letterSpacing: "1.5px",
+                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
+              }}
+            >
+              {image.text}
+            </div>
           </div>
         ))}
       </div>
 
-      <div className="form-container">
-        <h2>Create Your Diet Plan</h2>
+      <div
+        style={{
+          maxWidth: "400px",
+          margin: "0 auto",
+          padding: "20px",
+          border: "1px solid #ccc",
+          borderRadius: "8px",
+          backgroundColor: "#d6e5e7",
+        }}
+      >
+        <h2 style={{ textAlign: "center" }}>Create Your Diet Plan</h2>
 
         <label>
           BMI:
@@ -126,6 +176,13 @@ const DietPlanner = () => {
             value={formData.bmi}
             onChange={handleInputChange}
             placeholder="Enter your BMI"
+            style={{
+              width: "160%",
+              padding: "8px",
+              margin: "5px 0",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
+            }}
           />
         </label>
 
@@ -135,6 +192,13 @@ const DietPlanner = () => {
             name="goal"
             value={formData.goal}
             onChange={handleInputChange}
+            style={{
+              width: "193%",
+              padding: "8px",
+              margin: "5px 0",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
+            }}
           >
             <option value="lose">Lose Weight</option>
             <option value="gain">Gain Weight</option>
@@ -148,59 +212,57 @@ const DietPlanner = () => {
             name="dietType"
             value={formData.dietType}
             onChange={handleInputChange}
+            style={{
+              width: "165%",
+              padding: "8px",
+              margin: "5px 0",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
+            }}
           >
             <option value="veg">Vegetarian</option>
             <option value="non-veg">Non-Vegetarian</option>
           </select>
         </label>
 
-        <div className="health-condition">
+        <div
+          style={{
+            marginTop: "20px",
+            backgroundColor: "#f4f4f4",
+            padding: "20px",
+            borderRadius: "8px",
+            border: "1px solid #ccc",
+          }}
+        >
           <p>Select Health Condition:</p>
-          <div className="checkbox-container">
-            <div className="checkbox-item">
-              <label>
-                Diabetes
-                <input
-                  type="checkbox"
-                  value="Diabetes"
-                  checked={formData.healthConditions.includes("Diabetes")}
-                  onChange={handleHealthConditionChange}
-                />
-              </label>
-            </div>
-            <div className="checkbox-item">
-              <label>
-                High Pressure
-                <input
-                  type="checkbox"
-                  value="High Pressure"
-                  checked={formData.healthConditions.includes("High Pressure")}
-                  onChange={handleHealthConditionChange}
-                />
-              </label>
-            </div>
-            <div className="checkbox-item">
-              <label>
-                Heart Problem
-                <input
-                  type="checkbox"
-                  value="Heart Problem"
-                  checked={formData.healthConditions.includes("Heart Problem")}
-                  onChange={handleHealthConditionChange}
-                />
-              </label>
-            </div>
-            <div className="checkbox-item">
-              <label>
-                No Condition
-                <input
-                  type="checkbox"
-                  value="None"
-                  checked={formData.healthConditions.includes("None")}
-                  onChange={handleHealthConditionChange}
-                />
-              </label>
-            </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+            }}
+          >
+            {["Diabetes", "High Pressure", "Heart Problem", "None"].map(
+              (condition) => (
+                <div
+                  key={condition}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <label>{condition}</label>
+                  <input
+                    type="checkbox"
+                    value={condition}
+                    checked={formData.healthConditions.includes(condition)}
+                    onChange={handleHealthConditionChange}
+                  />
+                </div>
+              )
+            )}
           </div>
         </div>
 
@@ -210,7 +272,24 @@ const DietPlanner = () => {
             state: { dietPlan },
           }}
         >
-          <button onClick={generateDietPlan}>Generate Diet Plan</button>
+          <button
+            onClick={generateDietPlan}
+            style={{
+              backgroundColor: "#28a745",
+              color: "#fff",
+              fontSize: "16px",
+              borderRadius: "8px",
+              cursor: "pointer",
+              width: "100%",
+              padding: "8px",
+              marginTop: "20px",
+              transition: "background-color 0.3s ease",
+            }}
+            onMouseEnter={(e) => (e.target.style.backgroundColor = "#218838")}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = "#28a745")}
+          >
+            Generate Diet Plan
+          </button>
         </Link>
       </div>
     </div>

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { IconButton, Button, TextField, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 import { Visibility, VisibilityOff, Login as LoginIcon, PersonAdd as PersonAddIcon } from '@mui/icons-material';
 import PropTypes from 'prop-types';
+// import './loginpage.css';
+import '../App.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login_Page({ handleloginbutton, setPassword, setUser_id, loginType, setLoginType , setAdmin_id, setTrainer_id }) {

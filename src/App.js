@@ -192,7 +192,8 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
 
   const handleloginbutton = async (event) => {
     event.preventDefault();
-    console.log("Login request data:", { user_id, password, role: loginType });
+    
+    console.log("Login request data from form :", { user_id, password, role: loginType });
 
     try {
       const response = await fetch('http://localhost:8080/api/login', {
@@ -223,12 +224,19 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
             setAdmin_id(user_id);
             setisloggedin_trainer(false);
             setisloggedin(false);
+            
+            
+            setUser_id('');
+            setPassword('');
             break;
           case "trainer":
             setisloggedin_admin(false);
             setTrainer_id(user_id);//this way we can have the trainer id in its state
             setisloggedin_trainer(true);
             setisloggedin(false);
+            
+            setUser_id('');
+            setPassword('');
             break;
           case "user":
             setisloggedin_admin(false);
@@ -257,7 +265,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
       } else {
         const error = await response.json(); // Parse error as JSON if available
         console.log('Login Failed', error);
-        setAlertMessage(error.message || 'Login Failed: Invalid user_id or password');
+        setAlertMessage('Login Failed: Invalid id or password');
         setOpenSnackbar(true); // Open Snackbar
       }
     } catch (error) {
@@ -269,15 +277,13 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
 
 
   const logoutclicked = () => {
-    if(isloggedin){
-      setisloggedin(false);
-    }
-    if(isloggedin_admin){
-      setisloggedin_admin(false);
-    }
-    if(isloggedin_trainer){
-      setisloggedin_trainer(false);
-    }
+    
+    setisloggedin(false);
+    setUser_id('');
+    setUsername('');
+    setPassword('');
+
+    console.log(localStorage.getItem('user_id'));
     setAlertMessage('You have been logged out');
     setOpenSnackbar(true);
     setTimeout(() => {
@@ -290,59 +296,14 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
   };
 
 
-  // handle admin login 
-
-
-  const handleAdminloginbutton = async (event) => {
-    event.preventDefault();
-    console.log("Login request data:", { admin_id, password: admin_password });
-    try {
-      const response = await fetch('http://localhost:8080/api/admins/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ admin_id, password: admin_password })
-      });
-
-      if (response.ok) {
-        
-        const data = await response.text();
-        console.log(data);
-        // Login successful
-        // Show success message
-        setAlertMessage('Login Successful as Admin Now Redirecting...');
-        setOpenSnackbar(true); // Open Snackbar
-
-
-
-
-        // Delay navigation for a short period to allow the Snackbar to show
-        setTimeout(() => {
-          navigate('/Admin_Dashboard');
-        }, 1000); // Navigate after 1 seconds
-
-      } else {
-        const error = await response.text();
-        console.log('Login Failed', error);
-        // Show error message
-        setAlertMessage('Login Failed: Invalid admin_id or password');
-        setOpenSnackbar(true); // Open Snackbar
-      }
-    } catch (error) {
-      console.error('Login Failed', error);
-
-      setOpenSnackbar(true); // Open Snackbar
-    }
-  }
-
+ 
 
   return (
     <>
 
 
 
-      {location.pathname !== '/' && location.pathname !== '/Admin_Dashboard' && <Navbar isloggedin={isloggedin} logoutclicked={logoutclicked} />}
+      {location.pathname !== '/' && location.pathname !== '/Admin_Dashboard' && <Navbar isloggedin={isloggedin} logoutclicked={logoutclicked} isloggedin_admin={isloggedin_admin} isloggedin_trainer={isloggedin_trainer} />}
 
 
 
@@ -378,8 +339,8 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         
 
 
-        <Route path="/Admin_login" element={<Admin_login isloggedin={isloggedin} isloggedin_admin={isloggedin_admin} setisloggedin_admin={setisloggedin_admin} admin_id={admin_id} setAdmin_id={setAdmin_id} admin_password={admin_password} setAdmin_password={setAdmin_password} handleAdminloginbutton={handleAdminloginbutton} />} />
-        <Route path="/Admin_Dashboard" element={<Admin_Dashboard setisloggedin_admin={setisloggedin_admin} />} />
+        {/* <Route path="/Admin_login" element={<Admin_login isloggedin={isloggedin} isloggedin_admin={isloggedin_admin} setisloggedin_admin={setisloggedin_admin} admin_id={admin_id} setAdmin_id={setAdmin_id} admin_password={admin_password} setAdmin_password={setAdmin_password} handleAdminloginbutton={handleAdminloginbutton} />} /> */}
+        <Route path="/Admin_Dashboard" element={<Admin_Dashboard setisloggedin_admin={setisloggedin_admin} setAdmin_id={setAdmin_id} setAdmin_password={setAdmin_password} />} />
 
       </Routes>
       <Snackbar
