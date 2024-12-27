@@ -48,18 +48,12 @@ export default function Navbar({ isloggedin, logoutclicked, isloggedin_admin,isl
                 </ul>
               </li>
 
-              <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle modern-link" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ fontFamily, fontSize: fontSizeLink, marginRight: '10px', color: fontColor }}>
-                 Admin/Trainer
-                </Link>
-                <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="/Admin_login" style={{ fontFamily, fontSize: fontSizeLink, color: 'black' }}>Admin Login</Link></li>
-                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink, color: 'black' }}>Trainer Login</Link></li>
-                </ul>
-              </li>
            
 
             </ul>
+
+
+            {/* this is to check which user is logged in  , only the first login button works*/}
 
               {isloggedin ? (
               <Button variant="contained" color="secondary" onClick={logoutclicked} style={{ fontFamily, fontSize: fontSizeLink }}>
@@ -67,27 +61,27 @@ export default function Navbar({ isloggedin, logoutclicked, isloggedin_admin,isl
               </Button>
             ) : (
               <Button variant="contained" color="primary" component={Link} to="/Login" style={{ fontFamily, fontSize: fontSizeLink }}>
-                Login As User
+                Login
               </Button>
             )}
 
             {isloggedin_admin ? (
               <Button variant="contained" color="secondary" onClick={logoutclicked} style={{ fontFamily, fontSize: fontSizeLink }}>
-                Logout //Currently logged in as admin
+                Currently logged in as admin
               </Button>
             ) : (
-              <Button variant="contained" color="primary" component={Link} to="/Admin_login" style={{ fontFamily, fontSize: fontSizeLink }}>
-                Login As Admin
+              <Button variant="contained" color="primary" component={Link}  style={{ fontFamily, fontSize: fontSizeLink }}>
+                !Adminlogin
               </Button>
             )}
 
             {isloggedin_trainer ? (
               <Button variant="contained" color="secondary" onClick={logoutclicked} style={{ fontFamily, fontSize: fontSizeLink }}>
-                Logout //Currently logged in as trainer
+                Currently logged in as trainer
               </Button>
             ) : (
-              <Button variant="contained" color="primary" component={Link} to="/Trainer_login" style={{ fontFamily, fontSize: fontSizeLink }}>
-                Login As Trainer
+              <Button variant="contained" color="primary" component={Link}  style={{ fontFamily, fontSize: fontSizeLink }}>
+                !Trainerlogin
               </Button>
             )}
 

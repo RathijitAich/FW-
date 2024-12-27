@@ -1,140 +1,56 @@
 import React from "react";
 
+import { useLocation } from "react-router-dom";
 
 export const GeneratedPlan = () => {
+  const location = useLocation();
+  const workouts = location.state?.workouts || [];
+
   return (
     <div>
-     
-      <h1 className="text-center mt-5">Generated Plan</h1>
+      
+      <h1 className="text-center mt-5">Workouts</h1>
 
       <div className="container">
-        {/* Card 1 */}
-        <div className="card mb-4 shadow-sm">
-          <div className="row g-0">
-            <div className="col-md-4">
-              <img
-                src="pushup_1.png"
-                className="img-fluid rounded-start"
-                alt="..."
-                style={{ maxHeight: "150px", objectFit: "cover" }} // Limit image size and center it
-              />
-            </div>
-            <div className="col-md-8">
-              <div className="card-body">
-                <h5 className="card-title fw-bold">Push ups</h5>
-                <p className="card-text">
-                  Lie down on your chest and push your body up with your arms.
-                </p>
-                <div className="d-flex justify-content-between align-items-center">
-                  <span>
-                    <strong>Sets:</strong> 3
-                    <br />
-                    <strong>Reps:</strong> 10
-                  </span>
-                  <a href="#" className="btn btn-dark">
-                    Completed
-                  </a>
+        {workouts.length > 0 ? (
+          workouts.map((workout, index) => (
+            <div className="card mb-4 shadow-sm" key={index}>
+              <div className="row g-0">
+                {/* Image Section */}
+                <div className="col-md-4">
+                  <img
+                    src={`/${workout.workoutName
+                      .toLowerCase()
+                      .replace(/\s/g, "_")}.png`} // Convert to lowercase and replace spaces
+                    className="img-fluid rounded-start"
+                    alt={workout.workoutName}
+                    style={{ maxHeight: "150px", objectFit: "cover" }}
+                  />
+                </div>
+                {/* Content Section */}
+                <div className="col-md-8">
+                  <div className="card-body">
+                    <h5 className="card-title fw-bold">{workout.workoutName}</h5>
+                    <p className="card-text">{workout.workoutDescription}</p>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <span>
+                        <strong>Type:</strong> {workout.workoutType}
+                        <br />
+                        <strong>Target Muscle:</strong> {workout.targetMuscle || "General"}
+                        <br />
+                        <strong>Equipment:</strong> {workout.equipmentRequired || "None"}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Card 2 */}
-        <div className="card bg-light mb-4 shadow-sm">
-          <div className="row g-0">
-            <div className="col-md-4">
-              <img
-                src="pullup.png"
-                className="img-fluid rounded-start"
-                alt="..."
-                style={{ maxHeight: "150px", objectFit: "cover" }}
-              />
-            </div>
-            <div className="col-md-8">
-              <div className="card-body">
-                <h5 className="card-title fw-bold">Pull ups</h5>
-                <p className="card-text">
-                  pull your body up with your arms.
-                </p>
-                <div className="d-flex justify-content-between align-items-center">
-                  <span>
-                    <strong>Sets:</strong> 3
-                    <br />
-                    <strong>Reps:</strong> 10
-                  </span>
-                  <a href="#" className="btn btn-dark">
-                    Completed
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-light mb-4 shadow-sm">
-          <div className="row g-0">
-            <div className="col-md-4">
-              <img
-                src="benchpress.png"
-                className="img-fluid rounded-start"
-                alt="..."
-                style={{ maxHeight: "150px", objectFit: "cover" }}
-              />
-            </div>
-            <div className="col-md-8">
-              <div className="card-body">
-                <h5 className="card-title fw-bold">bench press</h5>
-                <p className="card-text">
-                  pull your body up with your arms.
-                </p>
-                <div className="d-flex justify-content-between align-items-center">
-                  <span>
-                    <strong>Sets:</strong> 3
-                    <br />
-                    <strong>Reps:</strong> 10
-                  </span>
-                  <a href="#" className="btn btn-dark">
-                    Completed
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-light mb-4 shadow-sm">
-          <div className="row g-0">
-            <div className="col-md-4">
-              <img
-                src="shoulder_press.png"
-                className="img-fluid rounded-start"
-                alt="..."
-                style={{ maxHeight: "150px", objectFit: "cover" }}
-              />
-            </div>
-            <div className="col-md-8">
-              <div className="card-body">
-                <h5 className="card-title fw-bold">shoulder press</h5>
-                <p className="card-text">
-                  pull your body up with your arms.
-                </p>
-                <div className="d-flex justify-content-between align-items-center">
-                  <span>
-                    <strong>Sets:</strong> 3
-                    <br />
-                    <strong>Reps:</strong> 10
-                  </span>
-                  <a href="#" className="btn btn-dark">
-                    Completed
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Additional cards can follow the same structure */}
+          ))
+        ) : (
+          <p>No workouts found. Please try again.</p>
+        )}
       </div>
     </div>
   );
 };
-
 export default GeneratedPlan;

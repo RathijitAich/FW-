@@ -92,7 +92,7 @@ export default function ActionAreaCard() {
                 <div className="carousel-container">
                     <Carousel>
                         <Carousel.Item>
-                            <Link to="/slide1">
+                            <Link to="/Workout_dictionary">
                                 <img
                                     className="d-block carousel-image"
                                     src={imgg8}

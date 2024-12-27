@@ -36,21 +36,7 @@ export default function Admin_DashBoard({setisloggedin_admin, setAdmin_id, setAd
 
         {/* Cards Layout */}
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
-          {/* Workout Plan Button */}
-          <div className="col">
-            <div className="card shadow border-0 h-100">
-              <div className="card-body text-center">
-                <h5 className="card-title fw-bold">Workout Plan</h5>
-                <p className="card-text text-muted">
-                  View and manage the existing workout plans for users.
-                </p>
-                <Link to="/login/workout_plan">
-                  <button className="btn btn-primary px-4">Go to Workout Plan</button>
-                </Link>
-              </div>
-            </div>
-          </div>
-
+         
           {/* Trainer Management Button */}
           <div className="col">
             <div className="card shadow border-0 h-100">
@@ -59,7 +45,7 @@ export default function Admin_DashBoard({setisloggedin_admin, setAdmin_id, setAd
                 <p className="card-text text-muted">
                   Add, edit, or manage trainers' details and schedules.
                 </p>
-                <Link to="/login/trainer_management">
+                <Link to="/trainer_management">
                   <button className="btn btn-success px-4">Go to Trainer Management</button>
                 </Link>
               </div>

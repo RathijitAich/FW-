@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import Navbar from "./Components/Navbar";
 import Login_Page from "./Components/Login_Page";
 
-import News from "./Components/News";
 import MainMenu from "./Components/Main-menu";
 import Registration from "./Components/Registration";
 import Calculators from "./Components/Calculators";
@@ -16,14 +15,37 @@ import CalorieThatDay from "./Components/CalorieThatDay";
 import CalorieIntake from "./Components/CalorieIntake";
 import Footer from "./Components/Footer";
 import Userprofile from "./Components/Userprofile";
+
+//News imports
+import News from "./Components/News";
+
+//Mental Health imports
 import MentalHealth from "./Components/MentalHealth";
-import Workout_plan from "./Components/workout_plan";
-import GeneratedPlan from "./Components/generated_plan";
 import MentalHealthQuestion from "./Components/MentalHealthQuestion";
 import Relax_stress from "./Components/Relax_stress";
+
+//Landing Page
 import LandingPage from "./Components/LandingPage";
-import Admin_login from "./Components/Admin_login";
+
+
+//Workout and Workout Plan imports
+import Workout_plan from "./Components/workout_plan";
+import GeneratedPlan from "./Components/generated_plan";
+import Workouts from "./Components/WorkoutDictionary";
+import  GeneratedPremadePlan  from "./Components/generated_premade_plan";
+
+//Admin Imports
 import Admin_Dashboard from "./Components/Admin_DashBoard";
+import WorkoutEdit from "./Components/WorkoutEdit";
+import TrainerManagement from "./Components/TrainerManagement";
+
+
+//Trainer Imports
+import TrainerDashboard from "./Components/Trainer_DashBoard";
+import WorkoutPlanEdit from "./Components/WorkoutPlanEdit";
+import  AddRemoveWorkoutTrainer  from "./Components/add_remove_workout_trainer";
+
+//Diet and Food imports
 import Food_dictionary from "./Components/Food_dictionary";
 import DietPlanGenerator from "./Components/DietPlanGenerator";
 import DietPlan from "./Components/DietPlan";
@@ -48,13 +70,18 @@ function App() {
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
   const [password, setPassword] = useState(localStorage.getItem('password') || '');
   const [user_id, setUser_id] = useState(localStorage.getItem('user_id') || '');
+
   const [isloggedin_admin, setisloggedin_admin] = useState(localStorage.getItem('isloggedin_admin') === 'true');
   const [admin_id, setAdmin_id] = useState(localStorage.getItem('admin_id') || '');
   const [admin_password, setAdmin_password] = useState(localStorage.getItem('admin_password') || '');
+
+
   const [isloggedin_trainer, setisloggedin_trainer] = useState(localStorage.getItem('isloggedin_trainer') === 'true');
   const [trainer_id, setTrainer_id] = useState(localStorage.getItem('trainer_id') || '');
   const [trainer_password, setTrainer_password] = useState(localStorage.getItem('trainer_password') || '');
+
   const [loginType, setLoginType] = useState("user");
+
 
 
 
@@ -324,9 +351,12 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/MentalHealthQuestion" element={<MentalHealthQuestion />} />
         <Route path="/Relax_stress" element={<Relax_stress />} />
 
+
+        {/* workout plan and workout dictionary routing */}
         <Route path="/WorkoutPlan" element={<Workout_plan />} />
-        <Route path="/generated_plan" element={<GeneratedPlan />} />
-        
+        <Route path="/workout_plan/generated_plan" element={<GeneratedPlan />}/>
+        <Route path="/Workout_dictionary" element={<Workouts />} />
+        <Route path="/generated_premade_plan" element={<GeneratedPremadePlan />} />
 
         {/* diet and food routing */}
         <Route path="/DietPlanGenerator" element={<DietPlanGenerator />} />
@@ -335,12 +365,17 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
 
         
 
-
-        
-
-
-        {/* <Route path="/Admin_login" element={<Admin_login isloggedin={isloggedin} isloggedin_admin={isloggedin_admin} setisloggedin_admin={setisloggedin_admin} admin_id={admin_id} setAdmin_id={setAdmin_id} admin_password={admin_password} setAdmin_password={setAdmin_password} handleAdminloginbutton={handleAdminloginbutton} />} /> */}
+        {/*admin dashboard*/}
         <Route path="/Admin_Dashboard" element={<Admin_Dashboard setisloggedin_admin={setisloggedin_admin} setAdmin_id={setAdmin_id} setAdmin_password={setAdmin_password} />} />
+        <Route path="/workout_dashboard" element={<WorkoutEdit />} />
+        <Route path="/trainer_management" element={<TrainerManagement />} />
+
+        {/*trainer dashboard*/}
+        <Route path="/Trainer_Dashboard" element={<TrainerDashboard setisloggedin_trainer={setisloggedin_trainer} setTrainer_id={setTrainer_id} setTrainer_password={setTrainer_password} />} />
+        <Route path="/trainer_dashboard/edit_workout_plan" element={<WorkoutPlanEdit />} />
+        <Route path="/add_remove_workout_trainer" element={<AddRemoveWorkoutTrainer />} />
+
+
 
       </Routes>
       <Snackbar
