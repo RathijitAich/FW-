@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+
+
+
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Button, MenuItem, Box, Typography, Grid, Paper } from '@mui/material';
 import regimg from '../Images/register.jpg';
@@ -6,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { Snackbar } from '@mui/material';
 import { FormControl, InputLabel, Select } from '@mui/material';
 
-export default function Registration(props) {
+export default function Registration() {
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -16,10 +19,31 @@ export default function Registration(props) {
     weight: '',
     gender: '',
     userId: '',
-    healthIssue: '', // Replaced healthCondition with healthIssue
+    healthIssue: '',
+    trainer: null,  // Store the whole trainer object
   });
-  const [alertMessage, setAlertMessage] = useState(''); // State for alert message
-  const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar visibility
+  const [alertMessage, setAlertMessage] = useState('');
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [trainers, setTrainers] = useState([]); // State for trainer list
+
+  // Fetch trainers list
+  useEffect(() => {
+    const fetchTrainers = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/trainer/all');
+        if (response.ok) {
+          const trainersData = await response.json();
+          setTrainers(trainersData); // Assuming the backend returns an array of trainers with 'trainerName' and 'trainerId'
+        } else {
+          console.error('Failed to fetch trainers');
+        }
+      } catch (error) {
+        console.error('Error fetching trainers:', error);
+      }
+    };
+
+    fetchTrainers();
+  }, []); // Fetch trainers once when the component mounts
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -73,16 +97,13 @@ export default function Registration(props) {
         const data = await response.text();
         console.log(data);
         // Registration successful
-        // Show success message
         setAlertMessage('Registration Successful Now Redirecting...');
         setOpenSnackbar(true);
         setTimeout(() => {
           navigate('/Login');
-        }, 1000); // Redirect to login page after 1 second
+        }, 1000);
       } else {
         const error = await response.text();
-        console.log('Registration Failed', error);
-        // Show error message
         setAlertMessage('Registration Failed: ' + error);
         setOpenSnackbar(true);
       }
@@ -99,7 +120,7 @@ export default function Registration(props) {
 
   return (
     <div className="container" style={{ marginBottom: '20px' }}>
-      <Grid container component="main" sx={{ height: '80vh', justifyContent: 'center', alignItems: 'center', mt: 10 }}>
+      <Grid container component="main" sx={{ height: '90vh', justifyContent: 'center', alignItems: 'center', mt: 10 }}>
         <Grid
           item
           xs={false}
@@ -113,7 +134,7 @@ export default function Registration(props) {
             height: '100%',
           }}
         />
-        <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square sx={{ height: '80vh', width: '500px', display: 'flex', alignItems: 'center', background: '#fffffff5' }}>
+        <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square sx={{ height: '90vh', width: '500px', display: 'flex', alignItems: 'center', background: '#fffffff5' }}>
           <Box
             sx={{
               my: 3,
@@ -125,8 +146,9 @@ export default function Registration(props) {
             }}
           >
             <form onSubmit={handleSubmit}>
-              <h2 className="text-center mb-4" style={{ color: 'blue', fontSize: '1.5rem' }}>Registration</h2>
+              <h2 className="text-center mb-4 mt-3" style={{ color: 'blue', fontSize: '1.5rem' }}>Registration</h2>
 
+              {/* Other input fields */}
               <div className="mb-3">
                 <TextField
                   id="userId"
@@ -225,49 +247,61 @@ export default function Registration(props) {
                 </FormControl>
               </div>
 
-              <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                type="submit"
-                sx={{ mb: 2 }}
-              >
-                Register
-              </Button>
+              <div className="mb-3">
+                <FormControl variant="standard" fullWidth>
+                  <InputLabel id="trainer-label">Choose Trainer</InputLabel>
+                  <Select
+                    labelId="trainer-label"
+                    id="trainer"
+                    name="trainer"
+                    value={formData.trainer ? formData.trainer.trainerId : ''} // Check if trainer is selected
+                    onChange={(event) => {
+                      const selectedTrainer = trainers.find(trainer => trainer.trainerId === event.target.value);
+                      setFormData({
+                        ...formData,
+                        trainer: selectedTrainer, // Store the whole trainer object
+                      });
+                    }}
+                    slotProps={{
+                      input: { style: { fontSize: '1.25rem' } },
+                      inputLabel: { style: { fontSize: '1.25rem' } },
+                    }}
+                  >
+                    {trainers.map((trainer) => (
+                      <MenuItem key={trainer.trainerId} value={trainer.trainerId}>
+                        {trainer.trainerName}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </div>
+
+              <div className="mb-3 text-center">
+                <Button
+                  type="submit"
+                  variant="contained"
+                  fullWidth
+                  sx={{ fontSize: '1rem', padding: '10px' }}
+                >
+                  Register
+                </Button>
+              </div>
+
+              {/* Snackbar for alerts */}
+              <Snackbar
+                open={openSnackbar}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+                message={alertMessage}
+              />
             </form>
           </Box>
         </Grid>
       </Grid>
-
-      <Box sx={{ mt: 4, p: 2, backgroundColor: '#f0f0f0', borderRadius: 2 }}>
-        <Typography variant="h6" gutterBottom>Field Explanations:</Typography>
-        <Typography variant="body1"><strong>User ID:</strong> A unique identifier for your account. It must be unique and will be used while logging in.</Typography>
-        <Typography variant="body1"><strong>Username:</strong> Your display name.</Typography>
-        <Typography variant="body1"><strong>Password:</strong> A secure password for your account.</Typography>
-        <Typography variant="body1"><strong>Height:</strong> Your height in centimeters.</Typography>
-        <Typography variant="body1"><strong>Weight:</strong> Your weight in kilograms.</Typography>
-        <Typography variant="body1"><strong>Gender:</strong> Your gender.</Typography>
-        <Typography variant="body1"><strong>Health Issue:</strong> Select any existing health issues you have.</Typography>
-      </Box>
-
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={2000}
-        onClose={handleSnackbarClose}
-        message={alertMessage}
-        action={
-          <Button color="inherit" size="small" onClick={handleSnackbarClose}>
-            Close
-          </Button>
-
-        }
-        sx={{
-          '& .MuiSnackbarContent-root': {
-            color: 'black', // Change this to your desired color
-            backgroundColor: 'white', // Change this to your desired color
-          },
-        }}
-      />
     </div>
   );
 }
+
+
+
+

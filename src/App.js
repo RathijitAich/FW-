@@ -14,7 +14,10 @@ import BMI from "./Components/BMI";
 import CalorieThatDay from "./Components/CalorieThatDay";
 import CalorieIntake from "./Components/CalorieIntake";
 import Footer from "./Components/Footer";
+
+//User profile imports
 import Userprofile from "./Components/Userprofile";
+import CurrentWorkoutPlan from "./Components/CurrentWorkoutPlan";
 
 //News imports
 import News from "./Components/News";
@@ -346,7 +349,13 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/BMI" element={<BMI />} />
         <Route path="/CalorieThatDay" element={<CalorieThatDay />} />
         <Route path="/CalorieIntake" element={<CalorieIntake />} />
+
+        {/* user profile routing */}
         <Route path="/Userprofile" element={<Userprofile isloggedin={isloggedin} user_id={user_id} username={username} password={password} />} />
+        <Route path="/CurrentWorkoutPlan" element={<CurrentWorkoutPlan user_id={user_id} />} />
+
+
+        {/* //Mental Health routing */}
         <Route path="/MentalHealth" element={<MentalHealth />} />
         <Route path="/MentalHealthQuestion" element={<MentalHealthQuestion />} />
         <Route path="/Relax_stress" element={<Relax_stress />} />
@@ -356,7 +365,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/WorkoutPlan" element={<Workout_plan />} />
         <Route path="/workout_plan/generated_plan" element={<GeneratedPlan />}/>
         <Route path="/Workout_dictionary" element={<Workouts />} />
-        <Route path="/generated_premade_plan" element={<GeneratedPremadePlan />} />
+        <Route path="/generated_premade_plan" element={<GeneratedPremadePlan user_id={user_id} />} />
 
         {/* diet and food routing */}
         <Route path="/DietPlanGenerator" element={<DietPlanGenerator />} />

@@ -43,7 +43,7 @@ export default function Navbar({ isloggedin, logoutclicked, isloggedin_admin,isl
                 <ul className="dropdown-menu">
                   <li><Link className="dropdown-item" to="/Userprofile" style={{ fontFamily, fontSize: fontSizeLink, color: 'black' }}>My Profile</Link></li>
                   <li><hr className="dropdown-divider" /></li>
-                  <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink, color: 'black' }}>Current Workout Plan</Link></li>
+                  <li><Link className="dropdown-item" to="/CurrentWorkoutPlan" style={{ fontFamily, fontSize: fontSizeLink, color: 'black' }}>Current Workout Plan</Link></li>
                   <li><Link className="dropdown-item" to="#" style={{ fontFamily, fontSize: fontSizeLink, color: 'black' }}>Current Diet Plan</Link></li>
                 </ul>
               </li>
