@@ -37,73 +37,161 @@ const DietPlan = () => {
     meals: [
       {
         time: "Morning",
-        food: "Oatmeal with Almonds",
-        calories: 250,
-        protein: 10,
-        carbs: 45,
-        fat: 6,
-        image: oatmeal, // Image for Oatmeal
+        foods: [
+          {
+            food: "Oatmeal with Almonds",
+            calories: 150,
+            protein: 5,
+            carbs: 25,
+            fat: 3,
+            image: oatmeal,
+          },
+          {
+            food: "Greek Yogurt",
+            calories: 100,
+            protein: 10,
+            carbs: 7,
+            fat: 2,
+            image: oatmeal,
+          },
+          {
+            food: "Boiled Egg",
+            calories: 70,
+            protein: 6,
+            carbs: 1,
+            fat: 5,
+            image: oatmeal,
+          },
+        ],
       },
       {
         time: "Noon",
-        food: "Grilled Chicken Salad",
-        calories: 350,
-        protein: 30,
-        carbs: 20,
-        fat: 15,
-        image: chickenSalad, // Image for Chicken Salad
+        foods: [
+          {
+            food: "Grilled Chicken Salad",
+            calories: 200,
+            protein: 20,
+            carbs: 10,
+            fat: 7,
+            image: chickenSalad,
+          },
+          {
+            food: "Quinoa",
+            calories: 100,
+            protein: 4,
+            carbs: 18,
+            fat: 2,
+            image: chickenSalad,
+          },
+          {
+            food: "Steamed Broccoli",
+            calories: 50,
+            protein: 3,
+            carbs: 5,
+            fat: 1,
+            image: chickenSalad,
+          },
+        ],
       },
       {
         time: "Afternoon",
-        food: "Fruit Smoothie with Whey Protein",
-        calories: 200,
-        protein: 20,
-        carbs: 30,
-        fat: 5,
-        image: smoothie, // Image for Smoothie
+        foods: [
+          {
+            food: "Fruit Smoothie with Whey Protein",
+            calories: 150,
+            protein: 15,
+            carbs: 25,
+            fat: 2,
+            image: smoothie,
+          },
+          {
+            food: "Mixed Nuts",
+            calories: 100,
+            protein: 3,
+            carbs: 5,
+            fat: 9,
+            image: smoothie,
+          },
+          {
+            food: "Granola Bar",
+            calories: 150,
+            protein: 5,
+            carbs: 22,
+            fat: 6,
+            image: smoothie,
+          },
+        ],
       },
       {
         time: "Night",
-        food: "Baked Salmon with Quinoa",
-        calories: 400,
-        protein: 35,
-        carbs: 40,
-        fat: 18,
-        image: salmonQuinoa, // Image for Salmon with Quinoa
+        foods: [
+          {
+            food: "Baked Salmon",
+            calories: 250,
+            protein: 25,
+            carbs: 0,
+            fat: 15,
+            image: salmonQuinoa,
+          },
+          {
+            food: "Quinoa",
+            calories: 100,
+            protein: 4,
+            carbs: 18,
+            fat: 2,
+            image: salmonQuinoa,
+          },
+          {
+            food: "Steamed Asparagus",
+            calories: 50,
+            protein: 2,
+            carbs: 5,
+            fat: 1,
+            image: salmonQuinoa,
+          },
+        ],
       },
     ],
   };
 
   const data = dietPlan || defaultDietPlan; // Use the passed dietPlan or fall back to the default
 
-  // Prepare data for the chart (calories, protein, carbs, fat)
+  // Aggregate data for the chart
   const chartData = {
     labels: data.meals.map((meal) => meal.time), // Meal times as labels
     datasets: [
       {
         label: "Calories",
-        data: data.meals.map((meal) => meal.calories),
+        data: data.meals.map((meal) =>
+          meal.foods.reduce((sum, food) => sum + food.calories, 0)
+        ),
         backgroundColor: "#FF5733", // Orange color for Calories
         borderColor: "#FF5733",
         borderWidth: 1,
       },
       {
         label: "Protein (g)",
-        data: data.meals.map((meal) => meal.protein),
+        data: data.meals.map((meal) =>
+          meal.foods.reduce((sum, food) => sum + food.protein, 0)
+        ),
         backgroundColor: "#4CAF50", // Green color for Protein
         borderColor: "#4CAF50",
         borderWidth: 1,
       },
       {
         label: "Carbs (g)",
-        data: data.meals.map((meal) => meal.carbs),
+        data: data.meals.map((meal) =>
+          meal.foods.reduce((sum, food) => sum + food.carbs, 0)
+        ),
         backgroundColor: "#3F51B5", // Blue color for Carbs
         borderColor: "#3F51B5",
         borderWidth: 1,
       },
       {
         label: "Fat (g)",
-        data: data.meals.map((meal) => meal.fat),
+        data: data.meals.map((meal) =>
+          meal.foods.reduce((sum, food) => sum + food.fat, 0)
+        ),
         backgroundColor: "#FFC107", // Yellow color for Fat
         borderColor: "#FFC107",
         borderWidth: 1,
@@ -136,19 +224,21 @@ const DietPlan = () => {
           </tr>
         </thead>
         <tbody>
-          {data.meals.map((meal, index) => (
-            <tr key={index}>
-              <td>{meal.time}</td>
-              <td>{meal.food}</td>
-              <td>{meal.calories}</td>
-              <td>{meal.protein}</td>
-              <td>{meal.carbs}</td>
-              <td>{meal.fat}</td>
-              <td>
-                <img src={meal.image} alt={meal.food} className="meal-img" />
-              </td>
-            </tr>
-          ))}
+          {data.meals.map((meal, index) =>
+            meal.foods.map((food, idx) => (
+              <tr key={`${index}-${idx}`}>
+                <td>{idx === 0 ? meal.time : ""}</td>
+                <td>{food.food}</td>
+                <td>{food.calories}</td>
+                <td>{food.protein}</td>
+                <td>{food.carbs}</td>
+                <td>{food.fat}</td>
+                <td>
+                  <img src={food.image} alt={food.food} className="meal-img" />
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
