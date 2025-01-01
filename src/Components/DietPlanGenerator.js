@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import img1 from "../Images/diet1.jpg";
 import img2 from "../Images/diet2.jpg";
 import img3 from "../Images/diet3.jpg";
+
 
 const images = [
   {
@@ -19,7 +21,7 @@ const images = [
   },
 ];
 
-const DietPlanner = () => {
+const DietPlanner = ({user_id}) => {
   const [imageIndex, setImageIndex] = useState(0);
   const [formData, setFormData] = useState({
     bmi: "",
@@ -295,5 +297,11 @@ const DietPlanner = () => {
     </div>
   );
 };
+
+
+DietPlanner.propTypes = {
+  user_id: PropTypes.number,
+};
+
 
 export default DietPlanner;

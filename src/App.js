@@ -368,7 +368,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/generated_premade_plan" element={<GeneratedPremadePlan user_id={user_id} />} />
 
         {/* diet and food routing */}
-        <Route path="/DietPlanGenerator" element={<DietPlanGenerator />} />
+        <Route path="/DietPlanGenerator" element={<DietPlanGenerator user_id={user_id} />} />
         <Route path="/Food_dictionary" element={<Food_dictionary />} />
         <Route path="/diet-plan" element={<DietPlan />} />
 
