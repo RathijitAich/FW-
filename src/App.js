@@ -18,6 +18,7 @@ import Footer from "./Components/Footer";
 //User profile imports
 import Userprofile from "./Components/Userprofile";
 import CurrentWorkoutPlan from "./Components/CurrentWorkoutPlan";
+import CurrentDietPlan from "./Components/CurrentDietPlan";
 
 //News imports
 import News from "./Components/News";
@@ -84,7 +85,13 @@ function App() {
   const [trainer_password, setTrainer_password] = useState(localStorage.getItem('trainer_password') || '');
 
   const [loginType, setLoginType] = useState("user");
+  
 
+  //state to store the food and diet plan
+  const [globalState, setGlobalState] = useState({
+    foodData: {}, // An object to store food data
+    dietPlan: "", // To store the generated diet plan
+  });
 
 
 
@@ -167,12 +174,15 @@ function App() {
         loginType={loginType}
         setLoginType={setLoginType}
 
+        globalState={globalState}
+        setGlobalState={setGlobalState}
+
       />
     </Router>
   );
 }
 
-function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, openSnackbar, setOpenSnackbar, username, setUsername, password, setPassword, user_id, setUser_id, admin_id, setAdmin_id, admin_password, setAdmin_password, isloggedin_admin, setisloggedin_admin, trainer_id, setTrainer_id, trainer_password, setTrainer_password, isloggedin_trainer, setisloggedin_trainer, loginType, setLoginType }) {
+function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, openSnackbar, setOpenSnackbar, username, setUsername, password, setPassword, user_id, setUser_id, admin_id, setAdmin_id, admin_password, setAdmin_password, isloggedin_admin, setisloggedin_admin, trainer_id, setTrainer_id, trainer_password, setTrainer_password, isloggedin_trainer, setisloggedin_trainer, loginType, setLoginType, globalState, setGlobalState }) {
   const navigate = useNavigate();
   const location = useLocation();
   const location2 = useLocation();
@@ -353,6 +363,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         {/* user profile routing */}
         <Route path="/Userprofile" element={<Userprofile isloggedin={isloggedin} user_id={user_id} username={username} password={password} />} />
         <Route path="/CurrentWorkoutPlan" element={<CurrentWorkoutPlan user_id={user_id} />} />
+        <Route path="/CurrentDietPlan" element={<CurrentDietPlan user_id={user_id} globalState={globalState} setGlobalState={setGlobalState} />} />
 
 
         {/* //Mental Health routing */}
@@ -368,9 +379,9 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/generated_premade_plan" element={<GeneratedPremadePlan user_id={user_id} />} />
 
         {/* diet and food routing */}
-        <Route path="/DietPlanGenerator" element={<DietPlanGenerator user_id={user_id} />} />
+        <Route path="/DietPlanGenerator" element={<DietPlanGenerator user_id={user_id} globalState={globalState} setGlobalState={setGlobalState} />} />
         <Route path="/Food_dictionary" element={<Food_dictionary />} />
-        <Route path="/diet-plan" element={<DietPlan />} />
+        <Route path="/diet-plan" element={<DietPlan globalState={globalState} setGlobalState={setGlobalState} user_id={user_id} />} />
 
         
 

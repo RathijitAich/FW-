@@ -147,7 +147,7 @@ const DietPlan = ({ globalState, setGlobalState,user_id }) => {
     <div className="diet-plan">
 
       {/* Save Button */}
-    <div className="container mb-4">
+    {/* <div className="container mb-4">
     <button
       className="btn btn-primary mt-1"
       onClick={handleSavedietPlan}
@@ -155,7 +155,7 @@ const DietPlan = ({ globalState, setGlobalState,user_id }) => {
     >
       Save Diet Plan
     </button>
-    </div>
+    </div> */}
 
       <h3>Diet Plan </h3>
       <div className="chart-container">
