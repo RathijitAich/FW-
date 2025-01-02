@@ -21,7 +21,8 @@ const images = [
   },
 ];
 
-const DietPlanner = ({user_id}) => {
+
+const DietPlanner = ({ user_id }) => {
   const [imageIndex, setImageIndex] = useState(0);
   const [formData, setFormData] = useState({
     bmi: "",
@@ -70,10 +71,35 @@ const DietPlanner = ({user_id}) => {
 
   const [dietPlan, setDietPlan] = useState(defaultDietPlan);
 
-  const generateDietPlan = () => {
-    setDietPlan(defaultDietPlan);
+  const generateDietPlan = async () => {
+    try {
+      // Generate the custom string based on formData
+      const conditionString = `${formData.bmi < 18 ? "<18" : formData.bmi > 25 ? ">25" : "18-25"}_${formData.goal}_${formData.dietType}_${formData.healthConditions.length > 0 ? formData.healthConditions.join("_") : "none"}`;
+  
+      console.log("Generated String:", conditionString);
+  
+      // Send the data to the backend
+      const response = await fetch("http://localhost:8080/api/diet-planner/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...formData, conditionString }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to submit diet plan");
+      }
+  
+      const result = await response.text();
+      console.log("Response from backend:", result);
+      alert("Diet plan submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting diet plan:", error);
+      alert("An error occurred while submitting the diet plan.");
+    }
   };
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setImageIndex((prevIndex) => (prevIndex + 1) % images.length);
