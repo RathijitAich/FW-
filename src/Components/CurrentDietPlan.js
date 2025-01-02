@@ -105,7 +105,7 @@ const DietPlan = ({ globalState, setGlobalState,user_id }) => {
       {
         label: "Calories",
         data: meals.map((meal) =>
-          meal.foods.reduce((sum, food) => sum + food.calories, 0)
+          meal.foods.reduce((sum, food) => sum + food.calorie, 0)
         ),
         backgroundColor: "#FF5733", // Orange color for Calories
         borderColor: "#FF5733",
@@ -123,7 +123,7 @@ const DietPlan = ({ globalState, setGlobalState,user_id }) => {
       {
         label: "Carbs (g)",
         data: meals.map((meal) =>
-          meal.foods.reduce((sum, food) => sum + food.carbs, 0)
+          meal.foods.reduce((sum, food) => sum + food.carbohydrate, 0)
         ),
         backgroundColor: "#3F51B5", // Blue color for Carbs
         borderColor: "#3F51B5",
