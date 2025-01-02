@@ -19,6 +19,7 @@ import Footer from "./Components/Footer";
 import Userprofile from "./Components/Userprofile";
 import CurrentWorkoutPlan from "./Components/CurrentWorkoutPlan";
 import CurrentDietPlan from "./Components/CurrentDietPlan";
+import UserTrainer from "./Components/UserTrainer";
 
 //News imports
 import News from "./Components/News";
@@ -42,12 +43,14 @@ import  GeneratedPremadePlan  from "./Components/generated_premade_plan";
 import Admin_Dashboard from "./Components/Admin_DashBoard";
 import WorkoutEdit from "./Components/WorkoutEdit";
 import TrainerManagement from "./Components/TrainerManagement";
+import AddFoodAdmin from "./Components/AddFoodAdmin";
 
 
 //Trainer Imports
 import TrainerDashboard from "./Components/Trainer_DashBoard";
 import WorkoutPlanEdit from "./Components/WorkoutPlanEdit";
 import  AddRemoveWorkoutTrainer  from "./Components/add_remove_workout_trainer";
+import DietPlanEdit from "./Components/DietPlanEdit";
 
 //Diet and Food imports
 import Food_dictionary from "./Components/Food_dictionary";
@@ -364,6 +367,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/Userprofile" element={<Userprofile isloggedin={isloggedin} user_id={user_id} username={username} password={password} />} />
         <Route path="/CurrentWorkoutPlan" element={<CurrentWorkoutPlan user_id={user_id} />} />
         <Route path="/CurrentDietPlan" element={<CurrentDietPlan user_id={user_id} globalState={globalState} setGlobalState={setGlobalState} />} />
+        <Route path="/UserTrainer" element={<UserTrainer user_id={user_id} />} />
 
 
         {/* //Mental Health routing */}
@@ -389,11 +393,14 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/Admin_Dashboard" element={<Admin_Dashboard setisloggedin_admin={setisloggedin_admin} setAdmin_id={setAdmin_id} setAdmin_password={setAdmin_password} />} />
         <Route path="/workout_dashboard" element={<WorkoutEdit />} />
         <Route path="/trainer_management" element={<TrainerManagement />} />
+        <Route path="/add_food" element={<AddFoodAdmin />} />
 
         {/*trainer dashboard*/}
         <Route path="/Trainer_Dashboard" element={<TrainerDashboard setisloggedin_trainer={setisloggedin_trainer} setTrainer_id={setTrainer_id} setTrainer_password={setTrainer_password} />} />
         <Route path="/trainer_dashboard/edit_workout_plan" element={<WorkoutPlanEdit />} />
         <Route path="/add_remove_workout_trainer" element={<AddRemoveWorkoutTrainer />} />
+        <Route path="/trainer_dashboard/edit_diet_plans" element={<DietPlanEdit />} />
+        
 
 
 
