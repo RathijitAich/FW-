@@ -5,7 +5,6 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useState } from "react";
 
-
 import PropTypes from "prop-types";
 
 import {
@@ -28,26 +27,16 @@ ChartJS.register(
   Legend
 );
 
-
-
-
-
-const DietPlan = ({ globalState, setGlobalState,user_id }) => {
-
-
+const DietPlan = ({ globalState, setGlobalState, user_id }) => {
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
     severity: "success",
   });
 
-
-
   const handleCloseSnackbar = () => {
     setSnackbar({ ...snackbar, open: false });
   };
-
-
 
   const handleSavedietPlan = async () => {
     try {
@@ -61,20 +50,26 @@ const DietPlan = ({ globalState, setGlobalState,user_id }) => {
           body: JSON.stringify(globalState.dietPlan),
         }
       );
-  
+
       if (response.ok) {
-        setSnackbar({ open: true, message: "Diet plan saved successfully!", severity: "success" });
+        setSnackbar({
+          open: true,
+          message: "Diet plan saved successfully!",
+          severity: "success",
+        });
       } else {
         throw new Error(`Failed to save Diet plan. Status: ${response.status}`);
       }
     } catch (error) {
       console.error("Error saving diet plan:", error);
-      setSnackbar({ open: true, message: "Failed to save diet plan.", severity: "error" });
+      setSnackbar({
+        open: true,
+        message: "Failed to save diet plan.",
+        severity: "error",
+      });
     }
   };
 
-  
-  
   const foodData = globalState.foodData; // Access foodData from globalState
 
   // Ensure foodData is available and contains enough items
@@ -83,9 +78,6 @@ const DietPlan = ({ globalState, setGlobalState,user_id }) => {
   // console.log("writing defaultFoodData", defaultFoodData);
 
   //extract dietplan from global state
-
-
-  
 
   // Extract only the food part from each entry
   const foods = defaultFoodData.map((item) => item.food);
@@ -142,20 +134,17 @@ const DietPlan = ({ globalState, setGlobalState,user_id }) => {
   };
 
   return (
-
-    
     <div className="diet-plan">
-
       {/* Save Button */}
-    <div className="container mb-4">
-    <button
-      className="btn btn-primary mt-1"
-      onClick={handleSavedietPlan}
-      // disabled={!selectedPlan}
-    >
-      Save Diet Plan
-    </button>
-    </div>
+      <div className="container mb-4">
+        <button
+          className="btn btn-primary mt-1"
+          onClick={handleSavedietPlan}
+          // disabled={!selectedPlan}
+        >
+          Save Diet Plan
+        </button>
+      </div>
 
       <h3>Diet Plan </h3>
       <div className="chart-container">
@@ -194,8 +183,8 @@ const DietPlan = ({ globalState, setGlobalState,user_id }) => {
         </tbody>
       </table>
 
-       {/* Snackbar for feedback */}
-       <Snackbar
+      {/* Snackbar for feedback */}
+      <Snackbar
         open={snackbar.open}
         autoHideDuration={4000}
         onClose={handleCloseSnackbar}
