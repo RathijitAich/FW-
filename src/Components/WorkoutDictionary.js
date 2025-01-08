@@ -52,11 +52,11 @@ export const Workouts = () => {
   return (
     <div>
       
-      <h1 className="text-center mt-5">Workouts</h1>
+      
 
        
 
-      <div className="container mb-4">
+      <div className="container mb-4 mt-4">
 
          {/* Search bar */}
          <input
@@ -97,7 +97,7 @@ export const Workouts = () => {
                 </div>
                 {/* Content Section */}
                 <div className="col-md-8">
-                  <div className="card-body">
+                  <div className="card-body" style={{ backgroundColor: "antiquewhite" }}>
                     <h5 className="card-title fw-bold">{workout.workoutName}</h5>
                     <p className="card-text">{workout.workoutDescription}</p>
                     <div className="d-flex justify-content-between align-items-center">
