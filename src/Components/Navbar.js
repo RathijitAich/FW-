@@ -58,7 +58,7 @@ export default function Navbar({ isloggedin, logoutclicked, isloggedin_admin,isl
 
               {isloggedin ? (
               <Button variant="contained" color="secondary" onClick={logoutclicked} style={{ fontFamily, fontSize: fontSizeLink }}>
-                Logout //Currently logged in as user
+                Logout
               </Button>
             ) : (
               <Button variant="contained" color="primary" component={Link} to="/Login" style={{ fontFamily, fontSize: fontSizeLink }}>
@@ -66,7 +66,7 @@ export default function Navbar({ isloggedin, logoutclicked, isloggedin_admin,isl
               </Button>
             )}
 
-            {isloggedin_admin ? (
+            {/* {isloggedin_admin ? (
               <Button variant="contained" color="secondary" onClick={logoutclicked} style={{ fontFamily, fontSize: fontSizeLink }}>
                 Currently logged in as admin
               </Button>
@@ -84,7 +84,7 @@ export default function Navbar({ isloggedin, logoutclicked, isloggedin_admin,isl
               <Button variant="contained" color="primary" component={Link}  style={{ fontFamily, fontSize: fontSizeLink }}>
                 !Trainerlogin
               </Button>
-            )}
+            )} */}
 
             
 

@@ -243,9 +243,9 @@ export const GeneratedPremadePlan = ({ user_id }) => {
 
 
       <Box sx={{ mb: 4, mt: 6, width: '100%', backgroundColor: '#275e54c4', p: 2, borderRadius: 2 }}>
-        <h1 className="text-center" style={{ color: "cyan"  }}>
+        <h2 className="text-center" style={{ color: "cyan"  }}>
           {selectedPlan ? `Workout Plan: ${selectedPlan}` : "Premade Workout Plan"}
-        </h1>
+        </h2>
       </Box>
 
       {/* Save Button */}
@@ -288,7 +288,7 @@ export const GeneratedPremadePlan = ({ user_id }) => {
                 </div>
                 {/* Content Section */}
                 <div className="col-md-8">
-                  <div className="card-body">
+                  <div className="card-body" style={{ backgroundColor: "antiquewhite" }}>
                     <h5 className="card-title fw-bold">{workout.workoutName}</h5>
                     <p className="card-text">{workout.workoutDescription}</p>
                     <div className="d-flex justify-content-between align-items-center">

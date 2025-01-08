@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import {Box} from "@mui/material";
 
 const CurrentWorkoutPlan = ({ user_id }) => {
   const [workoutPlan, setWorkoutPlan] = useState(null);
@@ -103,13 +104,19 @@ const CurrentWorkoutPlan = ({ user_id }) => {
 
   return (
     <div>
-      <h1 className="text-center mt-5" style={{ color: "cyan" }}>
+
+      
+
+      <div className="container mt-4">
+      <Box sx={{ mb: 4, mt: 6, width: '100%', backgroundColor: '#275e54c4', p: 2, borderRadius: 2 }}>
+      <h2 className="text-center " style={{ color: "cyan" }}>
         {workoutPlan?.workoutPlanName
           ? `Current Workout Plan: ${workoutPlan.workoutPlanName}`
           : "No Workout Plan Assigned"}
-      </h1>
+      </h2>
+      </Box>
 
-      <div className="container mt-4">
+        
         {workouts.length > 0 ? (
           workouts.map((workout, index) => (
             <div className="card mb-4 shadow-sm" key={index}>
@@ -127,7 +134,7 @@ const CurrentWorkoutPlan = ({ user_id }) => {
                 </div>
                 {/* Content Section */}
                 <div className="col-md-8">
-                  <div className="card-body">
+                  <div className="card-body" style={{ backgroundColor: "antiquewhite" }}>
                     <h5 className="card-title fw-bold">{workout.workoutName}</h5>
                     <p className="card-text">{workout.workoutDescription}</p>
                     <div className="d-flex justify-content-between align-items-center">
