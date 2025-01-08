@@ -23,24 +23,25 @@ export const WorkoutPlan = () => {
     setSelectedPlan1(event.target.value);
   };
 
+  // Fetch premade plans from the backend
+  const fetchPremadePlans = async () => {
+    const params = new URLSearchParams();
+    if (selectedPlan) params.append("plan", selectedPlan);
 
-// Fetch premade plans from the backend
-const fetchPremadePlans = async () => {
-  const params = new URLSearchParams();
-  if (selectedPlan) params.append("plan", selectedPlan);
-
-  try {
-    const response = await fetch(`http://localhost:8080/api/consists_of?${params.toString()}`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/consists_of?${params.toString()}`
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      return data; // Return the data to be used later
+    } catch (error) {
+      console.error("Error fetching premade plans:", error);
+      throw error;
     }
-    const data = await response.json();
-    return data;  // Return the data to be used later
-  } catch (error) {
-    console.error("Error fetching premade plans:", error);
-    throw error;
-  }
-};
+  };
   const handleColorChange = (event) => {
     setBgColor(event.target.value);
   };
@@ -82,12 +83,9 @@ const fetchPremadePlans = async () => {
   //   }
   // };
   const fetchWorkouts = async () => {
-
-
     console.log("Target Muscles:", targetMuscles);
     console.log("Workout Type:", workoutType);
     console.log("Equipment Required:", equipmentRequired);
-
 
     const params = new URLSearchParams();
     if (targetMuscles.length > 0)
@@ -126,18 +124,18 @@ const fetchPremadePlans = async () => {
   };
   // const fetchPremadePlans = async (fitnessLevel, goal) => {
   //   const params = new URLSearchParams();
-  
+
   //   // Add parameters to URLSearchParams
   //   if (fitnessLevel) params.append("fitnessLevel", fitnessLevel);
   //   if (goal) params.append("goal", goal);
-  
+
   //   try {
   //     const response = await fetch(`http://localhost:8080/api/consists_of?${params.toString()}`);
-      
+
   //     if (!response.ok) {
   //       throw new Error(`HTTP error! Status: ${response.status}`);
   //     }
-  
+
   //     const data = await response.json();
   //     return data;  // Return the data to be used later
   //   } catch (error) {
@@ -145,10 +143,9 @@ const fetchPremadePlans = async () => {
   //     throw error;
   //   }
   // };
-  
+
   return (
     <div style={{ backgroundColor: bgColor, minHeight: "100vh" }}>
-      
       <div className="sourgummy">
         <h1 className="text-center mt-5 HostGrotesk" style={{ color: "cyan" }}>
           Welcome to the Workout Generator
@@ -258,14 +255,17 @@ const fetchPremadePlans = async () => {
         </button>
       </div>
 
-       {/* Premade Plans */}
-       <div>
+      {/* Premade Plans */}
+      <div>
         <h1 className="text-center mt-5 HostGrotesk" style={{ color: "cyan" }}>
           Choose from our premade workout plans tailored just for you!
         </h1>
 
         <div className="container mt-4">
-          <div className="p-4 border rounded" style={{ backgroundColor: "white" }}>
+          <div
+            className="p-4 border rounded"
+            style={{ backgroundColor: "white" }}
+          >
             <h1 className="text-center mt-5" style={{ color: "grey" }}>
               Select Your Premade Plan
             </h1>
@@ -331,108 +331,112 @@ const fetchPremadePlans = async () => {
 
       {/* Custom Plan */}
       <div>
-        <h1 className="text-center mt-5 HostGrotesk" style={{ color: "cyan" }}>
-          Or create your custom plan below:
-        </h1>
+  <h1 className="text-center mt-5 HostGrotesk" style={{ color: "cyan" }}>
+    Or create your custom plan below:
+  </h1>
 
-        <div className="container mt-4">
-          <div className="mt-4 p-4 border rounded white-background">
-            <h1
-              className="text-center mt-5 HostGrotesk"
-              style={{ color: "grey" }}
-            >
-              Create Your Custom Plan
-            </h1>
+  <div className="container mt-4">
+    <div className="mt-4 p-4 border rounded white-background">
+      <h1 className="text-center mt-5 HostGrotesk" style={{ color: "grey" }}>
+        Create Your Custom Plan
+      </h1>
 
-            <form>
-              {/* Target Muscles */}
-              <label className="form-label fw-bold Battambang">
-                1. Target Muscle(s)
-              </label>
-              {[
-                "Shoulders",
-                "Full Body",
-                "Biceps",
-                "Core",
-                "Legs",
-                "Hips",
-                "Calves",
-                "Chest",
-                "Lower Back",
-                "Abdominals",
-                "Back",
-                "Hamstrings",
-                "Glutes",
-                "Hip Flexors",
-                "Neck",
-                "Obliques",
-                "Quadriceps",
-                "Spine",
-                "Triceps",
-              ].map((muscle) => (
-                <div key={muscle} className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value={muscle}
-                    id={muscle}
-                    checked={targetMuscles.includes(muscle)}
-                    onChange={handleMuscleChange}
-                  />
-                  <label className="form-check-label" htmlFor={muscle}>
-                    {muscle}
-                  </label>
-                </div>
-              ))}
-              <div className="mt-2">
-                Selected Muscles: {targetMuscles.join(", ") || "None"}
-              </div>
-              {/* Workout Type */}
-              <label className="form-label fw-bold mt-3">2. Workout Type</label>
-              <select
-                className="form-select"
-                value={workoutType}
-                onChange={handleWorkoutTypeChange}
-              >
-                <option value="Strength">Strength</option>
-                <option value="Cardio">Cardio</option>
-                <option value="Flexibility">Flexibility</option>
-                <option value="Endurance">Endurance</option>
-              </select>
-
-              {/* Equipment */}
-              <label className="form-label fw-bold mt-3">3. Equipment?</label>
-              <select
-                className="form-select"
-                value={equipmentRequired}
-                onChange={handleEquipmentChange}
-              >
-                <option value="Dumbbells">Dumbbells</option>
-                <option value="Ropes">Ropes</option>
-                <option value="None">None</option>
-                <option value="Plyo Box">Plyo Box</option>
-                <option value="Barbell">Barbell</option>
-                <option value="Cable Machine">Cable Machine</option>
-                <option value="Pull-Up Bar">Pull-Up Bar</option>
-                <option value="Kettlebell">Kettlebell</option>
-                <option value="Medicine Ball">Medicine Ball</option>
-                <option value="Parallel Bars">Parallel Bars</option>
-                <option value="Wall">Wall</option>
-              </select>
-
-              <button
-                type="button"
-                onClick={fetchWorkouts}
-                className="btn btn-primary mt-3"
-              >
-                Generate Plan
-              </button>
-            </form>
+      <form>
+        {/* Target Muscles */}
+        <label className="form-label fw-bold Battambang">
+          1. Target Muscle(s)
+        </label>
+        {[
+          "Shoulders",
+          "Full Body",
+          "Biceps",
+          "Core",
+          "Legs",
+          "Hips",
+          "Calves",
+          "Chest",
+          "Lower Back",
+          "Abdominals",
+          "Back",
+          "Hamstrings",
+          "Glutes",
+          "Hip Flexors",
+          "Neck",
+          "Obliques",
+          "Quadriceps",
+          "Spine",
+          "Triceps",
+        ].map((muscle) => (
+          <div key={muscle} className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value={muscle}
+              id={muscle}
+              checked={targetMuscles.includes(muscle)}
+              onChange={handleMuscleChange}
+              style={{
+                border: "2px solid #000", // Thicker border for checkboxes
+                width: "20px", // Increase checkbox size
+                height: "20px",
+                marginRight: "10px", // Space between checkbox and label
+              }}
+            />
+            <label className="form-check-label" htmlFor={muscle}>
+              {muscle}
+            </label>
           </div>
+        ))}
+        <div className="mt-2">
+          Selected Muscles: {targetMuscles.join(", ") || "None"}
         </div>
-      </div>
+        {/* Workout Type */}
+        <label className="form-label fw-bold mt-3">2. Workout Type</label>
+        <select
+          className="form-select"
+          value={workoutType}
+          onChange={handleWorkoutTypeChange}
+        >
+          <option value="Strength">Strength</option>
+          <option value="Cardio">Cardio</option>
+          <option value="Flexibility">Flexibility</option>
+          <option value="Endurance">Endurance</option>
+        </select>
+
+        {/* Equipment */}
+        <label className="form-label fw-bold mt-3">3. Equipment?</label>
+        <select
+          className="form-select"
+          value={equipmentRequired}
+          onChange={handleEquipmentChange}
+        >
+          <option value="Dumbbells">Dumbbells</option>
+          <option value="Ropes">Ropes</option>
+          <option value="None">None</option>
+          <option value="Plyo Box">Plyo Box</option>
+          <option value="Barbell">Barbell</option>
+          <option value="Cable Machine">Cable Machine</option>
+          <option value="Pull-Up Bar">Pull-Up Bar</option>
+          <option value="Kettlebell">Kettlebell</option>
+          <option value="Medicine Ball">Medicine Ball</option>
+          <option value="Parallel Bars">Parallel Bars</option>
+          <option value="Wall">Wall</option>
+        </select>
+
+        <button
+          type="button"
+          onClick={fetchWorkouts}
+          className="btn btn-primary mt-3"
+        >
+          Generate Plan
+        </button>
+      </form>
     </div>
-    
+  </div>
+</div>
+
+
+    </div>
   );
 };
 

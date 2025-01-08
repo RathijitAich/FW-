@@ -70,6 +70,35 @@ export default function Trainer_DashBoard ({setisloggedin_trainer ,setTrainer_id
                             </div>
                         </div>
                     </div>
+                    {/* Add or Remove Workout Plans Button */}
+        <div className="col">
+            <div className="card shadow border-0 h-100">
+                <div className="card-body text-center">
+                    <h5 className="card-title fw-bold">Add or Remove Workout Plan</h5>
+                    <p className="card-text text-muted">
+                        Add new workout plans or remove outdated ones for better management.
+                    </p>
+                    <Link to="/trainer_dashboard/add_remove_workout_plan">
+                        <button className="btn btn-warning px-4">Manage Workout Plans</button>
+                    </Link>
+                </div>
+            </div>
+        </div>
+
+        {/* Add or Remove Diet Plans Button */}
+        <div className="col">
+            <div className="card shadow border-0 h-100">
+                <div className="card-body text-center">
+                    <h5 className="card-title fw-bold">Add or Remove Diet Plan</h5>
+                    <p className="card-text text-muted">
+                        Create new diet plans or delete ones that are no longer needed.
+                    </p>
+                    <Link to="/trainer_dashboard/add_remove_diet_plan">
+                        <button className="btn btn-danger px-4">Manage Diet Plans</button>
+                    </Link>
+                </div>
+            </div>
+        </div>
 
                 </div>
 
