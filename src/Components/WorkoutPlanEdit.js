@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";  // Import useNavigate from react-router-dom
+import {Box} from '@mui/material';
 
 
 export const EditWorkoutPlans = () => {
@@ -34,13 +35,16 @@ export const EditWorkoutPlans = () => {
     <div>
       
       <div className="container py-5">
-        <h1 className="text-center text-primary">Edit Workout Plans</h1>
+        
+        
 
         {/* Premade Plans */}
         <div>
-          <h1 className="text-center mt-5 HostGrotesk" style={{ color: "cyan" }}>
-            Choose from our premade workout plans tailored just for you!
-          </h1>
+
+        <Box sx={{ mb: 4, mt:6, width: '100%', backgroundColor: '#d3d3d3db', p: 2, borderRadius: 2 }}>
+
+        <h1 className="text-center text-primary">Edit Workout Plans</h1>
+          </Box>
 
           <div className="container mt-4">
             <div className="p-4 border rounded" style={{ backgroundColor: "white" }}>

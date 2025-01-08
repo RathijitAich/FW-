@@ -64,7 +64,7 @@
 
 //   return (
 //     <div>
-     
+
 //       <h1 className="text-center mt-5" style={{ color: "cyan" }}>
 //         {selectedPlan ? `Workout Plan: ${selectedPlan}` : "Premade Workout Plan"}
 //       </h1>
@@ -143,6 +143,7 @@ import { useLocation } from "react-router-dom";
 import PropTypes from 'prop-types';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { Box } from '@mui/material';
 
 export const GeneratedPremadePlan = ({ user_id }) => {
   const location = useLocation();
@@ -238,10 +239,14 @@ export const GeneratedPremadePlan = ({ user_id }) => {
   };
 
   return (
-    <div>
-      <h1 className="text-center mt-5" style={{ color: "cyan" }}>
-        {selectedPlan ? `Workout Plan: ${selectedPlan}` : "Premade Workout Plan"}
-      </h1>
+    <div className="container">
+
+
+      <Box sx={{ mb: 4, mt: 6, width: '100%', backgroundColor: '#275e54c4', p: 2, borderRadius: 2 }}>
+        <h1 className="text-center" style={{ color: "cyan"  }}>
+          {selectedPlan ? `Workout Plan: ${selectedPlan}` : "Premade Workout Plan"}
+        </h1>
+      </Box>
 
       {/* Save Button */}
       <div className="container mb-4">

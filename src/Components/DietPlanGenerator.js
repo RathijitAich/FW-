@@ -1,28 +1,20 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import img1 from "../Images/diet1.jpg";
 import img2 from "../Images/diet2.jpg";
 import img3 from "../Images/diet3.jpg";
-
+//navigate
+import {useNavigate} from 'react-router-dom';
 
 const images = [
-  {
-    src: img1,
-    text: "Welcome to Healthy Living",
-  },
-  {
-    src: img2,
-    text: "Customized Nutrition Plans",
-  },
-  {
-    src: img3,
-    text: "Achieve Your Health Goals",
-  },
+  { src: img1, text: "Welcome to Healthy Living" },
+  { src: img2, text: "Customized Nutrition Plans" },
+  { src: img3, text: "Achieve Your Health Goals" },
 ];
 
-
-const DietPlanner = ({ user_id }) => {
+const DietPlanner = ({ user_id, globalState, setGlobalState }) => {
+  const navigate = useNavigate();
   const [imageIndex, setImageIndex] = useState(0);
   const [formData, setFormData] = useState({
     bmi: "",
@@ -30,76 +22,33 @@ const DietPlanner = ({ user_id }) => {
     dietType: "veg",
     healthConditions: [],
   });
+  const [dietPlan, setDietPlan] = useState('');
 
-  const defaultDietPlan = {
-    name: "Generic Diet Plan",
-    meals: [
-      {
-        time: "Morning",
-        food: "Oatmeal with Almonds",
-        calories: 250,
-        protein: 10,
-        carbs: 45,
-        fat: 6,
-      },
-      {
-        time: "Noon",
-        food: "Grilled Chicken Salad",
-        calories: 350,
-        protein: 30,
-        carbs: 20,
-        fat: 15,
-      },
-      {
-        time: "Afternoon",
-        food: "Fruit Smoothie with Whey Protein",
-        calories: 200,
-        protein: 20,
-        carbs: 30,
-        fat: 5,
-      },
-      {
-        time: "Night",
-        food: "Baked Salmon with Quinoa",
-        calories: 400,
-        protein: 35,
-        carbs: 40,
-        fat: 18,
-      },
-    ],
-  };
-
-  const [dietPlan, setDietPlan] = useState(defaultDietPlan);
-
-  const generateDietPlan = async () => {
-    try {
-      // Generate the custom string based on formData
-      const conditionString = `${formData.bmi < 18 ? "<18" : formData.bmi > 25 ? ">25" : "18-25"}_${formData.goal}_${formData.dietType}_${formData.healthConditions.length > 0 ? formData.healthConditions.join("_") : "none"}`;
-  
-      console.log("Generated String:", conditionString);
-  
-      // Send the data to the backend
-      const response = await fetch("http://localhost:8080/api/diet-planner/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...formData, conditionString }),
-      });
-  
-      if (!response.ok) {
-        throw new Error("Failed to submit diet plan");
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/users/${encodeURIComponent(user_id)}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          if (data.height && data.weight) {
+            const heightInMeters = data.height / 100;
+            const bmi = (data.weight / (heightInMeters * heightInMeters)).toFixed(2);
+            setFormData((prev) => ({ ...prev, bmi })); 
+          }
+        } else {
+          console.error("Failed to fetch user data");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
       }
-  
-      const result = await response.text();
-      console.log("Response from backend:", result);
-      alert("Diet plan submitted successfully!");
-    } catch (error) {
-      console.error("Error submitting diet plan:", error);
-      alert("An error occurred while submitting the diet plan.");
-    }
-  };
-  
+    };
+
+    fetchUserData();
+  }, [user_id]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -119,12 +68,75 @@ const DietPlanner = ({ user_id }) => {
         ? [...prevState.healthConditions, value]
         : prevState.healthConditions.filter((condition) => condition !== value);
 
-      return {
-        ...prevState,
-        healthConditions: newHealthConditions,
-      };
+      return { ...prevState, healthConditions: newHealthConditions };
     });
   };
+
+  const generateDietPlan = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/diet-plan", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData), // Send the form data to the backend
+      });
+  
+      if (response.ok) {
+        const data = await response.text(); // Use .text() because the backend returns a plain string
+        console.log(data);
+        setDietPlan(data); // Store the string response in the dietPlan state
+
+        setGlobalState((prevState) => ({
+          ...prevState,
+          dietPlan: data, // Set the diet plan
+        }));
+
+        fetchFoodsByDietPlan(data); // Fetch foods included in the diet plan
+      } else {
+        console.error("Failed to generate diet plan");
+      }
+    } catch (error) {
+      console.error("Error generating diet plan:", error);
+    }
+  };
+
+  const fetchFoodsByDietPlan = async (dietPlanName) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/include?dietPlanName=${dietPlanName}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (response.ok) {
+        const foods = await response.json();
+        console.log("Foods included in the diet plan:", foods);
+        // Use the fetched food data (e.g., display it in the UI)
+
+        setGlobalState((prevState) => ({
+          ...prevState,
+          foodData: foods,
+        }));
+
+        //write in console the state of the global state
+        console.log("writing the state",globalState);
+
+        navigate('/diet-plan');
+
+
+      } else {
+        console.error("Failed to fetch foods for the diet plan");
+        
+      }
+    } catch (error) {
+      console.error("Error fetching foods:", error);
+    }
+  };
+
+
+
 
   return (
     <div>
@@ -154,11 +166,7 @@ const DietPlanner = ({ user_id }) => {
             <img
               src={image.src}
               alt="Diet-related"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
             <div
               style={{
@@ -270,64 +278,61 @@ const DietPlanner = ({ user_id }) => {
               gap: "10px",
             }}
           >
-            {["Diabetes", "High Pressure", "Heart Problem", "None"].map(
-              (condition) => (
-                <div
-                  key={condition}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <label>{condition}</label>
-                  <input
-                    type="checkbox"
-                    value={condition}
-                    checked={formData.healthConditions.includes(condition)}
-                    onChange={handleHealthConditionChange}
-                  />
-                </div>
-              )
-            )}
+            {[
+              "Diabetes",
+              "High Pressure",
+              "Heart Problem",
+              "None",
+            ].map((condition) => (
+              <div
+                key={condition}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <label>{condition}</label>
+                <input
+                  type="checkbox"
+                  value={condition}
+                  checked={formData.healthConditions.includes(condition)}
+                  onChange={handleHealthConditionChange}
+                />
+              </div>
+            ))}
           </div>
         </div>
 
-        <Link
-          to={{
-            pathname: "/diet-plan",
-            state: { dietPlan },
+        <button
+          onClick={generateDietPlan}
+          style={{
+            backgroundColor: "#28a745",
+            color: "#fff",
+            fontSize: "16px",
+            borderRadius: "8px",
+            cursor: "pointer",
+            width: "100%",
+            padding: "8px",
+            marginTop: "20px",
+            transition: "background-color 0.3s ease",
           }}
+          onMouseEnter={(e) => (e.target.style.backgroundColor = "#218838")}
+          onMouseLeave={(e) => (e.target.style.backgroundColor = "#28a745")}
         >
-          <button
-            onClick={generateDietPlan}
-            style={{
-              backgroundColor: "#28a745",
-              color: "#fff",
-              fontSize: "16px",
-              borderRadius: "8px",
-              cursor: "pointer",
-              width: "100%",
-              padding: "8px",
-              marginTop: "20px",
-              transition: "background-color 0.3s ease",
-            }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = "#218838")}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = "#28a745")}
-          >
-            Generate Diet Plan
-          </button>
-        </Link>
+          Generate Diet Plan
+        </button>
       </div>
     </div>
   );
 };
 
-
 DietPlanner.propTypes = {
-  user_id: PropTypes.number,
+  user_id: PropTypes.string.isRequired,
+  globalState: PropTypes.object.isRequired,
+  setGlobalState: PropTypes.func.isRequired,
 };
 
-
 export default DietPlanner;
+//hellosdfdsf s

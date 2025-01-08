@@ -11,19 +11,14 @@ import {
   Paper,
   Box,
   Typography,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
   TablePagination,
 } from "@mui/material";
 import "./FoodTable.css";
-import axios from "axios"; // For making HTTP requests
+import axios from "axios";
 
 const FoodTable = () => {
   const [foodEntries, setFoodEntries] = useState([]); // State to hold fetched data
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterType, setFilterType] = useState("All");
   const [page, setPage] = useState(0); // Tracks the current page
   const [rowsPerPage, setRowsPerPage] = useState(5); // Number of rows per page
   const [loading, setLoading] = useState(true); // State to track loading status
@@ -44,14 +39,6 @@ const FoodTable = () => {
     fetchData();
   }, []);
 
-  const filteredEntries = foodEntries.filter((entry) => {
-    const matchesSearch = entry.foodName
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesType = filterType === "All" || entry.type === filterType;
-    return matchesSearch && matchesType;
-  });
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -60,6 +47,11 @@ const FoodTable = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0); // Reset to the first page when rows per page change
   };
+
+  // Filtered entries based on the search term
+  const filteredEntries = foodEntries.filter((food) =>
+    food.foodName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <Container className="container">
@@ -72,18 +64,6 @@ const FoodTable = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <FormControl className="filter-select" variant="outlined">
-            <InputLabel>Filter by Type</InputLabel>
-            <Select
-              value={filterType}
-              onChange={(e) => setFilterType(e.target.value)}
-              label="Filter by Type"
-            >
-              <MenuItem value="All">All</MenuItem>
-              <MenuItem value="Carb">Carb</MenuItem>
-              <MenuItem value="Protein">Protein</MenuItem>
-            </Select>
-          </FormControl>
         </Box>
       </Box>
       {loading ? (
@@ -96,7 +76,6 @@ const FoodTable = () => {
             <TableHead className="table-head">
               <TableRow>
                 <TableCell className="table-header-cell">Food Name</TableCell>
-                <TableCell className="table-header-cell">Type</TableCell>
                 <TableCell className="table-header-cell">
                   Calories per Unit
                 </TableCell>
@@ -108,22 +87,13 @@ const FoodTable = () => {
             <TableBody>
               {filteredEntries
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((entry, index) => (
-                  <TableRow key={index} className="table-row">
-                    <TableCell className="table-cell">
-                      {entry.foodName}
-                    </TableCell>
-                    <TableCell className="table-cell">{entry.type}</TableCell>
-                    <TableCell className="table-cell">
-                      {entry.calorie}
-                    </TableCell>
-                    <TableCell className="table-cell">
-                      {entry.carbohydrate}
-                    </TableCell>
-                    <TableCell className="table-cell">{entry.fat}</TableCell>
-                    <TableCell className="table-cell">
-                      {entry.protein}
-                    </TableCell>
+                .map((food) => (
+                  <TableRow key={food.id}>
+                    <TableCell>{food.foodName}</TableCell>
+                    <TableCell>{food.calorie}</TableCell>
+                    <TableCell>{food.carbohydrate}</TableCell>
+                    <TableCell>{food.fat}</TableCell>
+                    <TableCell>{food.protein}</TableCell>
                   </TableRow>
                 ))}
             </TableBody>

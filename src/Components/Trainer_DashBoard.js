@@ -1,25 +1,29 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Box } from '@mui/material';
 
 
-export default function Trainer_DashBoard ({setisloggedin_trainer ,setTrainer_id, setTrainer_password}) {
+export default function Trainer_DashBoard({ setisloggedin_trainer, setTrainer_id, setTrainer_password }) {
 
     // Handle Logout
-     const navigate = useNavigate();
-    
-      const handleLogout = () => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
         // Clear login session data (you can adjust this based on your login mechanism)
         setisloggedin_trainer(false);
         setTrainer_id('');
         setTrainer_password('');
-        
+
         // Redirect to the homepage or login page after logout
         navigate("/Home");
-      };
+    };
 
     return (
+
+
         <div>
+
             {/* Logout Button */}
             <div className="container py-3">
                 <button
@@ -28,15 +32,22 @@ export default function Trainer_DashBoard ({setisloggedin_trainer ,setTrainer_id
                 >
                     Logout
                 </button>
+                <Box sx={{ mb: 4, mt:6, width: '100%', backgroundColor: '#d2f8f1ed', p: 2, borderRadius: 2 }}>
+                    <div className="text-center mb-4">
+                        <h1 className="display-4 fw-bold text-primary">Trainer Dashboard</h1>
+                        <p className="lead text-muted">Manage workout plans and diet plans efficiently!</p>
+                    </div>
+                </Box>
             </div>
 
 
             {/* Main Section */}
+
+
+
             <div className="container py-5">
-                <div className="text-center mb-4">
-                    <h1 className="display-4 fw-bold text-primary">Trainer Dashboard</h1>
-                    <p className="lead text-muted">Manage workout plans and diet plans efficiently!</p>
-                </div>
+                
+
 
                 {/* Cards Layout */}
                 <div className="row row-cols-1 row-cols-md-2 g-4">
@@ -102,10 +113,10 @@ export default function Trainer_DashBoard ({setisloggedin_trainer ,setTrainer_id
 
                 </div>
 
-                {/* Footer Section */}
+                {/* Footer Section
                 <div className="mt-5 text-center">
                     <p className="text-muted">&copy; 2024 The Fitness Team | All Rights Reserved</p>
-                </div>
+                </div> */}
             </div>
         </div>
     );

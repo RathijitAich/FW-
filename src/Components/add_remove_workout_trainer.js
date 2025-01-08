@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import {Box} from '@mui/material';
 
 export const AddRemoveWorkoutTrainer = () => {
   const location = useLocation();
@@ -126,13 +127,20 @@ export const AddRemoveWorkoutTrainer = () => {
   };
 
   return (
+
+    
     <div>
-      <h1 className="text-center mt-5" style={{ color: "cyan" }}>
+      <div className="container py-5">
+      <Box sx={{ mt:5, mb: 4, width: '100%', backgroundColor: '#3c69a6db', p: 2, borderRadius: 2 }}>
+      <h1 className="text-center" style={{ color: "cyan" }}>
         {selectedPlan ? `Workout Plan: ${selectedPlan}` : "Premade Workout Plan"}
       </h1>
+      </Box>
+      </div>
+      
 
       <div className="container mb-4">
-        <input
+        {/* <input
           type="text"
           placeholder="Search for a workout"
           className="form-control"
@@ -141,9 +149,9 @@ export const AddRemoveWorkoutTrainer = () => {
         />
         <button className="btn btn-primary mt-2" onClick={handleSearch}>
           Search
-        </button>
+        </button> */}
         <button
-          className="btn btn-secondary mt-2 ms-2"
+          className="btn btn-info mt-2 ms-2"
           onClick={handleSortByName}
         >
           Sort by Name
@@ -170,7 +178,9 @@ export const AddRemoveWorkoutTrainer = () => {
       </div>
 
       <div className="container mt-4">
+       <Box sx={{ mb: 4, mt:6, width: '100%', backgroundColor: '#d2f8f1ed', p: 2, borderRadius: 2 }}>
         <h3 className="text-center mb-3">Modify Workouts</h3>
+        </Box>
         <div className="mb-3">
           <input
             type="text"

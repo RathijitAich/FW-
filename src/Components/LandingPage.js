@@ -40,7 +40,6 @@ export default function LandingPage() {
     { icon: <FitnessCenterIcon sx={{ fontSize: 40, color: '#ff5722' }} />, title: 'Personalized Workouts', description: 'Get custom workout plans tailored for you.' },
     { icon: <RestaurantIcon sx={{ fontSize: 40, color: '#4caf50' }} />, title: 'Nutrition Plans', description: 'Receive personalized meal plans to meet your goals.' },
     { icon: <HealthAndSafetyIcon sx={{ fontSize: 40, color: '#2196f3' }} />, title: 'Health Tracking', description: 'Monitor your health metrics and progress.' },
-    { icon: <BarChartIcon sx={{ fontSize: 40, color: '#9c27b0' }} />, title: 'Progress Reports', description: 'Track your progress with detailed reports.' },
     { icon: <LocalLibraryIcon sx={{ fontSize: 40, color: '#ffeb3b' }} />, title: 'Educational Resources', description: 'Access a library of fitness and health resources.' },
   ];
 

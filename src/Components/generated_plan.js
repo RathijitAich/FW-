@@ -9,6 +9,7 @@ export const GeneratedPlan = () => {
   return (
     <div>
       
+      
       <h1 className="text-center mt-5">Workouts</h1>
 
       <div className="container">

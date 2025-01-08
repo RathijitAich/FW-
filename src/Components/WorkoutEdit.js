@@ -53,7 +53,7 @@ export const WorkoutDashboard = () => {
         <div>
             
             <div className="container mt-4">
-                <h2>Workout Dashboard</h2>
+              
 
                 <div className="card p-4 mt-4">
                     <h3>Add Workout</h3>
