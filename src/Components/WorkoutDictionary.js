@@ -29,6 +29,17 @@ export const Workouts = () => {
     setSearchQuery(e.target.value);
   };
 
+   // Handle search button click to filter workouts
+   const handleSearch = () => {
+    const lowercasedQuery = searchQuery.toLowerCase();
+    const filtered = workouts.filter((workout) =>
+      workout.workoutName.toLowerCase().includes(lowercasedQuery) ||
+      workout.workoutDescription.toLowerCase().includes(lowercasedQuery)
+    );
+    
+    setFilteredWorkouts(filtered);
+  };
+
 
   // Handle sort by name button click
   const handleSortByName = () => {
@@ -43,7 +54,25 @@ export const Workouts = () => {
       
       <h1 className="text-center mt-5">Workouts</h1>
 
+       
+
       <div className="container mb-4">
+
+         {/* Search bar */}
+         <input
+          type="text"
+          placeholder="Search for a workout"
+          className="form-control"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          
+        />
+        {/* Search button */}
+        <button className="btn btn-primary mt-2" onClick={handleSearch}>
+          Search
+        </button>
+
+        
         {/* Sort button */}
         <button className="btn btn-secondary mt-2 ms-2" onClick={handleSortByName}>
           Sort by Name

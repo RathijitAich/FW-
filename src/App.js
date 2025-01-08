@@ -64,6 +64,7 @@ import { Close as CloseIcon } from '@mui/icons-material';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 
+
 function App() {
 
 
@@ -191,47 +192,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
   const location2 = useLocation();
 
 
-  // handle user login
-  // const handleloginbutton = async (event) => {
-  //   event.preventDefault();
-  //   console.log("Login request data:", { user_id, password, role: loginType});
-  //   try {
-  //     const response = await fetch('http://localhost:8080/api/login', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ user_id, password, role: loginType })
-  //     });
 
-  //     if (response.ok) {
-  //       const data = await response.text();
-  //       console.log(data);
-  //       // Login successful
-  //       // Show success message
-  //       setAlertMessage('Login Successful Now Redirecting...');
-  //       setOpenSnackbar(true); // Open Snackbar
-
-  //       setisloggedin(true); // Set the login status to true from app.js
-
-  //       // Delay navigation for a short period to allow the Snackbar to show
-  //       setTimeout(() => {
-  //         navigate('/Home');
-  //       }, 1000); // Navigate after 1 seconds
-
-  //     } else {
-  //       const error = await response.text();
-  //       console.log('Login Failed', error);
-  //       // Show error message
-  //       setAlertMessage('Login Failed: Invalid user_id or password');
-  //       setOpenSnackbar(true); // Open Snackbar
-  //     }
-  //   } catch (error) {
-  //     console.error('Login Failed', error);
-  //     setAlertMessage('Login Failed: An error occurred');
-  //     setOpenSnackbar(true); // Open Snackbar
-  //   }
-  // }
 
   const handleloginbutton = async (event) => {
     event.preventDefault();
@@ -406,7 +367,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
 
       </Routes>
       <Snackbar
-        open={openSnackbar}
+        open={openSnackbar} 
         autoHideDuration={2000}
         onClose={handleSnackbarClose}
         message={alertMessage}
@@ -422,7 +383,7 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
           },
         }}
       />
-      {/* <Footer /> */}
+      
     </>
   );
 }

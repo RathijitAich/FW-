@@ -32,7 +32,7 @@ export default function Trainer_DashBoard({ setisloggedin_trainer, setTrainer_id
                 >
                     Logout
                 </button>
-                <Box sx={{ mb: 4, mt:6, width: '100%', backgroundColor: '#d2f8f1ed', p: 2, borderRadius: 2 }}>
+                <Box sx={{ mb: 4, mt: 6, width: '100%', backgroundColor: '#d2f8f1ed', p: 2, borderRadius: 2 }}>
                     <div className="text-center mb-4">
                         <h1 className="display-4 fw-bold text-primary">Trainer Dashboard</h1>
                         <p className="lead text-muted">Manage workout plans and diet plans efficiently!</p>
@@ -46,7 +46,7 @@ export default function Trainer_DashBoard({ setisloggedin_trainer, setTrainer_id
 
 
             <div className="container py-5">
-                
+
 
 
                 {/* Cards Layout */}
@@ -82,34 +82,7 @@ export default function Trainer_DashBoard({ setisloggedin_trainer, setTrainer_id
                         </div>
                     </div>
                     {/* Add or Remove Workout Plans Button */}
-        <div className="col">
-            <div className="card shadow border-0 h-100">
-                <div className="card-body text-center">
-                    <h5 className="card-title fw-bold">Add or Remove Workout Plan</h5>
-                    <p className="card-text text-muted">
-                        Add new workout plans or remove outdated ones for better management.
-                    </p>
-                    <Link to="/trainer_dashboard/add_remove_workout_plan">
-                        <button className="btn btn-warning px-4">Manage Workout Plans</button>
-                    </Link>
-                </div>
-            </div>
-        </div>
 
-        {/* Add or Remove Diet Plans Button */}
-        <div className="col">
-            <div className="card shadow border-0 h-100">
-                <div className="card-body text-center">
-                    <h5 className="card-title fw-bold">Add or Remove Diet Plan</h5>
-                    <p className="card-text text-muted">
-                        Create new diet plans or delete ones that are no longer needed.
-                    </p>
-                    <Link to="/trainer_dashboard/add_remove_diet_plan">
-                        <button className="btn btn-danger px-4">Manage Diet Plans</button>
-                    </Link>
-                </div>
-            </div>
-        </div>
 
                 </div>
 
