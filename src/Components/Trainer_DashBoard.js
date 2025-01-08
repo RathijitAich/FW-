@@ -32,6 +32,12 @@ export default function Trainer_DashBoard({ setisloggedin_trainer, setTrainer_id
                 >
                     Logout
                 </button>
+                <Box sx={{ mb: 4, mt:6, width: '100%', backgroundColor: '#d2f8f1ed', p: 2, borderRadius: 2 }}>
+                    <div className="text-center mb-4">
+                        <h1 className="display-4 fw-bold text-primary">Trainer Dashboard</h1>
+                        <p className="lead text-muted">Manage workout plans and diet plans efficiently!</p>
+                    </div>
+                </Box>
             </div>
 
 
@@ -40,12 +46,7 @@ export default function Trainer_DashBoard({ setisloggedin_trainer, setTrainer_id
 
 
             <div className="container py-5">
-                <Box sx={{ mb: 4, mt:6, width: '100%', backgroundColor: '#d2f8f1ed', p: 2, borderRadius: 2 }}>
-                    <div className="text-center mb-4">
-                        <h1 className="display-4 fw-bold text-primary">Trainer Dashboard</h1>
-                        <p className="lead text-muted">Manage workout plans and diet plans efficiently!</p>
-                    </div>
-                </Box>
+                
 
 
                 {/* Cards Layout */}

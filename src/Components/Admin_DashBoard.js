@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from "react-router-dom";
+import { Box } from '@mui/material';
 
-export default function Admin_DashBoard({setisloggedin_admin, setAdmin_id, setAdmin_password}) {
+export default function Admin_DashBoard({ setisloggedin_admin, setAdmin_id, setAdmin_password }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -10,7 +11,7 @@ export default function Admin_DashBoard({setisloggedin_admin, setAdmin_id, setAd
     setisloggedin_admin(false);
     setAdmin_id('');
     setAdmin_password('');
-    
+
     // Redirect to the homepage or login page after logout
     navigate("/Home");
   };
@@ -29,14 +30,16 @@ export default function Admin_DashBoard({setisloggedin_admin, setAdmin_id, setAd
 
       {/* Main Section */}
       <div className="container py-5">
-        <div className="text-center mb-4">
+        <Box sx={{ mb: 4, mt: 6, width: '100%', backgroundColor: '#d2f8f1ed', p: 2, borderRadius: 2 }}>
+          <div className="text-center mb-4">
           <h1 className="display-4 fw-bold text-primary">Admin Dashboard</h1>
           <p className="lead text-muted">Manage workouts, trainers, and nutrition efficiently!</p>
-        </div>
+          </div>
+        </Box>
 
         {/* Cards Layout */}
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
-         
+
           {/* Trainer Management Button */}
           <div className="col">
             <div className="card shadow border-0 h-100">
@@ -83,10 +86,7 @@ export default function Admin_DashBoard({setisloggedin_admin, setAdmin_id, setAd
           </div>
         </div>
 
-        {/* Footer Section */}
-        <div className="mt-5 text-center">
-          <p className="text-muted">&copy; 2024 The Fitness Team | All Rights Reserved</p>
-        </div>
+       
       </div>
     </div>
   );

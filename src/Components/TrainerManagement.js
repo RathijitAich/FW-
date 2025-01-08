@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Box} from "@mui/material";
 
 import axios from "axios";
 
@@ -64,10 +65,12 @@ export const TrainerManagement = () => {
 
       {/* Main Section */}
       <div className="container py-5">
+      <Box sx={{ mb: 4, mt:6, width: '100%', backgroundColor: '#d2f8f1ed', p: 2, borderRadius: 2 }}>                 
         <div className="text-center mb-4">
           <h1 className="display-4 fw-bold text-success">Trainer Management</h1>
           <p className="lead text-muted">Add, edit, or manage trainers' details and schedules.</p>
         </div>
+        </Box>
 
         {/* Add Trainer Section */}
         <div className="card mb-4">
