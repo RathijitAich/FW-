@@ -166,9 +166,9 @@ export default function UserProfile({ isloggedin, user_id }) {
                     label="Health Issue"
                   >
                     <MenuItem value="none">No Conditions</MenuItem>
-                    <MenuItem value="Diabetes">Diabetes</MenuItem>
-                    <MenuItem value="Heart Disease">Heart Disease</MenuItem>
-                    <MenuItem value="High Pressure">High Pressure</MenuItem>
+                    <MenuItem value="diabetes">Diabetes</MenuItem>
+                    <MenuItem value="heart disease">Heart Disease</MenuItem>
+                    <MenuItem value="high pressure">High Pressure</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
