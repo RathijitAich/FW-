@@ -101,7 +101,7 @@ const DietPlanner = ({ user_id, globalState, setGlobalState }) => {
     }
   };
 
-  const fetchFoodsByDietPlan = async (dietPlanName) => {
+  const fetchFoodsByDietPlan = async (dietPlanName) => { // this fetches from the includes table so it is done with join
     try {
       const response = await fetch(`http://localhost:8080/api/include?dietPlanName=${dietPlanName}`, {
         method: "GET",

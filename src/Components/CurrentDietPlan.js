@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import "./DietPlan.css";
 import Snackbar from "@mui/material/Snackbar";
@@ -74,9 +74,40 @@ const DietPlan = ({ globalState, setGlobalState,user_id }) => {
   };
 
   
+
+  useEffect(() => {
+    // Fetch user's diet plan data on component mount
+    const fetchDietPlan = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/users/${user_id}/diet_plan`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch diet plan data");
+        }
+
+        const data = await response.json(); // Assuming the backend returns a JSON response
+        console.log("this is the fetched data", data);
+        // Update globalState with the fetched data
+        setGlobalState((prevState) => ({
+          ...prevState,
+          foodData: data,
+           // Assuming dietPlanName exists in IncludesEntity
+        }));
+      } catch (error) {
+        console.error("Error fetching diet plan:", error);
+      }
+    };
+
+    fetchDietPlan();
+  }, [user_id]);
   
   const foodData = globalState.foodData; // Access foodData from globalState
-
+  
   // Ensure foodData is available and contains enough items
   const defaultFoodData = foodData?.length >= 12 ? foodData : [];
 

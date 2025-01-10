@@ -286,7 +286,11 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
     setUser_id('');
     setUsername('');
     setPassword('');
-
+    //set global state null
+    setGlobalState((prevState) => ({
+      foodData: {},
+      dietPlan: "",
+    }));
     console.log(localStorage.getItem('user_id'));
     setAlertMessage('You have been logged out');
     setOpenSnackbar(true);
