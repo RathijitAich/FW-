@@ -165,7 +165,7 @@ export default function UserProfile({ isloggedin, user_id }) {
                     }
                     label="Health Issue"
                   >
-                    <MenuItem value="none">No Conditions</MenuItem>
+                    <MenuItem value="no issues">No Conditions</MenuItem>
                     <MenuItem value="diabetes">Diabetes</MenuItem>
                     <MenuItem value="heart Disease">Heart Disease</MenuItem>
                     <MenuItem value="high Pressure">High Pressure</MenuItem>
