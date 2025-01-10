@@ -113,7 +113,6 @@ const DietPlanner = ({ user_id, globalState, setGlobalState }) => {
       if (response.ok) {
         const foods = await response.json();
         console.log("Foods included in the diet plan:", foods);
-        // Use the fetched food data (e.g., display it in the UI)
 
         setGlobalState((prevState) => ({
           ...prevState,
