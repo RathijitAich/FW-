@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 
 
-export default class NewsItem extends Component {
+export default class NewsItem extends Component { 
 
     static defaultProps = {
         title: "Title is not available",

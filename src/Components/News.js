@@ -44,7 +44,7 @@ export default class News extends Component {
           .map((element) => {
                return (
                <div className="col-md-4" key={element.url}>
-               <NewsItem title={element.title} description={element.description.slice(0,88)} imageurl={element.urlToImage} newsurl={element.url}/>
+               <NewsItem title={element.title} description={element.description.slice(0,80)} imageurl={element.urlToImage} newsurl={element.url}/>
                </div>
                );
             })

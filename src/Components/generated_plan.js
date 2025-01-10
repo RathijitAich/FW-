@@ -1,4 +1,5 @@
 import React from "react";
+import { Box } from "@mui/material";
 
 import { useLocation } from "react-router-dom";
 
@@ -10,9 +11,14 @@ export const GeneratedPlan = () => {
     <div>
       
       
-      <h1 className="text-center mt-5">Workouts</h1>
+      
 
       <div className="container">
+      <Box sx={{ mb: 4, mt: 6, width: '100%', backgroundColor: '#275e54c4', p: 2, borderRadius: 2 }}>
+      <h2 className="text-center " style={{ color: "cyan" }}>
+        Workouts
+      </h2>
+      </Box>
         {workouts.length > 0 ? (
           workouts.map((workout, index) => (
             <div className="card mb-4 shadow-sm" key={index}>
@@ -30,7 +36,7 @@ export const GeneratedPlan = () => {
                 </div>
                 {/* Content Section */}
                 <div className="col-md-8">
-                  <div className="card-body">
+                  <div className="card-body" style={{ backgroundColor: "antiquewhite" }}>
                     <h5 className="card-title fw-bold">{workout.workoutName}</h5>
                     <p className="card-text">{workout.workoutDescription}</p>
                     <div className="d-flex justify-content-between align-items-center">

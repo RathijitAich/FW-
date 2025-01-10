@@ -28,7 +28,7 @@ const DietPlanner = ({ user_id, globalState, setGlobalState }) => {
     const fetchUserData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/users/${encodeURIComponent(user_id)}`
+          `http://localhost:8080/api/users/${encodeURIComponent(user_id)}` 
         );
         if (response.ok) {
           const data = await response.json();

@@ -14,7 +14,7 @@ import {
   TablePagination,
 } from "@mui/material";
 import "./FoodTable.css";
-import axios from "axios";
+import axios from "axios"; 
 
 const FoodTable = () => {
   const [foodEntries, setFoodEntries] = useState([]); // State to hold fetched data
@@ -54,7 +54,9 @@ const FoodTable = () => {
   );
 
   return (
-    <Container className="container">
+    
+    // container has predefined margin and padding
+    <Container className="container"> 
       <Box sx={{ my: 4 }}>
         <Box className="search-box" sx={{ display: "flex", gap: 2 }}>
           <TextField
