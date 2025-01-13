@@ -51,6 +51,8 @@ import TrainerDashboard from "./Components/Trainer_DashBoard";
 import WorkoutPlanEdit from "./Components/WorkoutPlanEdit";
 import  AddRemoveWorkoutTrainer  from "./Components/add_remove_workout_trainer";
 import DietPlanEdit from "./Components/DietPlanEdit";
+import AddWorkoutPlanForm from "./Components/Trainer_Adds_workout_plan";
+import AddDietPlanForm from "./Components/Trainer_Adds_Diet_Plan";
 
 //Diet and Food imports
 import Food_dictionary from "./Components/Food_dictionary";
@@ -365,6 +367,9 @@ function AppContent({ isloggedin, setisloggedin, alertMessage, setAlertMessage, 
         <Route path="/trainer_dashboard/edit_workout_plan" element={<WorkoutPlanEdit />} />
         <Route path="/add_remove_workout_trainer" element={<AddRemoveWorkoutTrainer />} />
         <Route path="/trainer_dashboard/edit_diet_plans" element={<DietPlanEdit />} />
+        <Route path="/trainer_dashboard/add_workout_plan" element={<AddWorkoutPlanForm />} />
+        <Route path="/trainer_dashboard/add_diet_plan" element={<AddDietPlanForm />} />
+        
         
 
 
